@@ -1,0 +1,8 @@
+{"message":"_auth->auth()","context":{"0":"_mem_auth","class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:16:27.553283+00:00","extra":{}}
+{"message":"unverified_token","context":{"0":"_mem_auth","1":{"auth_token":false},"class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:16:27.557083+00:00","extra":{}}
+{"message":"_auth->auth()","context":{"0":"_mem_auth","class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:18:09.811658+00:00","extra":{}}
+{"message":"unverified_token","context":{"0":"_mem_auth","1":{"auth_token":false},"class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:18:09.816096+00:00","extra":{}}
+{"message":"_auth->auth()","context":{"0":"_mem_auth","class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:19:27.681490+00:00","extra":{}}
+{"message":"unverified_token","context":{"0":"_mem_auth","1":{"auth_token":false},"class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:19:27.687755+00:00","extra":{}}
+{"message":"_auth->auth()","context":{"0":"_mem_auth","class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:22:14.726115+00:00","extra":{}}
+{"message":"unverified_token","context":{"0":"_mem_auth","1":{"auth_token":false},"class":"_auth"},"level":400,"level_name":"ERROR","channel":"_auth","datetime":"2024-10-27T23:22:14.728640+00:00","extra":{}}
