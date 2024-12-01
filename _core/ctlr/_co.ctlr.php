@@ -7,6 +7,21 @@ class _co_ctlr extends _ctlr
 		parent::__construct( '_co' );
 	}
 
+	public function get_all()
+	{
+		// Rather than a simple list,
+		// this will get a fully joined list
+		$_cos = $this->obj->get_all();
+		if( FALSE === $_cos )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+
+		$this->success( '_cos fetched' );
+		return $_cos;
+	}
+
 	/**
 	 * Should be moved to _co_pref ctlr
 	 *
@@ -37,21 +52,21 @@ class _co_ctlr extends _ctlr
 	public function save_subdomain() : string|bool
 	{
 		// Clean subdomain of incoming for illegal chars
-		_POST['new_subdomain'] = strtolower( html_entity_decode( _POST['new_subdomain'] ) );
+		$new_subdomain = strtolower( html_entity_decode( _POST['new_subdomain'] ) );
 
-		if( _POST['new_subdomain'] == $this->obj->sub( '_co_domain' ) )
+		if( $new_subdomain == $this->obj->sub( '_co_domain' ) )
 		{
 			$this->fail( 'subdomain_is_unchanged' );
 			return FALSE;
 		}
 
-		if( str_starts_with( _POST['new_subdomain'], '-' ) || str_ends_with( _POST['new_subdomain'], '-' ) )
+		if( str_starts_with( $new_subdomain, '-' ) || str_ends_with( $new_subdomain, '-' ) )
 		{
 			$this->fail( 'subdomain_cannot_start_or_end_with_hyphen' );
 			return FALSE;
 		}
 
-		preg_match_all( '/[^A-Za-z0-9\-]/', _POST['new_subdomain'], $matches );
+		preg_match_all( '/[^A-Za-z0-9\-]/', $new_subdomain, $matches );
 
 		if( $matches[0] )
 		{
@@ -59,7 +74,7 @@ class _co_ctlr extends _ctlr
 			return FALSE;
 		}
 
-		$saved = $this->obj->save_subdomain( _POST['new_subdomain'] );
+		$saved = $this->obj->save_subdomain( $new_subdomain );
 		if( FALSE === $saved )
 		{
 			$this->fail( $this->obj->get_error_msg() );
@@ -74,7 +89,7 @@ class _co_ctlr extends _ctlr
 	}
 
 	/**
-	 * Should be moved to _co_mem ctlr
+	 * Should be moved to _co__mem ctlr
 	 *
 	 * @deprecated
 	 * @return void

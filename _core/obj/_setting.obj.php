@@ -12,6 +12,26 @@ class _setting extends _obj
 		parent::__construct( '_setting' );
 	}
 
+	public function get_all() : array|bool
+	{
+		$sth = $this->query("SELECT * FROM _setting");
+
+		if( FALSE === $sth )
+		{
+			$this->fail( $this->get_error_msg() );
+			return FALSE;
+		}
+
+		$_settings = [];
+		while( $_setting = $sth->fetch() )
+		{
+			$_settings[$_setting['_setting_id']] = $_setting;
+		}
+
+		$this->success( '_settings fetched' );
+		return $_settings;
+	}
+
 	/**
 	 * Returns either the setting value or the setting row depending on val_only
 	 *

@@ -1,22 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand product_name" href="/"></a>
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#honeycomb_menu" aria-controls="honeycomb_menu" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 mx-0">
+	<a class="navbar-brand product_name sky-heading-font sky-heading display-3" href="/"></a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sky_menu" aria-controls="sky_menu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="collapse navbar-collapse" id="honeycomb_menu">
-		<ul class="navbar-nav mr-auto">
+	<div class="collapse navbar-collapse d-flex justify-content-end align-items-center" id="sky_menu">
+		<ul class="navbar-nav mr-auto align-items-center">
 			<li class="nav-item">
-				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#auth_user_box">Login</a>
+				<a href="#companies-tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#companies-tab');
+						new _loader({}).load('company_list');
+					"
+				>
+					Companies
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register_mem_box">Register</a>
+				<a href="#members-tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#members-tab');
+						new _loader({}).load('member_list');
+					"
+				>
+					Members
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register_co_box">New Subscriber</a>
+				<a href="#entities-tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#entities-tab');
+						new _loader({}).load('obj_list');
+					"
+				>
+					Entities
+				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/" onClick="new _api({ url: '/_auth/logout' }).poll().then( ( _ret ) => { if( 1 == _ret.return ){ window.location.href = '/' } })">Logout</a>
+				<a href="#roles-perms-tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#roles-perms-tab');
+					"
+				>
+					Roles &amp; Perms
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#roles-perms-tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#forms-tab');
+					"
+				>
+					Forms
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#settings_tab" class="btn btn-default"
+					onClick="
+						new _tab({}).showTab('#settings-tab');
+						new _loader({}).load('setting_list');
+					"
+				>
+					Settings
+				</a>
+			</li>
+			<li class="nav-item ms-4">
+				<div class="dropdown">
+					<button class="btn btn-primary rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa fa-user"></i>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#auth_user_box">Login</a></li>
+						<li><div class="dropdown-divider"></div></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#register_co_box">Register _co</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#register_mem_box">Register _mem</a></li>
+						<li><div class="dropdown-divider"></div></li>
+						<li><a class="dropdown-item" href="/" onClick="new _api({ url: '/_auth/logout' }).poll().then( ( _ret ) => { if( 1 == _ret.return ){ window.location.href = '/' } })">Logout</a></li>
+					</ul>
+				</div>
 			</li>
 		</ul>
 	</div>

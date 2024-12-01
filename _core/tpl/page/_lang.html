@@ -9,106 +9,106 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_lang_list' }).initTable().then( () => { new _table({ table: '_lang_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_lang_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_lang_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__lang_box" onClick="new _form({ form_id: 'save__lang_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_lang_list' }).initTable().then( () => { new _table({ table: '_lang_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_lang_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_lang_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__lang_box" onClick="new _form({ form_id: 'save__lang_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_lang_list"
-							class="list-group col-12 autoload _lang_list"
-							data-fl-src="/_lang/list"
-							data-fl-populate="_lang_list"
-							data-fl-tpl="_lang_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _lang to display</div>"
+						<table id="_lang_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_lang_id" flare-col-type="int">_lang_id</th>
+<th flare-col="_lang_new" flare-col-type="timestamp">_lang_new</th>
+<th flare-col="_lang_edit" flare-col-type="timestamp">_lang_edit</th>
+<th flare-col="_lang_del" flare-col-type="timestamp">_lang_del</th>
+<th flare-col="_lang_arch" flare-col-type="timestamp">_lang_arch</th>
+<th flare-col="_lang_active" flare-col-type="tinyint">_lang_active</th>
+<th flare-col="_lang_name" flare-col-type="varchar">_lang_name</th>
+<th flare-col="_lang_iso2" flare-col-type="char">_lang_iso2</th>
+<th flare-col="_lang_iso3" flare-col-type="char">_lang_iso3</th>
+<th flare-col="_lang_ulid" flare-col-type="varchar">_lang_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_lang_list" class="autoload _lang_list"
+								flare-src="/_lang/list"
+								flare-tpl="_lang_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _lang to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_lang_id" data-col-type="int">_lang_id</div>
-<div class="col" data-col="_lang_new" data-col-type="timestamp">_lang_new</div>
-<div class="col" data-col="_lang_edit" data-col-type="timestamp">_lang_edit</div>
-<div class="col" data-col="_lang_del" data-col-type="timestamp">_lang_del</div>
-<div class="col" data-col="_lang_arch" data-col-type="timestamp">_lang_arch</div>
-<div class="col" data-col="_lang_active" data-col-type="tinyint">_lang_active</div>
-<div class="col" data-col="_lang_order" data-col-type="smallint">_lang_order</div>
-<div class="col" data-col="_lang_name" data-col-type="varchar">_lang_name</div>
-<div class="col" data-col="_lang_code" data-col-type="varchar">_lang_code</div>
-<div class="col" data-col="_lang_default" data-col-type="tinyint">_lang_default</div>
-<div class="col" data-col="_lang_system" data-col-type="tinyint">_lang_system</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_lang_list_tpl" class="d-none">
-							<div id="_lang_~~_lang_id~~" class="list-group-item"
-								data-filter-_lang_id=~~_lang_id~~
-data-filter-_lang_new=~~_lang_new~~
-data-filter-_lang_edit=~~_lang_edit~~
-data-filter-_lang_del=~~_lang_del~~
-data-filter-_lang_arch=~~_lang_arch~~
-data-filter-_lang_active=~~_lang_active~~
-data-filter-_lang_order=~~_lang_order~~
-data-filter-_lang_name=~~_lang_name~~
-data-filter-_lang_code=~~_lang_code~~
-data-filter-_lang_default=~~_lang_default~~
-data-filter-_lang_system=~~_lang_system~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_lang_id" data-col-type="int">~~_lang_id~~</div>
-<div class="col" data-col="_lang_new" data-col-type="timestamp">~~_lang_new~~</div>
-<div class="col" data-col="_lang_edit" data-col-type="timestamp">~~_lang_edit~~</div>
-<div class="col" data-col="_lang_del" data-col-type="timestamp">~~_lang_del~~</div>
-<div class="col" data-col="_lang_arch" data-col-type="timestamp">~~_lang_arch~~</div>
-<div class="col" data-col="_lang_active" data-col-type="tinyint">~~_lang_active~~</div>
-<div class="col" data-col="_lang_order" data-col-type="smallint">~~_lang_order~~</div>
-<div class="col" data-col="_lang_name" data-col-type="varchar">~~_lang_name~~</div>
-<div class="col" data-col="_lang_code" data-col-type="varchar">~~_lang_code~~</div>
-<div class="col" data-col="_lang_default" data-col-type="tinyint">~~_lang_default~~</div>
-<div class="col" data-col="_lang_system" data-col-type="tinyint">~~_lang_system~~</div>
+							<tr id="_lang_~~_lang_id~~" class=""
+								flare-filter-_lang_id=~~_lang_id~~
+flare-filter-_lang_new=~~_lang_new~~
+flare-filter-_lang_edit=~~_lang_edit~~
+flare-filter-_lang_del=~~_lang_del~~
+flare-filter-_lang_arch=~~_lang_arch~~
+flare-filter-_lang_active=~~_lang_active~~
+flare-filter-_lang_name=~~_lang_name~~
+flare-filter-_lang_iso2=~~_lang_iso2~~
+flare-filter-_lang_iso3=~~_lang_iso3~~
+flare-filter-_lang_ulid=~~_lang_ulid~~
+							>
+								<td flare-col="_lang_id" flare-col-type="int">~~_lang_id~~</td>
+<td flare-col="_lang_new" flare-col-type="timestamp">~~_lang_new~~</td>
+<td flare-col="_lang_edit" flare-col-type="timestamp">~~_lang_edit~~</td>
+<td flare-col="_lang_del" flare-col-type="timestamp">~~_lang_del~~</td>
+<td flare-col="_lang_arch" flare-col-type="timestamp">~~_lang_arch~~</td>
+<td flare-col="_lang_active" flare-col-type="tinyint">~~_lang_active~~</td>
+<td flare-col="_lang_name" flare-col-type="varchar">~~_lang_name~~</td>
+<td flare-col="_lang_iso2" flare-col-type="char">~~_lang_iso2~~</td>
+<td flare-col="_lang_iso3" flare-col-type="char">~~_lang_iso3~~</td>
+<td flare-col="_lang_ulid" flare-col-type="varchar">~~_lang_ulid~~</td>
 
-									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__lang_box"
-													onClick="
-														new _form({ form_id: 'save__lang_form', autoform: true }).autoform()
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__lang_box"
+											onClick="
+												_dom.val('#save__lang_box__lang_id', '_lang_id');
+												new _form({ form_id: 'save__lang_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_lang/fetch/~~_lang_id~~' })
+														.poll()
 														.then(
-															() =>
+															function( _ret )
 															{
-																new _api({ url: '/_lang/fetch/~~_lang_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
-																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__lang_form', data: _ret.data }).popForm();
-																		}
-																	}
-																);
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__lang_form', data: _ret.data }).popForm();
+																}
 															}
 														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_lang/delete/~~_lang_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '#_lang_list' );
-																	}
-																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
-										</div>
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_lang/delete/~~_lang_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._lang_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -117,6 +117,6 @@ data-filter-_lang_system=~~_lang_system~~
 	</div>
 </body>
 
-<div id="save__lang_modal_tpl" class="autotpl" data-fl-tpl="modal/_lang_save"></div>
+<div id="save__lang_modal_tpl" class="autotpl" data-tpl="modal/_lang_save"></div>
 
 ~~include:_master_foot~~

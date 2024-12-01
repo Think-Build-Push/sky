@@ -9,100 +9,112 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_perm_list' }).initTable().then( () => { new _table({ table: '_perm_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_perm_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_perm_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__perm_box" onClick="new _form({ form_id: 'save__perm_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_perm_list' }).initTable().then( () => { new _table({ table: '_perm_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_perm_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_perm_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__perm_box" onClick="new _form({ form_id: 'save__perm_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_perm_list"
-							class="list-group col-12 autoload _perm_list"
-							data-fl-src="/_perm/list"
-							data-fl-populate="_perm_list"
-							data-fl-tpl="_perm_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _perm to display</div>"
+						<table id="_perm_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_perm_id" flare-col-type="int">_perm_id</th>
+<th flare-col="_perm_new" flare-col-type="timestamp">_perm_new</th>
+<th flare-col="_perm_edit" flare-col-type="timestamp">_perm_edit</th>
+<th flare-col="_perm_del" flare-col-type="timestamp">_perm_del</th>
+<th flare-col="_perm_arch" flare-col-type="timestamp">_perm_arch</th>
+<th flare-col="_perm_active" flare-col-type="tinyint">_perm_active</th>
+<th flare-col="_perm_selectable" flare-col-type="tinyint">_perm_selectable</th>
+<th flare-col="_perm_path" flare-col-type="varchar">_perm_path</th>
+<th flare-col="_perm_name" flare-col-type="varchar">_perm_name</th>
+<th flare-col="_perm_role_type" flare-col-type="varchar">_perm_role_type</th>
+<th flare-col="_perm_desc" flare-col-type="varchar">_perm_desc</th>
+<th flare-col="_perm_ulid" flare-col-type="varchar">_perm_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_perm_list" class="autoload _perm_list"
+								flare-src="/_perm/list"
+								flare-tpl="_perm_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _perm to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_perm_id" data-col-type="int">_perm_id</div>
-<div class="col" data-col="_perm_new" data-col-type="timestamp">_perm_new</div>
-<div class="col" data-col="_perm_edit" data-col-type="timestamp">_perm_edit</div>
-<div class="col" data-col="_perm_del" data-col-type="timestamp">_perm_del</div>
-<div class="col" data-col="_perm_arch" data-col-type="timestamp">_perm_arch</div>
-<div class="col" data-col="_perm_active" data-col-type="tinyint">_perm_active</div>
-<div class="col" data-col="_perm_name" data-col-type="varchar">_perm_name</div>
-<div class="col" data-col="_perm_path" data-col-type="varchar">_perm_path</div>
-<div class="col" data-col="_perm_desc" data-col-type="varchar">_perm_desc</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_perm_list_tpl" class="d-none">
-							<div id="_perm_~~_perm_id~~" class="list-group-item"
-								data-filter-_perm_id=~~_perm_id~~
-data-filter-_perm_new=~~_perm_new~~
-data-filter-_perm_edit=~~_perm_edit~~
-data-filter-_perm_del=~~_perm_del~~
-data-filter-_perm_arch=~~_perm_arch~~
-data-filter-_perm_active=~~_perm_active~~
-data-filter-_perm_name=~~_perm_name~~
-data-filter-_perm_path=~~_perm_path~~
-data-filter-_perm_desc=~~_perm_desc~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_perm_id" data-col-type="int">~~_perm_id~~</div>
-<div class="col" data-col="_perm_new" data-col-type="timestamp">~~_perm_new~~</div>
-<div class="col" data-col="_perm_edit" data-col-type="timestamp">~~_perm_edit~~</div>
-<div class="col" data-col="_perm_del" data-col-type="timestamp">~~_perm_del~~</div>
-<div class="col" data-col="_perm_arch" data-col-type="timestamp">~~_perm_arch~~</div>
-<div class="col" data-col="_perm_active" data-col-type="tinyint">~~_perm_active~~</div>
-<div class="col" data-col="_perm_name" data-col-type="varchar">~~_perm_name~~</div>
-<div class="col" data-col="_perm_path" data-col-type="varchar">~~_perm_path~~</div>
-<div class="col" data-col="_perm_desc" data-col-type="varchar">~~_perm_desc~~</div>
+							<tr id="_perm_~~_perm_id~~" class=""
+								flare-filter-_perm_id=~~_perm_id~~
+flare-filter-_perm_new=~~_perm_new~~
+flare-filter-_perm_edit=~~_perm_edit~~
+flare-filter-_perm_del=~~_perm_del~~
+flare-filter-_perm_arch=~~_perm_arch~~
+flare-filter-_perm_active=~~_perm_active~~
+flare-filter-_perm_selectable=~~_perm_selectable~~
+flare-filter-_perm_path=~~_perm_path~~
+flare-filter-_perm_name=~~_perm_name~~
+flare-filter-_perm_role_type=~~_perm_role_type~~
+flare-filter-_perm_desc=~~_perm_desc~~
+flare-filter-_perm_ulid=~~_perm_ulid~~
+							>
+								<td flare-col="_perm_id" flare-col-type="int">~~_perm_id~~</td>
+<td flare-col="_perm_new" flare-col-type="timestamp">~~_perm_new~~</td>
+<td flare-col="_perm_edit" flare-col-type="timestamp">~~_perm_edit~~</td>
+<td flare-col="_perm_del" flare-col-type="timestamp">~~_perm_del~~</td>
+<td flare-col="_perm_arch" flare-col-type="timestamp">~~_perm_arch~~</td>
+<td flare-col="_perm_active" flare-col-type="tinyint">~~_perm_active~~</td>
+<td flare-col="_perm_selectable" flare-col-type="tinyint">~~_perm_selectable~~</td>
+<td flare-col="_perm_path" flare-col-type="varchar">~~_perm_path~~</td>
+<td flare-col="_perm_name" flare-col-type="varchar">~~_perm_name~~</td>
+<td flare-col="_perm_role_type" flare-col-type="varchar">~~_perm_role_type~~</td>
+<td flare-col="_perm_desc" flare-col-type="varchar">~~_perm_desc~~</td>
+<td flare-col="_perm_ulid" flare-col-type="varchar">~~_perm_ulid~~</td>
 
-									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__perm_box"
-													onClick="
-														new _form({ form_id: 'save__perm_form', autoform: true }).autoform()
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__perm_box"
+											onClick="
+												_dom.val('#save__perm_box__perm_id', '_perm_id');
+												new _form({ form_id: 'save__perm_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_perm/fetch/~~_perm_id~~' })
+														.poll()
 														.then(
-															() =>
+															function( _ret )
 															{
-																new _api({ url: '/_perm/fetch/~~_perm_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
-																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__perm_form', data: _ret.data }).popForm();
-																		}
-																	}
-																);
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__perm_form', data: _ret.data }).popForm();
+																}
 															}
 														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_perm/delete/~~_perm_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '#_perm_list' );
-																	}
-																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
-										</div>
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_perm/delete/~~_perm_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._perm_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -111,6 +123,6 @@ data-filter-_perm_desc=~~_perm_desc~~
 	</div>
 </body>
 
-<div id="save__perm_modal_tpl" class="autotpl" data-fl-tpl="modal/_perm_save"></div>
+<div id="save__perm_modal_tpl" class="autotpl" data-tpl="modal/_perm_save"></div>
 
 ~~include:_master_foot~~

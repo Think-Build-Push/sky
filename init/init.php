@@ -35,7 +35,7 @@ array_pop( $parts );
 $path = implode( DIRECTORY_SEPARATOR, $parts );
 
 require_once( $path . '/init/defines.php' );
-require_once( OBJ_CORE . 'exception/exceptions.php' );
+require_once( CORE . 'exception/exceptions.php' );
 
 define( 'SUBDOMAIN_SCOPE', $config['subdomain_scope'] );
 
@@ -53,9 +53,9 @@ spl_autoload_register(
 				$filename = str_starts_with( $class_name, '_' ) ? CTLR_CORE : CTLR_APP;
 				$filename .= str_replace( '_ctlr', '', $class_name ) . '.ctlr.php';
 				break;
-			case '_obj_data' != $class_name && str_ends_with( $class_name, '_data' ):
-				$filename = str_starts_with( $class_name, '_' ) ? OBJ_DATA_CORE : OBJ_DATA_APP;
-				$filename .= str_replace( '_data', '', $class_name ) . '.data.php';
+			case '_model' != $class_name && str_ends_with( $class_name, '_model' ):
+				$filename = str_starts_with( $class_name, '_' ) ? MODEL_CORE : MODEL_APP;
+				$filename .= str_replace( '_model', '', $class_name ) . '.model.php';
 				break;
 			default:
 				$filename = str_starts_with( $class_name, '_' ) ? OBJ_CORE : OBJ_APP;

@@ -42,8 +42,8 @@ if( $verified )
 			$admin_role = $_role->create_admin_role();
 		}
 
-		$_co_mem = new _co_mem();
-		$sub_mem = $_co_mem->save([ 'fk__mem_id' => $owner_id, 'fk__role_id' => $admin_role['_role_id'] ]);
+		$_co__mem = new _co__mem();
+		$sub_mem = $_co__mem->save([ 'fk__mem_id' => $owner_id, 'fk__role_id' => $admin_role['_role_id'] ]);
 
 		$_co->save([ '_co_id' => $sub['_co_id'], '_co_setup' => 1 ]);
 	}

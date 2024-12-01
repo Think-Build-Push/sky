@@ -56,7 +56,7 @@ class _safe_map extends _da
 			if( $check_keys )
 			{
 				// This ensures that even if a column ends in _id but isn't a table id or table ulid, it won't be queried for its corresponding ulid column
-				$query = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '{$_SERVER['DB_NAME']}' AND COLUMN_NAME IN ( " . str_repeat( '?', count( array_keys( $check_keys ) ) ) . " )";
+				$query = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '{$_SERVER['DB_NAME']}' AND COLUMN_NAME IN ( " . substr( str_repeat( '?,', count( array_keys( $check_keys ) ) ), 0, -1 ) . " )";
 				$sth = $this->query( $query, array_keys( $check_keys ) );
 				$valid_keys = [];
 				while( $col = $sth->fetch() )

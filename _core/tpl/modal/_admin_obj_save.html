@@ -5,7 +5,7 @@
 				<h5 class="modal-title">_admin_obj Save Form</h5>
 			</div>
 			<div class="modal-body">
-				<form id="save__admin_obj_form" method="POST" action="/_admin/create_table" class="form validate">
+				<form id="save__admin_obj_form" method="POST" action="/_admin_obj/save" class="form validate">
 					<div id="save__admin_obj_form_fields">
 					</div>
 				</form>
@@ -28,3 +28,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded",
+	function()
+	{
+		new _form({ form_id: 'save__admin_obj_form' }).autoform();
+	}
+);
+</script>

@@ -9,103 +9,109 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_valid_form_list' }).initTable().then( () => { new _table({ table: '_valid_form_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_valid_form_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_valid_form_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__valid_form_box" onClick="new _form({ form_id: 'save__valid_form_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_valid_form_list' }).initTable().then( () => { new _table({ table: '_valid_form_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_valid_form_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_valid_form_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__valid_form_box" onClick="new _form({ form_id: 'save__valid_form_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_valid_form_list"
-							class="list-group col-12 autoload _valid_form_list"
-							data-fl-src="/_valid_form/list"
-							data-fl-populate="_valid_form_list"
-							data-fl-tpl="_valid_form_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _valid_form to display</div>"
+						<table id="_valid_form_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_valid_form_id" flare-col-type="int">_valid_form_id</th>
+<th flare-col="_valid_form_new" flare-col-type="timestamp">_valid_form_new</th>
+<th flare-col="_valid_form_edit" flare-col-type="timestamp">_valid_form_edit</th>
+<th flare-col="_valid_form_del" flare-col-type="timestamp">_valid_form_del</th>
+<th flare-col="_valid_form_arch" flare-col-type="timestamp">_valid_form_arch</th>
+<th flare-col="_valid_form_active" flare-col-type="tinyint">_valid_form_active</th>
+<th flare-col="_valid_form_name" flare-col-type="varchar">_valid_form_name</th>
+<th flare-col="_valid_form_form_id" flare-col-type="varchar">_valid_form_form_id</th>
+<th flare-col="_valid_form_action" flare-col-type="varchar">_valid_form_action</th>
+<th flare-col="_valid_form_method" flare-col-type="varchar">_valid_form_method</th>
+<th flare-col="_valid_form_ulid" flare-col-type="varchar">_valid_form_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_valid_form_list" class="autoload _valid_form_list"
+								flare-src="/_valid_form/list"
+								flare-tpl="_valid_form_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _valid_form to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_valid_form_id" data-col-type="int">_valid_form_id</div>
-<div class="col" data-col="_valid_form_new" data-col-type="timestamp">_valid_form_new</div>
-<div class="col" data-col="_valid_form_edit" data-col-type="timestamp">_valid_form_edit</div>
-<div class="col" data-col="_valid_form_del" data-col-type="timestamp">_valid_form_del</div>
-<div class="col" data-col="_valid_form_arch" data-col-type="timestamp">_valid_form_arch</div>
-<div class="col" data-col="_valid_form_active" data-col-type="tinyint">_valid_form_active</div>
-<div class="col" data-col="_valid_form_name" data-col-type="varchar">_valid_form_name</div>
-<div class="col" data-col="_valid_form_input_id" data-col-type="varchar">_valid_form_input_id</div>
-<div class="col" data-col="_valid_form_table" data-col-type="varchar">_valid_form_table</div>
-<div class="col" data-col="_valid_form_action" data-col-type="varchar">_valid_form_action</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_valid_form_list_tpl" class="d-none">
-							<div id="_valid_form_~~_valid_form_id~~" class="list-group-item"
-								data-filter-_valid_form_id=~~_valid_form_id~~
-data-filter-_valid_form_new=~~_valid_form_new~~
-data-filter-_valid_form_edit=~~_valid_form_edit~~
-data-filter-_valid_form_del=~~_valid_form_del~~
-data-filter-_valid_form_arch=~~_valid_form_arch~~
-data-filter-_valid_form_active=~~_valid_form_active~~
-data-filter-_valid_form_name=~~_valid_form_name~~
-data-filter-_valid_form_input_id=~~_valid_form_input_id~~
-data-filter-_valid_form_table=~~_valid_form_table~~
-data-filter-_valid_form_action=~~_valid_form_action~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_valid_form_id" data-col-type="int">~~_valid_form_id~~</div>
-<div class="col" data-col="_valid_form_new" data-col-type="timestamp">~~_valid_form_new~~</div>
-<div class="col" data-col="_valid_form_edit" data-col-type="timestamp">~~_valid_form_edit~~</div>
-<div class="col" data-col="_valid_form_del" data-col-type="timestamp">~~_valid_form_del~~</div>
-<div class="col" data-col="_valid_form_arch" data-col-type="timestamp">~~_valid_form_arch~~</div>
-<div class="col" data-col="_valid_form_active" data-col-type="tinyint">~~_valid_form_active~~</div>
-<div class="col" data-col="_valid_form_name" data-col-type="varchar">~~_valid_form_name~~</div>
-<div class="col" data-col="_valid_form_input_id" data-col-type="varchar">~~_valid_form_input_id~~</div>
-<div class="col" data-col="_valid_form_table" data-col-type="varchar">~~_valid_form_table~~</div>
-<div class="col" data-col="_valid_form_action" data-col-type="varchar">~~_valid_form_action~~</div>
+							<tr id="_valid_form_~~_valid_form_id~~" class=""
+								flare-filter-_valid_form_id=~~_valid_form_id~~
+flare-filter-_valid_form_new=~~_valid_form_new~~
+flare-filter-_valid_form_edit=~~_valid_form_edit~~
+flare-filter-_valid_form_del=~~_valid_form_del~~
+flare-filter-_valid_form_arch=~~_valid_form_arch~~
+flare-filter-_valid_form_active=~~_valid_form_active~~
+flare-filter-_valid_form_name=~~_valid_form_name~~
+flare-filter-_valid_form_form_id=~~_valid_form_form_id~~
+flare-filter-_valid_form_action=~~_valid_form_action~~
+flare-filter-_valid_form_method=~~_valid_form_method~~
+flare-filter-_valid_form_ulid=~~_valid_form_ulid~~
+							>
+								<td flare-col="_valid_form_id" flare-col-type="int">~~_valid_form_id~~</td>
+<td flare-col="_valid_form_new" flare-col-type="timestamp">~~_valid_form_new~~</td>
+<td flare-col="_valid_form_edit" flare-col-type="timestamp">~~_valid_form_edit~~</td>
+<td flare-col="_valid_form_del" flare-col-type="timestamp">~~_valid_form_del~~</td>
+<td flare-col="_valid_form_arch" flare-col-type="timestamp">~~_valid_form_arch~~</td>
+<td flare-col="_valid_form_active" flare-col-type="tinyint">~~_valid_form_active~~</td>
+<td flare-col="_valid_form_name" flare-col-type="varchar">~~_valid_form_name~~</td>
+<td flare-col="_valid_form_form_id" flare-col-type="varchar">~~_valid_form_form_id~~</td>
+<td flare-col="_valid_form_action" flare-col-type="varchar">~~_valid_form_action~~</td>
+<td flare-col="_valid_form_method" flare-col-type="varchar">~~_valid_form_method~~</td>
+<td flare-col="_valid_form_ulid" flare-col-type="varchar">~~_valid_form_ulid~~</td>
 
-									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__valid_form_box"
-													onClick="
-														new _form({ form_id: 'save__valid_form_form', autoform: true }).autoform()
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__valid_form_box"
+											onClick="
+												_dom.val('#save__valid_form_box__valid_form_id', '_valid_form_id');
+												new _form({ form_id: 'save__valid_form_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_valid_form/fetch/~~_valid_form_id~~' })
+														.poll()
 														.then(
-															() =>
+															function( _ret )
 															{
-																new _api({ url: '/_valid_form/fetch/~~_valid_form_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
-																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__valid_form_form', data: _ret.data }).popForm();
-																		}
-																	}
-																);
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__valid_form_form', data: _ret.data }).popForm();
+																}
 															}
 														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_valid_form/delete/~~_valid_form_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '#_valid_form_list' );
-																	}
-																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
-										</div>
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_valid_form/delete/~~_valid_form_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._valid_form_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -114,6 +120,6 @@ data-filter-_valid_form_action=~~_valid_form_action~~
 	</div>
 </body>
 
-<div id="save__valid_form_modal_tpl" class="autotpl" data-fl-tpl="modal/_valid_form_save"></div>
+<div id="save__valid_form_modal_tpl" class="autotpl" data-tpl="modal/_valid_form_save"></div>
 
 ~~include:_master_foot~~

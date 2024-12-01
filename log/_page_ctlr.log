@@ -1,4 +1,0 @@
-{"message":"_page_ctlr->show()","context":{"0":{"page":"index"},"class":"_page_ctlr"},"level":400,"level_name":"ERROR","channel":"_page_ctlr","datetime":"2024-10-27T23:16:27.564312+00:00","extra":{}}
-{"message":"_page_ctlr->show()","context":{"0":{"page":"index"},"class":"_page_ctlr"},"level":400,"level_name":"ERROR","channel":"_page_ctlr","datetime":"2024-10-27T23:18:09.827489+00:00","extra":{}}
-{"message":"_page_ctlr->show()","context":{"0":{"page":"index"},"class":"_page_ctlr"},"level":400,"level_name":"ERROR","channel":"_page_ctlr","datetime":"2024-10-27T23:19:27.715702+00:00","extra":{}}
-{"message":"_page_ctlr->show()","context":{"0":{"page":"index"},"class":"_page_ctlr"},"level":400,"level_name":"ERROR","channel":"_page_ctlr","datetime":"2024-10-27T23:22:14.740315+00:00","extra":{}}

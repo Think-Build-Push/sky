@@ -9,130 +9,103 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_valid_field_list' }).initTable().then( () => { new _table({ table: '_valid_field_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_valid_field_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_valid_field_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__valid_field_box" onClick="new _form({ form_id: 'save__valid_field_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_valid_field_list' }).initTable().then( () => { new _table({ table: '_valid_field_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_valid_field_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_valid_field_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__valid_field_box" onClick="new _form({ form_id: 'save__valid_field_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_valid_field_list"
-							class="list-group col-12 autoload _valid_field_list"
-							data-fl-src="/_valid_field/list"
-							data-fl-populate="_valid_field_list"
-							data-fl-tpl="_valid_field_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _valid_field to display</div>"
+						<table id="_valid_field_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_valid_field_id" flare-col-type="int">_valid_field_id</th>
+<th flare-col="_valid_field_new" flare-col-type="timestamp">_valid_field_new</th>
+<th flare-col="_valid_field_edit" flare-col-type="timestamp">_valid_field_edit</th>
+<th flare-col="_valid_field_del" flare-col-type="timestamp">_valid_field_del</th>
+<th flare-col="_valid_field_arch" flare-col-type="timestamp">_valid_field_arch</th>
+<th flare-col="_valid_field_active" flare-col-type="tinyint">_valid_field_active</th>
+<th flare-col="fk__valid_form_id" flare-col-type="int">fk__valid_form_id</th>
+<th flare-col="fk__field_id" flare-col-type="int">fk__field_id</th>
+<th flare-col="_valid_field_ulid" flare-col-type="varchar">_valid_field_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_valid_field_list" class="autoload _valid_field_list"
+								flare-src="/_valid_field/list"
+								flare-tpl="_valid_field_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _valid_field to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_valid_field_id" data-col-type="int">_valid_field_id</div>
-<div class="col" data-col="_valid_field_new" data-col-type="timestamp">_valid_field_new</div>
-<div class="col" data-col="_valid_field_edit" data-col-type="timestamp">_valid_field_edit</div>
-<div class="col" data-col="_valid_field_del" data-col-type="timestamp">_valid_field_del</div>
-<div class="col" data-col="_valid_field_arch" data-col-type="timestamp">_valid_field_arch</div>
-<div class="col" data-col="_valid_field_active" data-col-type="tinyint">_valid_field_active</div>
-<div class="col" data-col="fk__valid_form_id" data-col-type="int">fk__valid_form_id</div>
-<div class="col" data-col="_valid_field_name" data-col-type="varchar">_valid_field_name</div>
-<div class="col" data-col="_valid_field_input_id" data-col-type="varchar">_valid_field_input_id</div>
-<div class="col" data-col="_valid_field_type" data-col-type="varchar">_valid_field_type</div>
-<div class="col" data-col="_valid_field_required" data-col-type="tinyint">_valid_field_required</div>
-<div class="col" data-col="_valid_field_src" data-col-type="varchar">_valid_field_src</div>
-<div class="col" data-col="_valid_field_mask" data-col-type="varchar">_valid_field_mask</div>
-<div class="col" data-col="_valid_field_default_value" data-col-type="varchar">_valid_field_default_value</div>
-<div class="col" data-col="_valid_field_min" data-col-type="varchar">_valid_field_min</div>
-<div class="col" data-col="_valid_field_max" data-col-type="varchar">_valid_field_max</div>
-<div class="col" data-col="_valid_field_format" data-col-type="varchar">_valid_field_format</div>
-<div class="col" data-col="fk__valid_field_id" data-col-type="int">fk__valid_field_id</div>
-<div class="col" data-col="_valid_field_if_value" data-col-type="varchar">_valid_field_if_value</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_valid_field_list_tpl" class="d-none">
-							<div id="_valid_field_~~_valid_field_id~~" class="list-group-item"
-								data-filter-_valid_field_id=~~_valid_field_id~~
-data-filter-_valid_field_new=~~_valid_field_new~~
-data-filter-_valid_field_edit=~~_valid_field_edit~~
-data-filter-_valid_field_del=~~_valid_field_del~~
-data-filter-_valid_field_arch=~~_valid_field_arch~~
-data-filter-_valid_field_active=~~_valid_field_active~~
-data-filter-fk__valid_form_id=~~fk__valid_form_id~~
-data-filter-_valid_field_name=~~_valid_field_name~~
-data-filter-_valid_field_input_id=~~_valid_field_input_id~~
-data-filter-_valid_field_type=~~_valid_field_type~~
-data-filter-_valid_field_required=~~_valid_field_required~~
-data-filter-_valid_field_src=~~_valid_field_src~~
-data-filter-_valid_field_mask=~~_valid_field_mask~~
-data-filter-_valid_field_default_value=~~_valid_field_default_value~~
-data-filter-_valid_field_min=~~_valid_field_min~~
-data-filter-_valid_field_max=~~_valid_field_max~~
-data-filter-_valid_field_format=~~_valid_field_format~~
-data-filter-fk__valid_field_id=~~fk__valid_field_id~~
-data-filter-_valid_field_if_value=~~_valid_field_if_value~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_valid_field_id" data-col-type="int">~~_valid_field_id~~</div>
-<div class="col" data-col="_valid_field_new" data-col-type="timestamp">~~_valid_field_new~~</div>
-<div class="col" data-col="_valid_field_edit" data-col-type="timestamp">~~_valid_field_edit~~</div>
-<div class="col" data-col="_valid_field_del" data-col-type="timestamp">~~_valid_field_del~~</div>
-<div class="col" data-col="_valid_field_arch" data-col-type="timestamp">~~_valid_field_arch~~</div>
-<div class="col" data-col="_valid_field_active" data-col-type="tinyint">~~_valid_field_active~~</div>
-<div class="col" data-col="fk__valid_form_id" data-col-type="int">~~fk__valid_form_id~~</div>
-<div class="col" data-col="_valid_field_name" data-col-type="varchar">~~_valid_field_name~~</div>
-<div class="col" data-col="_valid_field_input_id" data-col-type="varchar">~~_valid_field_input_id~~</div>
-<div class="col" data-col="_valid_field_type" data-col-type="varchar">~~_valid_field_type~~</div>
-<div class="col" data-col="_valid_field_required" data-col-type="tinyint">~~_valid_field_required~~</div>
-<div class="col" data-col="_valid_field_src" data-col-type="varchar">~~_valid_field_src~~</div>
-<div class="col" data-col="_valid_field_mask" data-col-type="varchar">~~_valid_field_mask~~</div>
-<div class="col" data-col="_valid_field_default_value" data-col-type="varchar">~~_valid_field_default_value~~</div>
-<div class="col" data-col="_valid_field_min" data-col-type="varchar">~~_valid_field_min~~</div>
-<div class="col" data-col="_valid_field_max" data-col-type="varchar">~~_valid_field_max~~</div>
-<div class="col" data-col="_valid_field_format" data-col-type="varchar">~~_valid_field_format~~</div>
-<div class="col" data-col="fk__valid_field_id" data-col-type="int">~~fk__valid_field_id~~</div>
-<div class="col" data-col="_valid_field_if_value" data-col-type="varchar">~~_valid_field_if_value~~</div>
+							<tr id="_valid_field_~~_valid_field_id~~" class=""
+								flare-filter-_valid_field_id=~~_valid_field_id~~
+flare-filter-_valid_field_new=~~_valid_field_new~~
+flare-filter-_valid_field_edit=~~_valid_field_edit~~
+flare-filter-_valid_field_del=~~_valid_field_del~~
+flare-filter-_valid_field_arch=~~_valid_field_arch~~
+flare-filter-_valid_field_active=~~_valid_field_active~~
+flare-filter-fk__valid_form_id=~~fk__valid_form_id~~
+flare-filter-fk__field_id=~~fk__field_id~~
+flare-filter-_valid_field_ulid=~~_valid_field_ulid~~
+							>
+								<td flare-col="_valid_field_id" flare-col-type="int">~~_valid_field_id~~</td>
+<td flare-col="_valid_field_new" flare-col-type="timestamp">~~_valid_field_new~~</td>
+<td flare-col="_valid_field_edit" flare-col-type="timestamp">~~_valid_field_edit~~</td>
+<td flare-col="_valid_field_del" flare-col-type="timestamp">~~_valid_field_del~~</td>
+<td flare-col="_valid_field_arch" flare-col-type="timestamp">~~_valid_field_arch~~</td>
+<td flare-col="_valid_field_active" flare-col-type="tinyint">~~_valid_field_active~~</td>
+<td flare-col="fk__valid_form_id" flare-col-type="int">~~fk__valid_form_id~~</td>
+<td flare-col="fk__field_id" flare-col-type="int">~~fk__field_id~~</td>
+<td flare-col="_valid_field_ulid" flare-col-type="varchar">~~_valid_field_ulid~~</td>
 
-									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__valid_field_box"
-													onClick="
-														new _form({ form_id: 'save__valid_field_form', autoform: true }).autoform()
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__valid_field_box"
+											onClick="
+												_dom.val('#save__valid_field_box__valid_field_id', '_valid_field_id');
+												new _form({ form_id: 'save__valid_field_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_valid_field/fetch/~~_valid_field_id~~' })
+														.poll()
 														.then(
-															() =>
+															function( _ret )
 															{
-																new _api({ url: '/_valid_field/fetch/~~_valid_field_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
-																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__valid_field_form', data: _ret.data }).popForm();
-																		}
-																	}
-																);
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__valid_field_form', data: _ret.data }).popForm();
+																}
 															}
 														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_valid_field/delete/~~_valid_field_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '#_valid_field_list' );
-																	}
-																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
-										</div>
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_valid_field/delete/~~_valid_field_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._valid_field_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -141,6 +114,6 @@ data-filter-_valid_field_if_value=~~_valid_field_if_value~~
 	</div>
 </body>
 
-<div id="save__valid_field_modal_tpl" class="autotpl" data-fl-tpl="modal/_valid_field_save"></div>
+<div id="save__valid_field_modal_tpl" class="autotpl" data-tpl="modal/_valid_field_save"></div>
 
 ~~include:_master_foot~~

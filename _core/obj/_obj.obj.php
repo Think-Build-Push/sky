@@ -20,7 +20,7 @@ class _obj extends _da
 	public array $last_bound = [];
 	protected int $_co_id = 0;
 	protected ?string $_co_ulid = '';
-	protected ?object $data_obj = NULL;
+	protected ?object $model = NULL;
 
 	public function __construct( string $table )
 	{
@@ -239,7 +239,7 @@ class _obj extends _da
 
 		$this->paginate();
 
-		$rows = $this->get_by_col( $select_cols, TRUE, TRUE, $this->data_obj->full_join(), $this->data_obj->select_cols() );
+		$rows = $this->get_by_col( $select_cols, TRUE, TRUE, $this->model->full_join(), $this->model->select_cols() );
 
 		if( FALSE === $rows )
 		{
@@ -278,10 +278,10 @@ class _obj extends _da
 			unset( $vars[$this->table_ulid] );
 		}
 
-		if( $this->data_obj )
+		if( $this->model )
 		{
 			$field = $this->table_ulid;
-			if( $this->data_obj->col( $field ) )
+			if( $this->model->col( $field ) )
 			{
 				if( !$vars[$this->table_id] )
 				{
@@ -333,7 +333,7 @@ class _obj extends _da
 	 * @param boolean $enforce_multi_array
 	 * @param boolean $exclude_inactive
 	 * @param array $add_joins
-	 * @param string $export_cols
+	 * @param string $select_cols
 	 * @param string $order_by
 	 * @param int $result_limit
 	 * @return array|boolean
@@ -343,26 +343,26 @@ class _obj extends _da
 		array $cols_and_vals = array(),
 		bool $enforce_multi_array = FALSE,
 		bool $exclude_inactive = TRUE,
-		array $add_joins = array(),
-		string $export_cols = NULL,
+		array|string $add_joins = array(),
+		string $select_cols = NULL,
 		string $order_by = '',
 		int $result_limit = NULL
 	) : array|bool
  	{
 		$params = array();
-		if( !$export_cols )
+		if( !$select_cols )
 		{
-			if( $this->data_obj )
+			if( $this->model )
 			{
-				$export_cols = $this->data_obj->select_cols( 'string' );
+				$select_cols = $this->model->select_cols( 'string' );
 			}
 		}
 
-		if( !$add_joins && NULL !== $add_joins )
+		if( 'none' !== $add_joins && NULL !== $add_joins )
 		{
-			if( $this->data_obj )
+			if( $this->model )
 			{
-				$add_joins = $this->data_obj->full_join();
+				$add_joins = $this->model->full_join();
 			}
 		}
 
@@ -509,11 +509,11 @@ class _obj extends _da
 
 		if( $exclude_inactive )
 		{
-			$q = "SELECT {$export_cols} FROM {$this->table} {$joins} WHERE {$this->table}.{$this->table}_active = 1 ";
+			$q = "SELECT {$select_cols} FROM {$this->table} {$joins} WHERE {$this->table}.{$this->table}_active = 1 ";
 		}
 		else
 		{
-			$q = "SELECT {$export_cols} FROM {$this->table} {$joins} WHERE 1 ";
+			$q = "SELECT {$select_cols} FROM {$this->table} {$joins} WHERE 1 ";
 		}
 
 		if( $this->has_fk__co_id() )
@@ -603,7 +603,7 @@ class _obj extends _da
 		}
 
 		$this->log_data( $cols )->log_msg( 'get_by_id' );
-		return $this->get_by_col( $cols, FALSE, FALSE, $this->data_obj->full_join(), $this->data_obj->select_cols() );
+		return $this->get_by_col( $cols, FALSE, FALSE, $this->model->full_join(), $this->model->select_cols() );
 	}
 
 	public function get_table_name()
@@ -631,20 +631,20 @@ class _obj extends _da
 		$this->table_ulid = $table . '_ulid';
 		$this->table_explain = array();
 
-		$data_obj_name = $table . "_data";
-		if( defined( "OBJ_DATA_APP" ) && defined( "OBJ_DATA_CORE" ) )
+		$model_name = $table . "_model";
+		if( defined( "MODEL_APP" ) && defined( "MODEL_CORE" ) )
 		{
-			$data_obj_file = OBJ_DATA_APP;
+			$model_file = MODEL_APP;
 			if( $this->is_core( $table ) )
 			{
-				$data_obj_file = OBJ_DATA_CORE;
+				$model_file = MODEL_CORE;
 			}
-			$data_obj_file .= "{$data_obj_name}.obj.php";
+			$model_file .= "{$table}.model.php";
 
-			if( file_exists( $data_obj_file ) )
+			if( file_exists( $model_file ) )
 			{
-				require_once( $data_obj_file );
-				$this->data_obj = new $data_obj_name();
+				require_once( $model_file );
+				$this->model = new $model_name();
 			}
 		}
 

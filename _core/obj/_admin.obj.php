@@ -121,16 +121,16 @@ class _admin extends _obj
 	 */
 	public function create_data_objects( string $table ) : bool
 	{
-		$filename = OBJ_DATA_APP . $table . '_data.obj.php';
+		$filename = MODEL_APP . $table . '.model.php';
 		if( $this->is_core( $table ) )
 		{
-			$filename = OBJ_DATA_CORE . $table. '_data.obj.php';
+			$filename = MODEL_CORE . $table. '.model.php';
 		}
 
 		if( !file_exists( $filename ) )
 		{
-			$obj_tpl = file_get_contents( ADMIN . "tpl/obj.data.tpl" );
-			print "\n\nOBJ DATA TPL: " . ADMIN . "tpl/obj.data.tpl" . "\n";
+			$obj_tpl = file_get_contents( ADMIN . "tpl/model.tpl" );
+			print "\n\nMODEL TPL: " . ADMIN . "tpl/model.tpl" . "\n";
 
 			$columns = $this->explain_table( $table, TRUE ); // force refresh of table definitions just in case
 			if( !$columns )
@@ -173,11 +173,11 @@ class _admin extends _obj
 					$block = "";
 					if( $this->is_core( $fk_table ) )
 					{
-						$block = "\t\trequire_once( OBJ_DATA_CORE . '{$fk_table}_data.obj.php' );\n";
+						$block = "\t\trequire_once( MODEL_CORE . '{$fk_table}_data.obj.php' );\n";
 					}
 					else
 					{
-						$block = "\t\trequire_once( OBJ_DATA_APP . '{$fk_table}_data.obj.php' );\n";
+						$block = "\t\trequire_once( MODEL_APP . '{$fk_table}_data.obj.php' );\n";
 					}
 
 					$block .= "\t\t" . '$o_' . $fk_table . '_data = new ' . $fk_table . "_data();\n" .
@@ -374,13 +374,13 @@ class _admin extends _obj
 				foreach( $columns as $col => $type )
 				{
 					list( $type, $length ) = explode( "(", $type );
-					$crud_header[] = "<div class=\"col\" data-col=\"{$col}\" data-col-type=\"{$type}\">{$col}</div>\n";
-					$crud_cols[] = "<div class=\"col\" data-col=\"{$col}\" data-col-type=\"{$type}\">~~{$col}~~</div>\n";
-					$filter_cols[] = "data-filter-{$col}=~~{$col}~~";
+					$crud_header[] = "<th flare-col=\"{$col}\" flare-col-type=\"{$type}\">{$col}</th>\n";
+					$crud_cols[] = "<td flare-col=\"{$col}\" flare-col-type=\"{$type}\">~~{$col}~~</td>\n";
+					$filter_cols[] = "flare-filter-{$col}=~~{$col}~~";
 				}
 			}
 
-			$crud_header[] = "<div class=\"col text-center\"><i class=\"fa fa-tools\"></i></div>";
+			$crud_header[] = "<th class=\"text-center\"><i class=\"fa fa-tools\"></i></th>";
 			$crud_tpl = file_get_contents( ADMIN . "/tpl/crud.tpl" );
 			print "\n\nCRUD TPL: " . ADMIN . "/tpl/crud.tpl" . "\n";
 			p( $crud_tpl );
@@ -439,10 +439,11 @@ class _admin extends _obj
 	 */
 	public function create_valid_form( string $table, string $form_input_id ) : bool
 	{
-		$obj = $this->get_by_col([ '_admin_obj_table' => $table, '_admin_obj_name' => $table ]);
-
 		$_valid_form = new _valid_form();
-		$form = $_valid_form->get_by_col([ '_valid_form_input_id' => $form_input_id, '_valid_form_table' => $table ]);
+		$_field = new _field();
+		$_valid_field = new _valid_field();
+
+		$form = $_valid_form->get_by_col([ '_valid_form_form_id' => $form_input_id ]);
 
 		if( FALSE === $form )
 		{
@@ -450,19 +451,16 @@ class _admin extends _obj
 			return FALSE;
 		}
 
-		$_valid_field = new _valid_field();
-
 		if( !$form )
 		{
-			$form_id = $_valid_form->save([ '_valid_form_action' => "/{$table}/save", '_valid_form_name' => "Save {$table}", '_valid_form_input_id' => $form_input_id, '_valid_form_table' => $table ]);
+			$form_id = $_valid_form->save([ '_valid_form_action' => "/{$table}/save", '_valid_form_name' => "Save {$table}", '_valid_form_form_id' => $form_input_id, '_valid_form_action' => "/{$table}/save", '_valid_form_method' => 'POST' ]);
 			$form = $_valid_form->get_by_id( $form_id );
 		}
 
 		$form_id = $form['_valid_form_id'];
-
 		$exclude_fields = [ $table . "_new", $table . "_edit", $table . "_del", $table . "_arch", 'fk__co_id' ];
-		$exclude_srcs = [ '_co', '_token' ];
-
+		
+		p( "Creating valid form {$table} {$form_input_id}" );
 		$sth = $this->query( "EXPLAIN `{$table}`" );
 		while( $col = $sth->fetch() )
 		{
@@ -471,7 +469,16 @@ class _admin extends _obj
 				continue;
 			}
 
-			$field = [ 'fk__valid_form_id' => $form_id, '_valid_field_name' => $col['Field'], '_valid_field_input_id' => $form['_valid_form_input_id'] . "_" . $col['Field'] ];
+			p( "Field: {$col['Field']}" );
+
+			$field = [
+				'fk__valid_form_id' => $form_id,
+				'_field_id_name' => $col['Field'],
+				'_field_table' => $table,
+				'_field_col' => $col['Field'],
+				'_field_label' => $table .'.'.$col['Field'],
+				'_field_fqn' => $table .'.'.$col['Field'],
+			];
 
 			list( $type, $length ) = explode( "(", $col['Type'], 2 );
 			switch( $type )
@@ -485,8 +492,10 @@ class _admin extends _obj
 				case 'year':
 					$type = 'number';
 					break;
-				case 'date':
 				case 'time':
+					$type='time';
+					break;
+				case 'date':
 				case 'datetime':
 				case 'timestamp':
 					$type = 'datetime-local';
@@ -506,24 +515,48 @@ class _admin extends _obj
 					break;
 			}
 
-			if( 'fk_' == substr( $col['Field'], 0, 3 ) && '_id' == substr( $col['Field'], -3) )
+			if( str_starts_with( $col['Field'], 'fk_' ) && str_ends_with( $col['Field'], '_id' ) )
 			{
 				$type = 'select';
-				if( !in_array( substr( $col['Field'], 3, -3 ), $exclude_srcs ) )
-				{
-					$field['_valid_field_src'] = "/" . substr( $col['Field'], 3, -3 ) . '/list';
-				}
+				$field_src = str_replace( 'fk_', '', $col['Field'] );
+				$field_src = str_replace( '_id', '', $col['Field'] );	
+				$field['_field_src'] = "/" . $field_src . '/list';
 			}
 
-			if( $table . "_id" == $col['Field'] )
+			if( $table . "_id" == $col['Field'] || $table . '_ulid' == $col['Field'] )
 			{
 				$type = 'hidden';
 			}
 
-			$field['_valid_field_type'] = $type;
-			$field['_valid_field_max'] = preg_replace( '/[^0-9]/', '', $length );
+			$field['_field_is_hidden'] = 'hidden' == $type ? 1 : 0;
 
-			$exists = $_valid_field->get_by_col( $field );
+			$field['_field_type'] = $type;
+			$field['_field_max_length'] = preg_replace( '/[^0-9]/', '', $length );
+			$field['_field_is_required'] = 1;
+			$field['_field_is_required_if_present'] = 1;
+			
+			$field_exists = $_field->get_by_col([ '_field_fqn' => $field['_field_fqn'] ]);
+			if( FALSE === $field_exists )
+			{
+				$this->fail( 'Could not check _field existence' );
+				return FALSE;
+			}
+
+			if( $field_exists )
+			{
+				$field = [...$field_exists, ...$field];
+			}
+
+			$field_id = $_field->save( $field );
+			if( FALSE === $field_id )
+			{
+				$this->fail( 'Could not save _field' );
+				return FALSE;
+			}
+
+			$field['fk__field_id'] = $field_id;
+
+			$exists = $_valid_field->get_by_col([ 'fk__field_id' => $field['fk__field_id'], 'fk__valid_form_id' => $field['fk__valid_form_id'] ], FALSE, TRUE, 'none', '_valid_field_id');
 			if( !$exists && FALSE !== $exists )
 			{
 				$_valid_field_id = $_valid_field->save( $field );
@@ -537,12 +570,6 @@ class _admin extends _obj
 					exit;
 				}
 			}
-		}
-
-		if( FALSE !== $obj && $obj && !$obj['_admin_valid_form'] )
-		{
-			$obj['_admin_valid_form'] = 1;
-			$this->save( $obj );
 		}
 
 		return TRUE;

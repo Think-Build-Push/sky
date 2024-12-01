@@ -7,8 +7,8 @@
 
 class _co extends _obj
 {
-	protected array $_co;
-	protected int $_co_id;
+	protected array $_co = [];
+	protected int $_co_id = 0;
 
 	public function __construct()
 	{
@@ -16,6 +16,41 @@ class _co extends _obj
 		$this->log_lvl( 'error' );
 
 		$this->scope();
+	}
+
+	public function get_all() : array|bool
+	{
+		$sth = $this->query('
+			SELECT
+				_co_name,
+				_co_domain,
+				DATE_FORMAT( _co_new, "%Y-%m-%d %H:%i" ) AS _co_new,
+				_co_active,
+				_co_setup,
+				_co_configured,
+				_mem_fname,
+				_mem_lname,
+				_sub_plan_name,
+				_sub_plan_id
+			FROM _co
+			LEFT JOIN _sub_plan ON fk__sub_plan_id = _sub_plan_id
+			JOIN _mem ON fk__mem_id = _mem_id
+		');
+
+		if( FALSE === $sth )
+		{
+			$this->fail( $this->get_error_msg() );
+			return FALSE;
+		}
+
+		$_cos = [];
+		while( $_co = $sth->fetch() )
+		{
+			$_cos[$_co['_co_id']] = $_co;
+		}
+
+		$this->success( '_cos fetched' );
+		return $_cos;
 	}
 
 	public function get_by_owner__mem_id( int $_mem_id ) : int|bool
@@ -166,7 +201,7 @@ class _co extends _obj
 	}
 
 	/**
-	 * Does not work correctly. use _co_mem->list()
+	 * Does not work correctly. use _co__mem->list()
 	 *
 	 * @deprecated
 	 * @return array|boolean

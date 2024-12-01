@@ -21,12 +21,26 @@ class _mem_ctlr extends _ctlr
 		$this->me = array();
 	}
 
+	public function get_all()
+	{
+		// Rather than a simple list,
+		// this will get a fully joined list
+		$_mems = $this->obj->get_all();
+		if( FALSE === $_mems )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+
+		$this->success( '_mems fetched' );
+		return $_mems;
+	}
+
 	/**
 	 *	_mem() returns all or specific information about the authenticated _mem
 	 *	@param   string	$key	the _mem column name
 	 *	@return  mixed	The value of the _mem column or table for the logged in user depending on supplied key
 	 */
-
 	public function _mem( string $key = NULL ) : string|array
 	{
 		if( !$key )

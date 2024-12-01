@@ -12,6 +12,57 @@ class _mem extends _obj
 		$this->init_me();
 	}
 
+	public function get_all() : array|bool
+	{
+		$sth = $this->query("
+			SELECT
+				_mem_id,
+				_mem_ulid,
+				_mem_fname,
+				_mem_lname,
+				_mem_email,
+				_mem_active,
+				DATE_FORMAT( _mem_new, '%Y-%m-%d %H:%i' ) AS _mem_new,
+				_mem_email_verified,
+				_mem_configured,
+				_role_id,
+				_role_ulid,
+				_role_name,
+				_locale_id,
+				_locale_ulid,
+				_locale_name,
+				_tz_id,
+				_tz_ulid,
+				_tz_name,
+				_lang_id,
+				_lang_ulid,
+				_lang_name
+			FROM _mem
+			JOIN _co__mem ON fk__mem_id = _mem_id
+			JOIN _role ON fk__role_id = _role_id
+			JOIN _co ON _co__mem.fk__co_id = _co_id
+			LEFT JOIN _tz ON fk__tz_id = _tz_id
+			LEFT JOIN _lang ON fk__lang_id = _lang_id
+			LEFT JOIN _locale ON fk__locale_id = _locale_id
+			LEFT JOIN _doc ON fk__doc_id = _doc_id
+		");
+
+		if( FALSE === $sth )
+		{
+			$this->fail( $this->get_error_msg() );
+			return FALSE;
+		}
+
+		$_mems = [];
+		while( $_mem = $sth->fetch() )
+		{
+			$_mems[$_mem['_mem_id']] = $_mem;
+		}
+
+		$this->success( '_mems fetched' );
+		return $_mems;
+	}
+
 	public function email_exists( string $email ) : int|string
 	{
 		if( $mem_id = $this->is_duplicate_email( $email ) )
@@ -101,14 +152,10 @@ class _mem extends _obj
 		}
 
 		$me['roles'] = [];
-		$o__module__mem = new _module__mem();
-		$module_mem = $o__module__mem->get_by__mem_id( $me['_mem_id'] );
 
-		if( $module_mem )
-		{
-			$me['roles'] = array_column( $module_mem, 'fk__role_id' );
-		}
-
+		$_co__mem = new _co__mem();
+		$me['roles'] = $_co__mem->get_by__mem_id($me['_mem_id']);
+		
 		$this->success( 'me_initted' );
 
 		// me stored in session for easier retrieval in me() without having to parse the current mem token each time.

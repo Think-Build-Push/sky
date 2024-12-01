@@ -2,13 +2,13 @@
 
 class _app extends _fail
 {
-	protected string $requested_path	= '/page/index';	// default path. Maybe should be set in init
+	protected string $requested_path	= ADMIN_PORTAL ? '/_page/show/_admin' : '/_page/show/index';	// default path. Maybe should be set in init
 	protected string $path				= ''; 				// The parsed path for use within sky
-	protected array|bool $path_access	= [];				// Assume not allowed, require postiive access grant
+	protected array|bool $path_access	= [];				// Assume not allowed, require positive access grant
 	protected int|bool $authed__mem_id	= 0;				// The eventually authenticated user
 	protected object $api;
 
-	protected string $ctlr 				= '';				// Requested controller parsed from reqested_path
+	protected string $ctlr 				= '';				// Requested controller parsed from requested_path
 	protected string $method 			= '';				// Controller method parsed from requested_path
 	protected array|string $args 		= '';				// Arguments on the url
 	protected string $token				= '';				// Token as determined by check_auth()
@@ -85,7 +85,14 @@ class _app extends _fail
 			$this->api->success( $ctlr->get_error_msg() );
 		}
 
-		$this->api->data( $o_safe_map->convert_ids_to_ulids( $result ) )->send();
+		try
+		{
+			$this->api->data( $o_safe_map->convert_ids_to_ulids( $result ) )->send();
+		}
+		catch( APIException $ae )
+		{
+			$this->log_data([$ae], FALSE)->log_msg('API error occurred on send');
+		}
 		exit;
 	}
 
@@ -126,7 +133,7 @@ class _app extends _fail
 
 	private function parse_requested_path() : bool
 	{
-		$this->log_msg( 'parsing request path' );
+		$this->log_data($this->requested_path, FALSE)->log_msg('parse_requested_path');
 
 		$uri = array_filter( explode( "/", $this->requested_path ) );
 
@@ -136,7 +143,7 @@ class _app extends _fail
 			$this->log_msg( 'SUBDOMAIN_SCOPE TRUE ' . $subdomain );
 		}
 
-		$this->log_data( $uri )->log_msg( 'uri' );
+		$this->log_data( $uri, FALSE )->log_msg( 'uri' );
 		$this->ctlr		= array_shift( $uri );
 		$this->method	= array_shift( $uri );
 		

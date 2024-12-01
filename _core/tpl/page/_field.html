@@ -1,0 +1,164 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_field List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_field_list' }).initTable().then( () => { new _table({ table: '_field_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_field_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_field_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__field_box" onClick="new _form({ form_id: 'save__field_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
+						</div>
+						<table id="_field_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_field_id" flare-col-type="int">_field_id</th>
+<th flare-col="_field_new" flare-col-type="timestamp">_field_new</th>
+<th flare-col="_field_edit" flare-col-type="timestamp">_field_edit</th>
+<th flare-col="_field_del" flare-col-type="timestamp">_field_del</th>
+<th flare-col="_field_arch" flare-col-type="timestamp">_field_arch</th>
+<th flare-col="_field_active" flare-col-type="tinyint">_field_active</th>
+<th flare-col="_field_is_required" flare-col-type="tinyint">_field_is_required</th>
+<th flare-col="_field_is_required_if_present" flare-col-type="tinyint">_field_is_required_if_present</th>
+<th flare-col="_field_is_hidden" flare-col-type="tinyint">_field_is_hidden</th>
+<th flare-col="_field_min_length" flare-col-type="int">_field_min_length</th>
+<th flare-col="_field_max_length" flare-col-type="int">_field_max_length</th>
+<th flare-col="_field_label" flare-col-type="varchar">_field_label</th>
+<th flare-col="_field_id_name" flare-col-type="varchar">_field_id_name</th>
+<th flare-col="_field_type" flare-col-type="varchar">_field_type</th>
+<th flare-col="_field_src" flare-col-type="varchar">_field_src</th>
+<th flare-col="_field_valid_url" flare-col-type="varchar">_field_valid_url</th>
+<th flare-col="_field_default_value" flare-col-type="varchar">_field_default_value</th>
+<th flare-col="_field_min_val" flare-col-type="varchar">_field_min_val</th>
+<th flare-col="_field_max_val" flare-col-type="varchar">_field_max_val</th>
+<th flare-col="_field_pattern" flare-col-type="varchar">_field_pattern</th>
+<th flare-col="_field_table" flare-col-type="varchar">_field_table</th>
+<th flare-col="_field_col" flare-col-type="varchar">_field_col</th>
+<th flare-col="_field_fqn" flare-col-type="varchar">_field_fqn</th>
+<th flare-col="_field_ulid" flare-col-type="varchar">_field_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_field_list" class="autoload _field_list"
+								flare-src="/_field/list"
+								flare-tpl="_field_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _field to display</div>"
+							>
+							</tbody>
+						<table>
+						<template id="_field_list_tpl" class="d-none">
+							<tr id="_field_~~_field_id~~" class=""
+								flare-filter-_field_id=~~_field_id~~
+flare-filter-_field_new=~~_field_new~~
+flare-filter-_field_edit=~~_field_edit~~
+flare-filter-_field_del=~~_field_del~~
+flare-filter-_field_arch=~~_field_arch~~
+flare-filter-_field_active=~~_field_active~~
+flare-filter-_field_is_required=~~_field_is_required~~
+flare-filter-_field_is_required_if_present=~~_field_is_required_if_present~~
+flare-filter-_field_is_hidden=~~_field_is_hidden~~
+flare-filter-_field_min_length=~~_field_min_length~~
+flare-filter-_field_max_length=~~_field_max_length~~
+flare-filter-_field_label=~~_field_label~~
+flare-filter-_field_id_name=~~_field_id_name~~
+flare-filter-_field_type=~~_field_type~~
+flare-filter-_field_src=~~_field_src~~
+flare-filter-_field_valid_url=~~_field_valid_url~~
+flare-filter-_field_default_value=~~_field_default_value~~
+flare-filter-_field_min_val=~~_field_min_val~~
+flare-filter-_field_max_val=~~_field_max_val~~
+flare-filter-_field_pattern=~~_field_pattern~~
+flare-filter-_field_table=~~_field_table~~
+flare-filter-_field_col=~~_field_col~~
+flare-filter-_field_fqn=~~_field_fqn~~
+flare-filter-_field_ulid=~~_field_ulid~~
+							>
+								<td flare-col="_field_id" flare-col-type="int">~~_field_id~~</td>
+<td flare-col="_field_new" flare-col-type="timestamp">~~_field_new~~</td>
+<td flare-col="_field_edit" flare-col-type="timestamp">~~_field_edit~~</td>
+<td flare-col="_field_del" flare-col-type="timestamp">~~_field_del~~</td>
+<td flare-col="_field_arch" flare-col-type="timestamp">~~_field_arch~~</td>
+<td flare-col="_field_active" flare-col-type="tinyint">~~_field_active~~</td>
+<td flare-col="_field_is_required" flare-col-type="tinyint">~~_field_is_required~~</td>
+<td flare-col="_field_is_required_if_present" flare-col-type="tinyint">~~_field_is_required_if_present~~</td>
+<td flare-col="_field_is_hidden" flare-col-type="tinyint">~~_field_is_hidden~~</td>
+<td flare-col="_field_min_length" flare-col-type="int">~~_field_min_length~~</td>
+<td flare-col="_field_max_length" flare-col-type="int">~~_field_max_length~~</td>
+<td flare-col="_field_label" flare-col-type="varchar">~~_field_label~~</td>
+<td flare-col="_field_id_name" flare-col-type="varchar">~~_field_id_name~~</td>
+<td flare-col="_field_type" flare-col-type="varchar">~~_field_type~~</td>
+<td flare-col="_field_src" flare-col-type="varchar">~~_field_src~~</td>
+<td flare-col="_field_valid_url" flare-col-type="varchar">~~_field_valid_url~~</td>
+<td flare-col="_field_default_value" flare-col-type="varchar">~~_field_default_value~~</td>
+<td flare-col="_field_min_val" flare-col-type="varchar">~~_field_min_val~~</td>
+<td flare-col="_field_max_val" flare-col-type="varchar">~~_field_max_val~~</td>
+<td flare-col="_field_pattern" flare-col-type="varchar">~~_field_pattern~~</td>
+<td flare-col="_field_table" flare-col-type="varchar">~~_field_table~~</td>
+<td flare-col="_field_col" flare-col-type="varchar">~~_field_col~~</td>
+<td flare-col="_field_fqn" flare-col-type="varchar">~~_field_fqn~~</td>
+<td flare-col="_field_ulid" flare-col-type="varchar">~~_field_ulid~~</td>
+
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__field_box"
+											onClick="
+												_dom.val('#save__field_box__field_id', '_field_id');
+												new _form({ form_id: 'save__field_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_field/fetch/~~_field_id~~' })
+														.poll()
+														.then(
+															function( _ret )
+															{
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__field_form', data: _ret.data }).popForm();
+																}
+															}
+														);
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_field/delete/~~_field_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._field_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__field_modal_tpl" class="autotpl" data-tpl="modal/_field_save"></div>
+
+~~include:_master_foot~~

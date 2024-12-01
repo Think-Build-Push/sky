@@ -11,8 +11,23 @@ class _setting_ctlr extends _ctlr
 		parent::__construct( '_setting' );
 	}
 
+	public function get_all()
+	{
+		// Rather than a simple list,
+		// this will get a fully joined list
+		$_settings = $this->obj->get_all();
+		if( FALSE === $_settings )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+
+		$this->success( '_settings fetched' );
+		return $_settings;
+	}
+
 	/**
-	 * Gets necesary base settings for each page load for things like product name, copyright, etc.
+	 * Gets necessary base settings for each page load for things like product name, copyright, etc.
 	 *
 	 * @TODO should be moved to obj
 	 * @return array|boolean array of base settings or FALSE on error
@@ -20,7 +35,7 @@ class _setting_ctlr extends _ctlr
 	public function get_base_settings() : array|bool
 	{
 		$this->obj->paginate( FALSE );
-		$settings = $this->obj->list();
+		$settings = $this->obj->get_by_col(['_setting_is_sensitive' => 0]);
 
 		if( FALSE === $settings )
 		{
@@ -31,15 +46,12 @@ class _setting_ctlr extends _ctlr
 		if( $settings )
 		{
 			$return = [];
-			$whitelist = [ 'product_name', 'app_domain', 'meta_desc', 'meta_author', 'copyright_banner' ];
-
-			$set = array_column( array_filter( $settings ), '_setting_id', '_setting_key' );
-
-			foreach( $whitelist as $key )
+			foreach( $settings as $id => $setting )
 			{
-				$return[$key] = $settings[$set[$key]]['_setting_value'];
+				$return[$setting['_setting_key']] = $setting['_setting_value'];
 			}
 
+			$return = array_column( $settings, '_setting_value', '_setting_key');
 			$this->success( 'base_settings_fetched' );
 			return $return;
 		}

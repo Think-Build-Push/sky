@@ -1,0 +1,125 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_locale List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_locale_list' }).initTable().then( () => { new _table({ table: '_locale_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_locale_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_locale_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__locale_box" onClick="new _form({ form_id: 'save__locale_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
+						</div>
+						<table id="_locale_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_locale_id" flare-col-type="int">_locale_id</th>
+<th flare-col="_locale_new" flare-col-type="timestamp">_locale_new</th>
+<th flare-col="_locale_edit" flare-col-type="timestamp">_locale_edit</th>
+<th flare-col="_locale_del" flare-col-type="timestamp">_locale_del</th>
+<th flare-col="_locale_arch" flare-col-type="timestamp">_locale_arch</th>
+<th flare-col="_locale_active" flare-col-type="tinyint">_locale_active</th>
+<th flare-col="fk__lang_id" flare-col-type="int">fk__lang_id</th>
+<th flare-col="_locale_sort" flare-col-type="smallint">_locale_sort</th>
+<th flare-col="_locale_name" flare-col-type="varchar">_locale_name</th>
+<th flare-col="_locale_code" flare-col-type="varchar">_locale_code</th>
+<th flare-col="_locale_ulid" flare-col-type="varchar">_locale_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_locale_list" class="autoload _locale_list"
+								flare-src="/_locale/list"
+								flare-tpl="_locale_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _locale to display</div>"
+							>
+							</tbody>
+						<table>
+						<template id="_locale_list_tpl" class="d-none">
+							<tr id="_locale_~~_locale_id~~" class=""
+								flare-filter-_locale_id=~~_locale_id~~
+flare-filter-_locale_new=~~_locale_new~~
+flare-filter-_locale_edit=~~_locale_edit~~
+flare-filter-_locale_del=~~_locale_del~~
+flare-filter-_locale_arch=~~_locale_arch~~
+flare-filter-_locale_active=~~_locale_active~~
+flare-filter-fk__lang_id=~~fk__lang_id~~
+flare-filter-_locale_sort=~~_locale_sort~~
+flare-filter-_locale_name=~~_locale_name~~
+flare-filter-_locale_code=~~_locale_code~~
+flare-filter-_locale_ulid=~~_locale_ulid~~
+							>
+								<td flare-col="_locale_id" flare-col-type="int">~~_locale_id~~</td>
+<td flare-col="_locale_new" flare-col-type="timestamp">~~_locale_new~~</td>
+<td flare-col="_locale_edit" flare-col-type="timestamp">~~_locale_edit~~</td>
+<td flare-col="_locale_del" flare-col-type="timestamp">~~_locale_del~~</td>
+<td flare-col="_locale_arch" flare-col-type="timestamp">~~_locale_arch~~</td>
+<td flare-col="_locale_active" flare-col-type="tinyint">~~_locale_active~~</td>
+<td flare-col="fk__lang_id" flare-col-type="int">~~fk__lang_id~~</td>
+<td flare-col="_locale_sort" flare-col-type="smallint">~~_locale_sort~~</td>
+<td flare-col="_locale_name" flare-col-type="varchar">~~_locale_name~~</td>
+<td flare-col="_locale_code" flare-col-type="varchar">~~_locale_code~~</td>
+<td flare-col="_locale_ulid" flare-col-type="varchar">~~_locale_ulid~~</td>
+
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__locale_box"
+											onClick="
+												_dom.val('#save__locale_box__locale_id', '_locale_id');
+												new _form({ form_id: 'save__locale_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_locale/fetch/~~_locale_id~~' })
+														.poll()
+														.then(
+															function( _ret )
+															{
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__locale_form', data: _ret.data }).popForm();
+																}
+															}
+														);
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_locale/delete/~~_locale_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._locale_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__locale_modal_tpl" class="autotpl" data-tpl="modal/_locale_save"></div>
+
+~~include:_master_foot~~

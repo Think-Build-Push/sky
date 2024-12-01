@@ -28,3 +28,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded",
+	function()
+	{
+		new _form({ form_id: 'save_~~crud~~_form' }).autoform();
+	}
+);
+</script>
