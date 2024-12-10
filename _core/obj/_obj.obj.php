@@ -76,18 +76,19 @@ class _obj extends _da
 	 * Toggles active on passed id for the $this->table
 	 *
 	 * @TODO make this make sense Needs to return the new toggle state and unset archied, deleted on toggle active = 1
-	 * @param integer $id
+	 * @param int|string $id
 	 * @return boolean TRUE on toggle, FALSE on error
 	 */
-	public function toggle_active( int $id ) : bool
+	public function toggle_active( int|string $id ) : bool
 	{
 		$params = [ "{$this->table_ulid}" => $id ];
 		$q = "UPDATE {$this->table} SET {$this->table}_active = !{$this->table}_active WHERE {$this->table}_del IS NULL AND {$this->table_ulid} = :{$this->table_ulid}";
-		if( !ULID_AS_ID )
+		if( is_int( $id ) )
 		{
 			$q = "UPDATE {$this->table} SET {$this->table}_active = !{$this->table}_active WHERE {$this->table}_del IS NULL AND {$this->table_id} = :{$this->table_id}";
 			$params = [ "{$this->table_id}" => $id ];
 		}
+
 		if( $this->has_fk__co_id() )
   		{
   			$q .= " AND fk__co_id = :fk__co_id";
@@ -110,16 +111,11 @@ class _obj extends _da
 	  * delete() marks a row for deletion with a NOW() timestamp. A cron will collect all the garbage
 	 *	and delete them every day right after the nightly backup.
 	  *
-	  * @param integer|string $id Either auto_increment or ulid depending on ULID_AS_ID value
+	  * @param int|string $id Either auto_increment or ulid depending on ULID_AS_ID value
 	  * @return boolean FALSE if the query fails (but the QueryException should be thrown way before this), TRUE otherwise
 	  */
-	 public function delete( int|string $id ) : bool
+	public function delete( int|string $id ) : bool
   	{
-  		if( is_array( $id ) )
-  		{
-  			$id = array_shift( $id );
-  		}
-
   		$params = array( $this->table_id => $id );
   		$q = "UPDATE {$this->table} SET {$this->table}_del = NOW(), {$this->table}_active = 0 WHERE {$this->table}_del IS NULL AND {$this->table_ulid} = :{$this->table_ulid}";
 		if( is_int( $id ) )
@@ -153,11 +149,6 @@ class _obj extends _da
 	 */
 	protected function real_delete( int $id ) : bool
  	{
- 		if( is_array( $id ) )
- 		{
- 			$id = array_shift( $id );
- 		}
-
  		$params = array( $this->table_id => $id );
  		$q = "DELETE FROM {$this->table} WHERE {$this->table_id} = :{$this->table_id} ";
  		if( $this->has_fk__co_id() )
@@ -186,11 +177,6 @@ class _obj extends _da
 	 */
 	public function undelete( int $id ) : bool
 	{
-		if( is_array( $id ) )
-		{
-			$id = array_shift( $id );
-		}
-
 		$params = array( $this->table_id => $id );
 		$q = "UPDATE {$this->table} SET {$this->table}_del = NULL, {$this->table}_active = 1 WHERE {$this->table_id} = :{$this->table_id}";
 		if( $this->has_fk__co_id() )
@@ -307,7 +293,7 @@ class _obj extends _da
 		{
 			$this->log_data( $qe )->log_msg( '_obj->save QueryException' );
 
-			$exc = json_decode( $qe->getMessage(), JSON_OBJECT_AS_ARRAY );
+			$exc = json_decode( $qe->getMessage(), TRUE, JSON_OBJECT_AS_ARRAY );
 			$msg = "Unknown query error";
 			if( '23000' == $exc['pdo']['errorInfo'][0] )
 			{
@@ -346,7 +332,7 @@ class _obj extends _da
 		array|string $add_joins = array(),
 		string $select_cols = NULL,
 		string $order_by = '',
-		int $result_limit = NULL
+		int|string $result_limit = NULL
 	) : array|bool
  	{
 		$params = array();
@@ -358,7 +344,7 @@ class _obj extends _da
 			}
 		}
 
-		if( 'none' !== $add_joins && NULL !== $add_joins )
+		if( 'none' !== $add_joins && !$add_joins )
 		{
 			if( $this->model )
 			{
@@ -380,7 +366,7 @@ class _obj extends _da
 					}
 
 					$column = preg_replace( "/[^a-z_0-9\/]/", '', $col );
-					if( NULL !== $val && '!NULL' !== $val && is_array( $val ) && 0 != $val )
+					if( is_array( $val ) )
 					{
 						$placeholders = [];
 						foreach( $val as $key => $value )
@@ -399,7 +385,9 @@ class _obj extends _da
 							case 0:
 								$params["`{$table}`.`{$column}` = :{$column}"] = 0;
 								break;
+							/* PHPStan says this will always evaluate to false.  This is fully incorrect */
 							case NULL === $val:
+							case 'NULL' == $val:
 								$params["`{$table}`.`{$column}` IS NULL"] = '';
 								unset( $cols_and_vals[$col] );
 								break;
@@ -606,7 +594,7 @@ class _obj extends _da
 		return $this->get_by_col( $cols, FALSE, FALSE, $this->model->full_join(), $this->model->select_cols() );
 	}
 
-	public function get_table_name()
+	public function get_table_name() : string
 	{
 		return $this->table;
 	}
@@ -700,17 +688,17 @@ class _obj extends _da
 	 *	@link	https://kevin.vanzonneveld.net/
 	 *	@param mixed   $in   String or long input to translate
 	 *	@param boolean $to_num  Reverses translation when true
-	 *	@param mixed   $pad_up  Number or boolean padds the result up to a specified length
-	 *	@param string  $pass_key Supplying a password makes it harder to calculate the original ID
+	 *	@param bool|int   $pad_up  Number or boolean padds the result up to a specified length
+	 *	@param string|bool  $pass_key Supplying a password makes it harder to calculate the original ID
 	 *	@return mixed string or long
 	 */
-	function alphaID( string $in, bool $to_num = false, bool $pad_up = false, string $pass_key = null) : string
+	function alphaID( mixed $in, bool $to_num = false, bool|int $pad_up = false, string|bool $pass_key = null) : mixed
 	{
 		$out   =   '';
 		$index = 'bcdfghjklmnpqrstuvwxyz1234567890BCDFGHJKLMNPQRSTUVWXYZ';
 		$base  = strlen($index);
 
-		if( $pass_key !== null )
+		if( NULL !== $pass_key )
 		{
 			// Although this function's purpose is to just make the
 			// ID short - and not so much secure,
@@ -740,7 +728,7 @@ class _obj extends _da
 			$len = strlen($in) - 1;
 
 			for ($t = $len; $t >= 0; $t--) {
-				$bcp = bcpow($base, $len - $t);
+				$bcp = bcpow( (string) $base, (string) ($len - $t) );
 				$out = $out + strpos($index, substr($in, $t, 1)) * $bcp;
 			}
 
@@ -762,7 +750,7 @@ class _obj extends _da
 			}
 
 			for ($t = ($in != 0 ? floor(log($in, $base)) : 0); $t >= 0; $t--) {
-				$bcp = bcpow($base, $t);
+				$bcp = bcpow( (string) $base, (string) $t);
 				$a   = floor($in / $bcp) % $base;
 				$out = $out . substr($index, $a, 1);
 				$in  = $in - ($a * $bcp);

@@ -8,8 +8,8 @@ class _co_sub_plan_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_co_sub_plan' );
-		$this->log_chan( '_co_sub_plan_data' );
+		parent::__construct();
+		$this->log_chan( '_co_sub_plan_model' );
 
 		$this->cols = [
 						"_co_sub_plan_id" => "int",
@@ -43,10 +43,10 @@ class _co_sub_plan_model extends _model
 		];
 
 				require_once( MODEL_CORE . '_sub_plan.model.php' );
-		$o__sub_plan_data = new _sub_plan_model();
-		if( $o__sub_plan_data->select_cols() )
+		$o__sub_plan_model = new _sub_plan_model();
+		if( $o__sub_plan_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__sub_plan_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__sub_plan_model->select_cols( 'array' ) );
 		}
 
 

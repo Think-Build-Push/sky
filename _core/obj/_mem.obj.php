@@ -63,7 +63,7 @@ class _mem extends _obj
 		return $_mems;
 	}
 
-	public function email_exists( string $email ) : int|string
+	public function email_exists( string $email ) : int|bool
 	{
 		if( $mem_id = $this->is_duplicate_email( $email ) )
 		{

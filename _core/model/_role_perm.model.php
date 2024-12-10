@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_role_perm_data auto-generated
+ *	_role_perm_model auto-generated
  */
 
 class _role_perm_model extends _model

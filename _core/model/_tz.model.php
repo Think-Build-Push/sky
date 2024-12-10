@@ -1,12 +1,12 @@
 <?php
 
 /**
- *	_tz_data auto-generated
+ *	_tz_model auto-generated
  */
 
 class _tz_model extends _model
 {
-public array $cols;
+	public array $cols;
 	public array $select_cols;
 	public array $full_join;
 

@@ -45,23 +45,15 @@ class _doc_model extends _model
 			"_doc_ulid" => "char"
 		];
 
-				require_once( MODEL_CORE . '_mem.model.php' );
-		$o__mem_data = new _mem_model();
-		if( $o__mem_data->select_cols() )
+		require_once( MODEL_CORE . '_mem.model.php' );
+		$o__mem_model = new _mem_model();
+		if( $o__mem_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__mem_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__mem_model->select_cols( 'array' ) );
 		}
-
-		require_once( MODEL_APP . 'uploader__mem.model.php' );
-		$o_uploader__mem_data = new uploader__mem_model();
-		if( $o_uploader__mem_data->select_cols() )
-		{
-			$this->select_cols = array_merge( $this->select_cols, $o_uploader__mem_data->select_cols( 'array' ) );
-		}
-
 
 		$this->full_join = [
-						'fk__mem_id' =>
+			'fk__mem_id' =>
 			[
 				'table' => '_mem',
 				'join_as' => '_mem'

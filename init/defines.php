@@ -5,8 +5,11 @@
  * they are directories and file locations. Since they are constants,
  * the order of creation is not important except where one constant
  * may need another constant to be defined prior to creation.
+ * 
+ * $path is defined in the calling index.php
  */
 
+ /** @var string $path */
 define("BASE",		$path . DIRECTORY_SEPARATOR);
 define("CORE",		BASE . "_core" . DIRECTORY_SEPARATOR);
 define("APP",		BASE . "app" . DIRECTORY_SEPARATOR);

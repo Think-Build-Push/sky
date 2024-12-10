@@ -38,10 +38,10 @@ class _mem_pref_model extends _model
 		];
 
 				require_once( MODEL_CORE . '_mem.model.php' );
-		$o__mem_data = new _mem_model();
-		if( $o__mem_data->select_cols() )
+		$o__mem_model = new _mem_model();
+		if( $o__mem_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__mem_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__mem_model->select_cols( 'array' ) );
 		}
 
 

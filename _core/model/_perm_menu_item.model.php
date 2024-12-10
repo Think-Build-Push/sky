@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_perm_menu_item_data auto-generated
+ *	_perm_menu_item_model auto-generated
  */
 
 class _perm_menu_item_model extends _model

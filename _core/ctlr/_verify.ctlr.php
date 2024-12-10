@@ -29,8 +29,6 @@ class _verify_ctlr extends _ctlr
 
 			$_mem->set_me( $verified_mem_id );
 
-p( $_mem->me() );
-exit;
 			header( 'Location: /', true, 303 ); // redirect to the dashboard if verified since they are now logged in
 			exit;
 		}

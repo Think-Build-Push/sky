@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_public_path_data auto-generated
+ *	_public_path_model auto-generated
  */
 
 class _public_path_model extends _model

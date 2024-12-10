@@ -12,7 +12,6 @@ define( 'AUTOPOPULATE_ULIDS', $autopopulate_ulids );
 
 $antiXSS = new AntiXSS();
 
-
 $new_get = [];
 if( $_GET )
 {
@@ -22,12 +21,13 @@ if( $_GET )
 	}
 }
 
+/** @var array $_GET */
 define( '_GET', $new_get );
 
 $new_post = [];
 if( 'application/json' == apache_request_headers()['Content-Type'] )
 {
-	$_POST = json_decode(file_get_contents('php://input'), JSON_OBJECT_AS_ARRAY | JSON_INVALID_UTF8_SUBSTITUTE);
+	$_POST = json_decode(file_get_contents('php://input'), TRUE, JSON_OBJECT_AS_ARRAY | JSON_INVALID_UTF8_SUBSTITUTE);
 }
 
 if( $_POST )
@@ -39,4 +39,5 @@ if( $_POST )
 
 }
 
+/** @var array $_POST */
 define( '_POST', $new_post );

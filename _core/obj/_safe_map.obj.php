@@ -4,15 +4,13 @@ use voku\helper\AntiXSS;
 
 class _safe_map extends _da
 {
-	private mixed $to_sanitize = [];
 	private object $antiXSS;
 
-	public function __construct( mixed $to_sanitize = [] )
+	public function __construct()
 	{
 		parent::__construct();
 		$this->log_chan( '_safe_map' )->log_lvl( 'error' );
 
-		$this->to_sanitize = $to_sanitize;
 		$this->antiXSS = new AntiXSS();
 
 		$this->sanitize_post();
@@ -32,7 +30,7 @@ class _safe_map extends _da
 		}
 	}
 
-	public function convert_post_ulids()
+	public function convert_post_ulids() : void
 	{
 		if( $_POST )
 		{
@@ -101,7 +99,7 @@ class _safe_map extends _da
 		}
 	}
 
-	public function convert_get_ulids( $table, $get_vals = [] )
+	public function convert_get_ulids( string $table, array|string $get_vals = [] ) : array
 	{
 		if( !$table )
 		{
@@ -136,7 +134,7 @@ class _safe_map extends _da
 		return $get_vals;
 	}
 
-	public function convert_ids_to_ulids( array|string $data ) : array|string
+	public function convert_ids_to_ulids( array|string $data = [] ) : array|string
 	{
 		if( !$data )
 		{
@@ -157,18 +155,18 @@ class _safe_map extends _da
 					{
 						case str_starts_with( $key, 'fk_' ):
 							$check_id = str_replace( 'fk_', '', $key );
-							if( $array[$check_id] )
+							if( $data[$check_id] )
 							{
-								$array[$key] = $array[$check_id];
-								unset( $array[$check_id] );
+								$data[$key] = $data[$check_id];
+								unset( $data[$check_id] );
 							}
 							break;
 						case str_ends_with( $key, '_id' ):
 							$check_ulid = str_replace( '_id', '_ulid', $key );
-							if( $array[$check_ulid] )
+							if( $data[$check_ulid] )
 							{
-								$array[$key] = $array[$check_ulid];
-								unset( $array[$check_ulid] );
+								$data[$key] = $data[$check_ulid];
+								unset( $data[$check_ulid] );
 							}
 							break;
 					}

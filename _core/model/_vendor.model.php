@@ -8,12 +8,12 @@ class _vendor_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_vendor' );
+		parent::__construct();
 		
 		$this->log_chan( '_vendor_model' );
 
 		$this->cols = [
-			"_vendor_id" => "intunsigned",
+			"_vendor_id" => "int",
 			"_vendor_new" => "timestamp",
 			"_vendor_edit" => "timestamp",
 			"_vendor_del" => "timestamp",
@@ -29,7 +29,7 @@ class _vendor_model extends _model
 		];
 
 		$this->select_cols = [
-			"_vendor_id" => "intunsigned",
+			"_vendor_id" => "int",
 			"_vendor_new" => "timestamp",
 			"_vendor_edit" => "timestamp",
 			"_vendor_active" => "tinyint",

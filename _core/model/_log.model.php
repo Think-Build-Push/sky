@@ -19,7 +19,6 @@ class _log_model extends _model
 			"_log_active" => "tinyint",
 			"fk__co_id" => "int",
 			"fk__mem_id" => "int",
-			"fk__module_id" => "int",
 			"_log_type" => "varchar",
 			"_log_obj" => "varchar",
 			"_log_obj_id" => "int",
@@ -33,7 +32,6 @@ class _log_model extends _model
 			"_log_edit" => "timestamp",
 			"_log_active" => "tinyint",
 			"_log.fk__mem_id" => "int",
-			"_log.fk__module_id" => "int",
 			"_log_type" => "varchar",
 			"_log_obj" => "varchar",
 			"_log_obj_id" => "int",
@@ -41,32 +39,19 @@ class _log_model extends _model
 			"_log_ulid" => "char"
 		];
 
-				require_once( MODEL_CORE . '_mem.model.php' );
-		$o__mem_data = new _mem_model();
-		if( $o__mem_data->select_cols() )
+		require_once( MODEL_CORE . '_mem.model.php' );
+		$o__mem_model = new _mem_model();
+		if( $o__mem_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__mem_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__mem_model->select_cols( 'array' ) );
 		}
-
-		require_once( MODEL_CORE . '_module.model.php' );
-		$o__module_data = new _module_model();
-		if( $o__module_data->select_cols() )
-		{
-			$this->select_cols = array_merge( $this->select_cols, $o__module_data->select_cols( 'array' ) );
-		}
-
 
 		$this->full_join = [
-						'fk__mem_id' =>
+			'fk__mem_id' =>
 			[
 				'table' => '_mem',
 				'join_as' => '_mem'
 			],
-			'fk__module_id' =>
-			[
-				'table' => '_module',
-				'join_as' => '_module'
-			]
 		];
 	}
 }

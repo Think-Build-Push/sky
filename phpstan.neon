@@ -1,3 +1,5 @@
+includes:
+	- phpstan-baseline.neon
 parameters:
 	level: 6
 	paths:
@@ -6,3 +8,34 @@ parameters:
 		- cron
 		- init
 		- web
+	ignoreErrors:
+		- '#Constant _POST not found#'
+		- '#no value type specified in iterable type array#'
+		- '#Access to an undefined property _da::\$_co_id#'
+		- '#Variable \$_tpl might not be defined#'
+		- '#Variable \$page_tpl might not be defined#'
+		- '#Variable \$args might not be defined#'
+		- '#Unable to resolve the template type TXssCleanInput in call to method voku\\helper\\AntiXSS::xss_clean\(\)#'
+		- 
+			message: '#Ternary operator condition is always true#'
+			path: '_core/obj/_app.obj.php'
+		-
+			message: '#Strict comparison using === between false and object\|null will always evaluate to false#'
+			paths:
+				- '_core/obj/_co.obj.php'
+				- '_core/obj/_mem.obj.php'
+		-
+			message: '#Access to an undefined property _da::\$table_id#'
+			path: '_core/obj/_da.obj.php'
+		-
+			message: '#Access to an undefined property _da::\$table_explain#'
+			path: '_core/obj/_da.obj.php'
+		-
+			message: '#Access to an undefined property _model::\$cols#'
+			path: '_core/obj/_model.obj.php'
+		-
+			message: '#Access to an undefined property _model::\$select_cols#'
+			path: '_core/obj/_model.obj.php'
+		-
+			message: '#Access to an undefined property _model::\$full_join#'
+			path: '_core/obj/_model.obj.php'

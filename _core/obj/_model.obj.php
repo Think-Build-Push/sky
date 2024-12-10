@@ -33,9 +33,9 @@ class _model extends _fail
 	 * Returns array of col data by col name
 	 *
 	 * @param string $col
-	 * @return array col array
+	 * @return string|array|bool col array
 	 */
-	public function col( string $col ) : string
+	public function col( string $col ) : string|array|bool
 	{
 		return $this->cols[$col] ?? FALSE;
 	}

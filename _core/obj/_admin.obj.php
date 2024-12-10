@@ -419,7 +419,7 @@ class _admin extends _obj
 		}
 
 		$obj = $this->get_by_col([ '_admin_obj_table' => $crud, '_admin_obj_name' => $crud ]);
-		if( NULL !== $obj && $obj && !$obj['_admin_obj_page'] ||  !$obj['_admin_obj_save_modal'] )
+		if( $obj && ( !$obj['_admin_obj_page'] || !$obj['_admin_obj_save_modal'] ) )
 		{
 			$obj['_admin_obj_page'] = 1;
 			$obj['_admin_obj_save_modal'] = 1;
@@ -434,7 +434,7 @@ class _admin extends _obj
 	 * Creates valid form and valid fields for form
 	 *
 	 * @param string $table table name
-	 * @param integer $form_input_id auto increment id of form
+	 * @param string $form_input_id auto increment id of form
 	 * @return boolean TRUE on save, FALSE on error
 	 */
 	public function create_valid_form( string $table, string $form_input_id ) : bool
@@ -453,7 +453,7 @@ class _admin extends _obj
 
 		if( !$form )
 		{
-			$form_id = $_valid_form->save([ '_valid_form_action' => "/{$table}/save", '_valid_form_name' => "Save {$table}", '_valid_form_form_id' => $form_input_id, '_valid_form_action' => "/{$table}/save", '_valid_form_method' => 'POST' ]);
+			$form_id = $_valid_form->save([ '_valid_form_name' => "Save {$table}", '_valid_form_form_id' => $form_input_id, '_valid_form_action' => "/{$table}/save", '_valid_form_method' => 'POST' ]);
 			$form = $_valid_form->get_by_id( $form_id );
 		}
 

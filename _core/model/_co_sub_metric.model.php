@@ -8,8 +8,8 @@ class _co_sub_metric_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_co_sub_metric' );
-		$this->log_chan( '_co_sub_metric_data' );
+		parent::__construct();
+		$this->log_chan( '_co_sub_metric_model' );
 
 		$this->cols = [
 						"_co_sub_metric_id" => "int",
@@ -39,10 +39,10 @@ class _co_sub_metric_model extends _model
 		];
 
 				require_once( MODEL_CORE . '_sub_plan_metric.model.php' );
-		$o__sub_plan_metric_data = new _sub_plan_metric_model();
-		if( $o__sub_plan_metric_data->select_cols() )
+		$o__sub_plan_metric_model = new _sub_plan_metric_model();
+		if( $o__sub_plan_metric_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__sub_plan_metric_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__sub_plan_metric_model->select_cols( 'array' ) );
 		}
 
 

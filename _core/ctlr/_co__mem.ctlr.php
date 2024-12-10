@@ -74,7 +74,7 @@ class _co__mem_ctlr extends _ctlr
 		else
 		{
 			$_mem = new _mem();
-			$existing_mem_id = $_mem->check_email_exists( $_POST['_mem_email'] );
+			$existing_mem_id = $_mem->email_exists( $_POST['_mem_email'] );
 			if( $existing_mem_id )
 			{
 				$_POST['fk__mem_id'] = $existing_mem_id;
@@ -95,8 +95,8 @@ class _co__mem_ctlr extends _ctlr
 				$_mem_auth->save([ 'fk__mem_id' => $_mem_id, '_mem_login' => $_POST['_mem_email'] ]);
 
 				$_mem_reset = new _mem_reset();
-				$reset_id = $_mem_reset->create_reset([ 'fk__mem_id' => $_mem_id, '_mem_reset_type' => 'email_verify', '_mem_reset_new_value' => $_POST['_mem_email'] ]);
-				$reset = $_mem_reset->get_by_id( $reset_id );
+				$reset = $_mem_reset->create_reset([ 'fk__mem_id' => $_mem_id, '_mem_reset_type' => 'email_verify', '_mem_reset_new_value' => $_POST['_mem_email'] ]);
+				$reset = $_mem_reset->get_by_id( $reset['_mem_reset_id'] );
 
 				global $_tpl;
 
@@ -108,7 +108,7 @@ class _co__mem_ctlr extends _ctlr
 				$_tpl->assign( 'recipient_name', $_POST['_mem_name'] );
 				$_tpl->assign( 'email_token', $reset['_mem_reset_token'] );
 
-				$domain = $_co->sub( '_co_domain' ) . '.' . $app_domain;
+				$domain = $_co->_co( '_co_domain' ) . '.' . $app_domain;
 				$_tpl->assign( 'subscriber_domain', $domain );
 
 				$_comm = new _comm();

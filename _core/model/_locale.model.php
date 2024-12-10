@@ -8,12 +8,12 @@ class _locale_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_locale' );
+		parent::__construct();
 		
 		$this->log_chan( '_locale_model' );
 
 		$this->cols = [
-						"_locale_id" => "intunsigned",
+						"_locale_id" => "int",
 			"_locale_new" => "timestamp",
 			"_locale_edit" => "timestamp",
 			"_locale_del" => "timestamp",
@@ -27,7 +27,7 @@ class _locale_model extends _model
 		];
 
 		$this->select_cols = [
-						"_locale_id" => "intunsigned",
+						"_locale_id" => "int",
 			"_locale_new" => "timestamp",
 			"_locale_edit" => "timestamp",
 			"_locale_active" => "tinyint",
@@ -38,11 +38,11 @@ class _locale_model extends _model
 			"_locale_ulid" => "varchar"
 		];
 
-				require_once( MODEL_CORE . '_lang_data.obj.php' );
-		$o__lang_data = new _lang_data();
-		if( $o__lang_data->select_cols() )
+				require_once( MODEL_CORE . '_lang_model.obj.php' );
+		$o__lang_model = new _lang_model();
+		if( $o__lang_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__lang_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__lang_model->select_cols( 'array' ) );
 		}
 
 

@@ -62,6 +62,7 @@ class _mem_pref_ctlr extends _ctlr
 
 		$search_cols = [];
 		$group = $args; // If no value is supplied this will search all prefs by the group
+		$val = '';
 		if( is_array( $args ) )
 		{
 			$group = $args[0];

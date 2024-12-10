@@ -11,7 +11,7 @@ class _tpl_ctlr extends _ctlr
 	/**
 	 * Gets tpl content by name (filename)
 	 *
-	 * @param array|string if array, then it contains a sub directory in the /tpl directory; if string, top level tpl
+	 * @param array|string $name An array? Then it contains a sub directory in the /tpl directory; string? top level tpl.
 	 * @return string|boolean template content on success, FALSE on error
 	 */
 	public function by_name( string|array $name ) : string|bool

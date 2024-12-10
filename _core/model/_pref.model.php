@@ -8,12 +8,12 @@ class _pref_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_pref' );
+		parent::__construct();
 		
 		$this->log_chan( '_pref_model' );
 
 		$this->cols = [
-						"_pref_id" => "intunsigned",
+						"_pref_id" => "int",
 			"_pref_new" => "timestamp",
 			"_pref_edit" => "timestamp",
 			"_pref_del" => "timestamp",
@@ -32,7 +32,7 @@ class _pref_model extends _model
 		];
 
 		$this->select_cols = [
-						"_pref_id" => "intunsigned",
+						"_pref_id" => "int",
 			"_pref_new" => "timestamp",
 			"_pref_edit" => "timestamp",
 			"_pref_active" => "tinyint",

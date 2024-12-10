@@ -7,7 +7,7 @@ class _co_ctlr extends _ctlr
 		parent::__construct( '_co' );
 	}
 
-	public function get_all()
+	public function get_all() : array|bool
 	{
 		// Rather than a simple list,
 		// this will get a fully joined list

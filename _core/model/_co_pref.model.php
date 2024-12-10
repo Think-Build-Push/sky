@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_co_pref_data auto-generated
+ *	_co_pref_model auto-generated
  */
 
 class _co_pref_model extends _model

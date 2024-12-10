@@ -43,7 +43,7 @@ class _valid_field extends _obj
 
 	public function is_field( string $field_fqn ) : bool|array
 	{
-		$field = $this->get_by_col([ '_field_fqn' => $field_fqn ], FALSE, TRUE, NULL, "_field_id");
+		$field = $this->get_by_col([ '_field_fqn' => $field_fqn ], FALSE, TRUE, 'none', "_field_id");
 		if( FALSE === $field )
 		{
 			// To avoid duplicates we return true here as though the field exists

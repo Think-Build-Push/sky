@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_setting_data auto-generated
+ *	_setting_model auto-generated
  */
 
 class _setting_model extends _model

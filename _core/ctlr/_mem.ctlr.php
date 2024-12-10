@@ -21,7 +21,7 @@ class _mem_ctlr extends _ctlr
 		$this->me = array();
 	}
 
-	public function get_all()
+	public function get_all() : bool|array
 	{
 		// Rather than a simple list,
 		// this will get a fully joined list
@@ -39,7 +39,7 @@ class _mem_ctlr extends _ctlr
 	/**
 	 *	_mem() returns all or specific information about the authenticated _mem
 	 *	@param   string	$key	the _mem column name
-	 *	@return  mixed	The value of the _mem column or table for the logged in user depending on supplied key
+	 *	@return  array|string	The value of the _mem column or table for the logged in user depending on supplied key
 	 */
 	public function _mem( string $key = NULL ) : string|array
 	{

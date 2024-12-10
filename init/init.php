@@ -3,7 +3,7 @@
 error_reporting( E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_NOTICE );
 ini_set( 'display_errors', 1 );
 
-function err( $error_num, $error_string, $error_file, $error_line )
+function err( int $error_num, string $error_string, string $error_file, int $error_line ) : bool
 {
 	$msg = json_encode([ 'error_num' => $error_num, 'error_string' => $error_string, 'error_file' => $error_file, 'error_line' => $error_line ]);
 
@@ -22,6 +22,8 @@ function err( $error_num, $error_string, $error_file, $error_line )
 	{
 		error_log( $msg );
 	}
+
+	return TRUE;
 }
 
 set_error_handler( 'err' );
