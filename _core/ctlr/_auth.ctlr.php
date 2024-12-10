@@ -12,7 +12,7 @@ class _auth_ctlr extends _ctlr
 		$this->log_chan( '_auth' )->log_lvl( 'error' );
 	}
 
-	public function magic_link()
+	public function magic_link() : string|bool
 	{
 		$email = _POST['_mem_login'];
 		$magic_link_sent = $this->obj->send_magic_link( $email );

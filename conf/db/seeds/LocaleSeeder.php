@@ -13,6 +13,7 @@ class LocaleSeeder extends AbstractSeed
 
 	public function run(): void
 	{
+		$rows = [];
 		$locales = IntlCalendar::getAvailableLocales();
 		foreach($locales as $locale)
 		{

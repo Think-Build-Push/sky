@@ -23,13 +23,13 @@ class _role_perm extends _obj
 	/**
 	 * If role has perm, the role_perm_id is returned.
 	 *
-	 * @param integer $role_id
-	 * @param integer $perm_id
-	 * @return integer|boolean role_perm_id or FALSE on error
+	 * @param int $role_id
+	 * @param int|string $perm_id
+	 * @return int|bool role_perm_id or FALSE on error
 	 */
-	public function role_has_perm( int $role_id, int $perm_id ) : int|bool
+	public function role_has_perm( int $role_id, int|string $perm_id ) : int|bool
 	{
-		if( is_numeric( $perm_id ) && is_integer( $perm_id * 1 ) )
+		if( is_numeric( $perm_id ) )
 		{
 			$perm = $this->get_by_col([ 'fk__role_id' => $role_id, 'fk__perm_id' => $perm_id ]);
 		}

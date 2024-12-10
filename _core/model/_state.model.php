@@ -1,12 +1,12 @@
 <?php
 
 /**
- *	_state_data auto-generated
+ *	_state_model auto-generated
  */
 
 class _state_model extends _model
 {
-public array $cols;
+	public array $cols;
 	public array $select_cols;
 	public array $full_join;
 

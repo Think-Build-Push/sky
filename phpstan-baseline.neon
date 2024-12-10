@@ -1,0 +1,38 @@
+parameters:
+	ignoreErrors:
+		# Strict comparison and type elimination - valid PHP pattern, PHPStan doesn't understand type narrowing
+		-
+			message: '#^Strict comparison using \=\=\= between null and mixed will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: _core/obj/_obj.obj.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between false and object\|null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: _core/obj/_setting.obj.php
+		# If condition on preg_match_all - valid check for empty array and false returns
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: _core/obj/_tpl.obj.php
+		# Method calls on PDO statements that might return false - normal PDO error handling pattern
+		-
+			message: '#^Cannot call method execute\(\) on bool\|object\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: _core/obj/_util.obj.php
+
+		-
+			message: '#^Cannot call method fetch\(\) on bool\|object\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: _core/obj/_util.obj.php
+		# Template variables through includes - defined in included files
+		-
+			message: '#^Variable \$_co might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: _core/page/_verify.php

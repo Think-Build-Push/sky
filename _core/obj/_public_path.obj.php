@@ -15,8 +15,8 @@ class _public_path extends _obj
 	/**
 	 * Confirms if path arg is a public path.
 	 *
-	 * @param string $path full requested path
-	 * @return array|boolean _public_path row or FALSE one rror
+	 * @param string $requested_path full requested path
+	 * @return array|boolean _public_path row or FALSE one error
 	 */
 	public function is_public_path( string $requested_path ) : array|bool
 	{
@@ -30,7 +30,7 @@ class _public_path extends _obj
 		list( $ctlr_level, $path, $deep_path, $args ) = explode( '/', $requested_path, 4 );
 		$ctlr_level = '/' . $ctlr_level;
 		$path = $ctlr_level . '/' . $path;
-		$deep_path = '/' . $deep_path ? $path . '/' . $deep_path : $this->generate_ulid; // Generating a ulid so that the deep path can never be found if there is no deep path
+		$deep_path = $deep_path ? $path . '/' . $deep_path : '/' . $this->generate_ulid(); // Generating a ulid so that the deep path can never be found if there is no deep path
 
 		$public_path = $this->get_by_col([ '_public_path' => [ $ctlr_level, $path, $deep_path ] ]);
 

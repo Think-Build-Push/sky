@@ -21,7 +21,7 @@ class _util_ctlr extends _ctlr
 		exit;
 	}
 
-	public function populate_ulids()
+	public function populate_ulids() : void
 	{
 		$this->obj->populate_ulids();
 		exit;
@@ -31,33 +31,12 @@ class _util_ctlr extends _ctlr
 	 * Returns the minimum table schema for a passed entity name
 	 *
 	 * @param string $table table name
-	 * @return string minimum table schema
+	 * @return void
 	 */
 	public function table_def( string $table ) : void
 	{
 		$tpl = file_get_contents( ADMIN . '/tpl/create_table.tpl' );
 		print str_replace( '~~table~~', $table, $tpl );
-		exit;
-	}
-
-	/**
-	 * Prints mutliple table minimum schemas
-	 *
-	 * @deprecated
-	 * @return void
-	 */
-	public function all_defs() : void
-	{
-		$cats = array(
-		);
-
-		$tpl = file_get_contents( ADMIN . '/tpl/create_table.tpl' );
-
-		foreach( $cats as $table )
-		{
-			print str_replace( '~~table~~', $table, $tpl ) . "\n";
-		}
-
 		exit;
 	}
 }

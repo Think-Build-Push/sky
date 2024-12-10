@@ -8,8 +8,8 @@ class _sub_plan_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_sub_plan' );
-		$this->log_chan( '_sub_plan_data' );
+		parent::__construct();
+		$this->log_chan( '_sub_plan_model' );
 
 		$this->cols = [
 						"_sub_plan_id" => "int",

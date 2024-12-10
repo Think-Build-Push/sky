@@ -75,6 +75,7 @@ class _tpl extends _obj
 	{
 		preg_match_all( '/\~\~include\:(.+)\~\~/', $this->tpl, $matches, PREG_PATTERN_ORDER );
 
+		/* PHPStan says this will always evaluate to true. This is fully incorrect */
 		if( $matches )
 		{
 			while( $matches[1] )

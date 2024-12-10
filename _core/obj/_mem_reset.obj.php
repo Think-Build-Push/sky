@@ -41,7 +41,7 @@ class _mem_reset extends _obj
 	 * Creates an auth_token and creates new _mem_auth row
 	 *
 	 * @param array $vars _mem_reset_*
-	 * @return integer|boolean new reset row, FALSE on error
+	 * @return array|bool new reset row, FALSE on error
 	 */
 	public function create_reset( array $vars ) : array|bool
 	{

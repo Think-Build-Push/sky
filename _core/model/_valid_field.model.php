@@ -1,12 +1,12 @@
 <?php
 
 /**
- *	_valid_field_data auto-generated
+ *	_valid_field_model auto-generated
  */
 
 class _valid_field_model extends _model
 {
-public array $cols;
+	public array $cols;
 	public array $select_cols;
 	public array $full_join;
 

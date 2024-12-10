@@ -8,12 +8,12 @@ class _lang_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_lang' );
+		parent::__construct();
 		
 		$this->log_chan( '_lang_model' );
 
 		$this->cols = [
-						"_lang_id" => "intunsigned",
+						"_lang_id" => "int",
 			"_lang_new" => "timestamp",
 			"_lang_edit" => "timestamp",
 			"_lang_del" => "timestamp",
@@ -26,7 +26,7 @@ class _lang_model extends _model
 		];
 
 		$this->select_cols = [
-						"_lang_id" => "intunsigned",
+						"_lang_id" => "int",
 			"_lang_new" => "timestamp",
 			"_lang_edit" => "timestamp",
 			"_lang_active" => "tinyint",

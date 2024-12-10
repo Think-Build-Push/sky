@@ -2,6 +2,8 @@
 
 class _page extends _fail
 {
+	private object $_tpl;
+	
 	/**
 	 * _page doesn't use the database at all
 	 * so it is the only object that inherits from _fail
@@ -12,7 +14,7 @@ class _page extends _fail
 		// the log channel and the table for
 		// the obj to work with. Change this
 		// if the obj works with another table
-		parent::__construct( '_page' );
+		parent::__construct();
 
 		global $_tpl;
 		$this->_tpl = $_tpl;

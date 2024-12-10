@@ -32,7 +32,7 @@ class _app extends _fail
 		$this->serve_path();
 	}
 
-	private function serve_path()
+	private function serve_path() : void
 	{
 		$this->log_msg( 'Serving path' );
 
@@ -156,11 +156,11 @@ class _app extends _fail
 			$this->args = $uri;
 		}
 
-		$this->log_data([ 'ctlr' => $this->ctlr, 'method' => $this->method, 'args' => $args ]);
+		$this->log_data([ 'ctlr' => $this->ctlr, 'method' => $this->method, 'args' => $this->args ]);
 
-		if( is_array( $args ) && 1 == count( $args ) )
+		if( is_array( $this->args ) && 1 == count( $this->args ) )
 		{
-			$args = array_shift( $args );
+			$this->args = array_shift( $this->args );
 		}
 
 		$this->path = $this->ctlr . "/" . $this->method;
@@ -191,7 +191,6 @@ class _app extends _fail
 	{
 		$o_public_path = new _public_path();
 		$this->path_access = $o_public_path->is_public_path( $this->requested_path );
-		$this->path_access ?? $this->log_msg( 'public path access' );
 		if( !$this->path_access )
 		{
 			$this->path_access = (new _perm())->verify_path_access( $this->path );

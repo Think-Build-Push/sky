@@ -90,8 +90,7 @@ class _auth extends _obj
 	 * is a public path. If there is a token, it then returns the token array.
 	 * If not, it returns FALSE and an 'unverified token' log msg.
 	 *
-	 * @param array $vars [ '_mem_login' => '', '_mem_password' => '' ]
-	 * @return string|boolean An auth_token if successful, FALSE if not
+	 * @return array|bool An auth_token if successful, FALSE if not
 	 */
 	public function auth() : array|bool
 	{

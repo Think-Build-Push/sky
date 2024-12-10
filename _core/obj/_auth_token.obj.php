@@ -125,7 +125,7 @@ class _auth_token extends _obj
 
 				$now = new DateTimeImmutable();
 				$expires = new DateTimeImmutable( $token['_auth_token_expires'] );
-				if( $expires >= $now && !$token['_auth_token_expired'] )
+				if( $expires >= $now )
 				{
 					$this->log_msg( 'valid_auth_token' );
 					$this->success( 'valid_auth_token' );

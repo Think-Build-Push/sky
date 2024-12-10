@@ -10,9 +10,4 @@ class _hook_ctlr extends _ctlr
 	{
 		parent::__construct( '_hook' );
 	}
-
-	public function inbound( $integration )
-	{
-
-	}
 }

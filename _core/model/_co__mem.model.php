@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	_co__mem_data auto-generated
+ *	_co__mem_model auto-generated
  */
 
 class _co__mem_model extends _model

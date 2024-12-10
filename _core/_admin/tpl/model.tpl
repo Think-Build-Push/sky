@@ -8,7 +8,7 @@ class ~~obj~~_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '~~obj~~' );
+		parent::__construct();
 		
 		$this->log_chan( '~~obj~~_model' );
 

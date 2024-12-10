@@ -16,6 +16,7 @@ class _setting extends _obj
 	{
 		$sth = $this->query("SELECT * FROM _setting");
 
+		/* PHPStan says this will always be false. This is fully incorrect */
 		if( FALSE === $sth )
 		{
 			$this->fail( $this->get_error_msg() );

@@ -8,7 +8,7 @@ class _migration_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_migration' );
+		parent::__construct();
 		
 		$this->log_chan( '_migration_model' );
 

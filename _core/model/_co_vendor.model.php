@@ -8,12 +8,12 @@ class _co_vendor_model extends _model
 
 	public function __construct()
 	{
-		parent::__construct( '_co_vendor' );
+		parent::__construct();
 		
 		$this->log_chan( '_co_vendor_model' );
 
 		$this->cols = [
-						"_co_vendor_id" => "intunsigned",
+						"_co_vendor_id" => "int",
 			"_co_vendor_new" => "timestamp",
 			"_co_vendor_edit" => "timestamp",
 			"_co_vendor_del" => "timestamp",
@@ -32,7 +32,7 @@ class _co_vendor_model extends _model
 		];
 
 		$this->select_cols = [
-						"_co_vendor_id" => "intunsigned",
+						"_co_vendor_id" => "int",
 			"_co_vendor_new" => "timestamp",
 			"_co_vendor_edit" => "timestamp",
 			"_co_vendor_active" => "tinyint",
@@ -47,11 +47,11 @@ class _co_vendor_model extends _model
 			"_co_vendor_ulid" => "varchar"
 		];
 
-				require_once( MODEL_CORE . '_vendor_data.obj.php' );
-		$o__vendor_data = new _vendor_data();
-		if( $o__vendor_data->select_cols() )
+				require_once( MODEL_CORE . '_vendor_model.obj.php' );
+		$o__vendor_model = new _vendor_model();
+		if( $o__vendor_model->select_cols() )
 		{
-			$this->select_cols = array_merge( $this->select_cols, $o__vendor_data->select_cols( 'array' ) );
+			$this->select_cols = array_merge( $this->select_cols, $o__vendor_model->select_cols( 'array' ) );
 		}
 
 
