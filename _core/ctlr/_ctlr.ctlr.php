@@ -24,7 +24,7 @@ class _ctlr extends _fail
 		$this->_obj( $obj, $args );
 	}
 
-	public function get_table_name()
+	public function get_table_name() : string
 	{
 		return $this->obj->get_table_name();
 	}
@@ -48,11 +48,6 @@ class _ctlr extends _fail
 		return $toggled;
 	}
 
-	public function search( $args )
-	{
-
-	}
-
 	/**
 	 *	_obj instantiates the associated object with the controller.
 	 *
@@ -73,7 +68,7 @@ class _ctlr extends _fail
 	/**
 	 *	fetch selects one row by id from the table
 	 *	@param   integer	$id	The table id value of the object requested
-	 *	@return  mixed	FALSE on failure, array of the object requested on success
+	 *	@return  bool|array	FALSE on failure, array of the object requested on success
 	 */
 
 	public function fetch( int $id ) : bool|array
@@ -190,6 +185,7 @@ class _ctlr extends _fail
 	 */
 	public function parse_args( array $args, string $return_type = 'assoc' ) : array
 	{
+		$return = [];
 		switch( $return_type )
 		{
 			case 'assoc':

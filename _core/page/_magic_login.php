@@ -7,8 +7,6 @@ if( $args && is_array( $args ) )
 	$token = array_shift( $args );
 }
 
-global $_tpl;
-
 if( $token )
 {
 	$o__mem_reset = new _mem_reset();

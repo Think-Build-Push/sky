@@ -1,0 +1,140 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_co_sub_metric_usage List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_co_sub_metric_usage_list' }).initTable().then( () => { new _table({ table: '_co_sub_metric_usage_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_co_sub_metric_usage_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_co_sub_metric_usage_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__co_sub_metric_usage_box" onClick="new _form({ form_id: 'save__co_sub_metric_usage_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
+						</div>
+						<table id="_co_sub_metric_usage_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_co_sub_metric_usage_id" flare-col-type="int">_co_sub_metric_usage_id</th>
+<th flare-col="_co_sub_metric_usage_new" flare-col-type="timestamp">_co_sub_metric_usage_new</th>
+<th flare-col="_co_sub_metric_usage_edit" flare-col-type="timestamp">_co_sub_metric_usage_edit</th>
+<th flare-col="_co_sub_metric_usage_del" flare-col-type="timestamp">_co_sub_metric_usage_del</th>
+<th flare-col="_co_sub_metric_usage_arch" flare-col-type="timestamp">_co_sub_metric_usage_arch</th>
+<th flare-col="_co_sub_metric_usage_active" flare-col-type="tinyint">_co_sub_metric_usage_active</th>
+<th flare-col="fk__co_id" flare-col-type="int">fk__co_id</th>
+<th flare-col="fk__vendor_id" flare-col-type="int">fk__vendor_id</th>
+<th flare-col="fk__co_vendor_id" flare-col-type="int">fk__co_vendor_id</th>
+<th flare-col="fk__sub_plan_id" flare-col-type="int">fk__sub_plan_id</th>
+<th flare-col="fk__sub_plan_metric_id" flare-col-type="int">fk__sub_plan_metric_id</th>
+<th flare-col="_co_sub_metric_usage_increment" flare-col-type="tinyint">_co_sub_metric_usage_increment</th>
+<th flare-col="_co_sub_metric_usage_decrement" flare-col-type="tinyint">_co_sub_metric_usage_decrement</th>
+<th flare-col="_co_sub_metric_usage_entity_ulid" flare-col-type="varchar">_co_sub_metric_usage_entity_ulid</th>
+<th flare-col="_co_sub_metric_usage_vendor_transaction_id" flare-col-type="varchar">_co_sub_metric_usage_vendor_transaction_id</th>
+<th flare-col="_co_sub_metric_usage_ulid" flare-col-type="varchar">_co_sub_metric_usage_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_co_sub_metric_usage_list" class="autoload _co_sub_metric_usage_list"
+								flare-src="/_co_sub_metric_usage/list"
+								flare-tpl="_co_sub_metric_usage_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _co_sub_metric_usage to display</div>"
+							>
+							</tbody>
+						<table>
+						<template id="_co_sub_metric_usage_list_tpl" class="d-none">
+							<tr id="_co_sub_metric_usage_~~_co_sub_metric_usage_id~~" class=""
+								flare-filter-_co_sub_metric_usage_id=~~_co_sub_metric_usage_id~~
+flare-filter-_co_sub_metric_usage_new=~~_co_sub_metric_usage_new~~
+flare-filter-_co_sub_metric_usage_edit=~~_co_sub_metric_usage_edit~~
+flare-filter-_co_sub_metric_usage_del=~~_co_sub_metric_usage_del~~
+flare-filter-_co_sub_metric_usage_arch=~~_co_sub_metric_usage_arch~~
+flare-filter-_co_sub_metric_usage_active=~~_co_sub_metric_usage_active~~
+flare-filter-fk__co_id=~~fk__co_id~~
+flare-filter-fk__vendor_id=~~fk__vendor_id~~
+flare-filter-fk__co_vendor_id=~~fk__co_vendor_id~~
+flare-filter-fk__sub_plan_id=~~fk__sub_plan_id~~
+flare-filter-fk__sub_plan_metric_id=~~fk__sub_plan_metric_id~~
+flare-filter-_co_sub_metric_usage_increment=~~_co_sub_metric_usage_increment~~
+flare-filter-_co_sub_metric_usage_decrement=~~_co_sub_metric_usage_decrement~~
+flare-filter-_co_sub_metric_usage_entity_ulid=~~_co_sub_metric_usage_entity_ulid~~
+flare-filter-_co_sub_metric_usage_vendor_transaction_id=~~_co_sub_metric_usage_vendor_transaction_id~~
+flare-filter-_co_sub_metric_usage_ulid=~~_co_sub_metric_usage_ulid~~
+							>
+								<td flare-col="_co_sub_metric_usage_id" flare-col-type="int">~~_co_sub_metric_usage_id~~</td>
+<td flare-col="_co_sub_metric_usage_new" flare-col-type="timestamp">~~_co_sub_metric_usage_new~~</td>
+<td flare-col="_co_sub_metric_usage_edit" flare-col-type="timestamp">~~_co_sub_metric_usage_edit~~</td>
+<td flare-col="_co_sub_metric_usage_del" flare-col-type="timestamp">~~_co_sub_metric_usage_del~~</td>
+<td flare-col="_co_sub_metric_usage_arch" flare-col-type="timestamp">~~_co_sub_metric_usage_arch~~</td>
+<td flare-col="_co_sub_metric_usage_active" flare-col-type="tinyint">~~_co_sub_metric_usage_active~~</td>
+<td flare-col="fk__co_id" flare-col-type="int">~~fk__co_id~~</td>
+<td flare-col="fk__vendor_id" flare-col-type="int">~~fk__vendor_id~~</td>
+<td flare-col="fk__co_vendor_id" flare-col-type="int">~~fk__co_vendor_id~~</td>
+<td flare-col="fk__sub_plan_id" flare-col-type="int">~~fk__sub_plan_id~~</td>
+<td flare-col="fk__sub_plan_metric_id" flare-col-type="int">~~fk__sub_plan_metric_id~~</td>
+<td flare-col="_co_sub_metric_usage_increment" flare-col-type="tinyint">~~_co_sub_metric_usage_increment~~</td>
+<td flare-col="_co_sub_metric_usage_decrement" flare-col-type="tinyint">~~_co_sub_metric_usage_decrement~~</td>
+<td flare-col="_co_sub_metric_usage_entity_ulid" flare-col-type="varchar">~~_co_sub_metric_usage_entity_ulid~~</td>
+<td flare-col="_co_sub_metric_usage_vendor_transaction_id" flare-col-type="varchar">~~_co_sub_metric_usage_vendor_transaction_id~~</td>
+<td flare-col="_co_sub_metric_usage_ulid" flare-col-type="varchar">~~_co_sub_metric_usage_ulid~~</td>
+
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__co_sub_metric_usage_box"
+											onClick="
+												_dom.val('#save__co_sub_metric_usage_box__co_sub_metric_usage_id', '_co_sub_metric_usage_id');
+												new _form({ form_id: 'save__co_sub_metric_usage_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_co_sub_metric_usage/fetch/~~_co_sub_metric_usage_id~~' })
+														.poll()
+														.then(
+															function( _ret )
+															{
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__co_sub_metric_usage_form', data: _ret.data }).popForm();
+																}
+															}
+														);
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_co_sub_metric_usage/delete/~~_co_sub_metric_usage_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._co_sub_metric_usage_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__co_sub_metric_usage_modal_tpl" class="autotpl" data-tpl="modal/_co_sub_metric_usage_save"></div>
+
+~~include:_master_foot~~

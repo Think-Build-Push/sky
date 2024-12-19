@@ -7,8 +7,8 @@
 
 class _co extends _obj
 {
-	protected array $_co;
-	protected int $_co_id;
+	protected array $_co = [];
+	protected int $_co_id = 0;
 
 	public function __construct()
 	{
@@ -16,6 +16,41 @@ class _co extends _obj
 		$this->log_lvl( 'error' );
 
 		$this->scope();
+	}
+
+	public function get_all() : array|bool
+	{
+		$sth = $this->query('
+			SELECT
+				_co_name,
+				_co_domain,
+				DATE_FORMAT( _co_new, "%Y-%m-%d %H:%i" ) AS _co_new,
+				_co_active,
+				_co_setup,
+				_co_configured,
+				_mem_fname,
+				_mem_lname,
+				_sub_plan_name,
+				_sub_plan_id
+			FROM _co
+			LEFT JOIN _sub_plan ON fk__sub_plan_id = _sub_plan_id
+			JOIN _mem ON fk__mem_id = _mem_id
+		');
+
+		if( FALSE === $sth )
+		{
+			$this->fail( $this->get_error_msg() );
+			return FALSE;
+		}
+
+		$_cos = [];
+		while( $_co = $sth->fetch() )
+		{
+			$_cos[$_co['_co_id']] = $_co;
+		}
+
+		$this->success( '_cos fetched' );
+		return $_cos;
 	}
 
 	public function get_by_owner__mem_id( int $_mem_id ) : int|bool
@@ -142,92 +177,6 @@ class _co extends _obj
 
 		$this->success( 'subdomain_not_taken' );
 		return strtolower( $subdomain );
-	}
-
-	/**
-	 * Does not work correctly.
-	 *
-	 * @deprecated
-	 * @return integer
-	 */
-	public function get_user_count() : int
-	{
-		$_mem_auth = new _mem_auth();
-		$users = $_mem_auth->get_by_col([ 'fk__role_id' => '!NULL' ], TRUE, TRUE, [], '_mem_auth_id' );
-
-		if( FALSE === $users )
-		{
-			$this->fail( 'failed_getting_users' );
-			return FALSE;
-		}
-
-		$this->success( 'users_fetched' );
-		return count( array_keys( $users ) );
-	}
-
-	/**
-	 * Does not work correctly. use _co_mem->list()
-	 *
-	 * @deprecated
-	 * @return array|boolean
-	 */
-	public function get_users() : array|bool
-	{
-		$_mem_auth = new _mem_auth();
-		$users = $_mem_auth->get_by_col([ 'fk__role_id' => '!NULL' ], TRUE, TRUE,
-			[
-				'fk__mem_id' =>
-				[
-					'table' => '_mem',
-					'join_as' => '_mem'
-				],
-				'fk__role_id' =>
-				[
-					'table' => '_role',
-					'join_as' => '_role'
-				]
-			]
-		);
-		if( FALSE === $users )
-		{
-			$this->fail( 'failed_getting_users' );
-			return FALSE;
-		}
-
-		$this->success( 'users_fetched' );
-		return $users;
-	}
-
-	/**
-	 * Do not use.  Not sure why this exists.
-	 *
-	 * @deprecated
-	 * @param array $vars
-	 * @return boolean
-	 */
-	public function assign_co_ownership( array $vars ) : bool
-	{
-		if( !$vars['_co_id'] || !$vars['_co_domain'] | !$vars['_mem_id'] )
-		{
-			$this->fail( 'sub_id, sub_domain and mem_id are required.' );
-			return FALSE;
-		}
-
-		$q = "SELECT * FROM _co WHERE _co_id = ? AND _co_domain = ?";
-		$sth = $this->query( $q, [ $vars['_co_id'], $vars['_co_domain'] ] );
-
-		$co = $sth->fetch();
-
-		if( !$co['_co_id'] )
-		{
-			$this->fail( 'sub not found in assign_co_ownership' );
-			return FALSE;
-		}
-
-		$q = "UPDATE _co SET fk__mem_id = :_mem_id WHERE _co_id = :_co_id AND _co_domain = :_co_domain";
-		$sth = $this->query( $q, $vars );
-
-		return '00000' == $sth->errorCode() ? FALSE : TRUE;
 	}
 
 	/**

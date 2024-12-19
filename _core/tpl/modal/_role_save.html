@@ -7,22 +7,12 @@
 			<div class="modal-body">
 				<form id="save__role_form" method="POST" action="/_role/save" class="form validate">
 					<div id="save__role_form_fields">
-						<div class="form-row">
-							<input type="hidden" name="_role_id" id="save__role_form__role_id" value="" class="form-control">
-						</div>
-						<div class="form-row">
-							<label for="save__role_form__role_name">Name</label>
-							<input type="text" name="_role_name" id="save__role_form__role_name" value="" class="form-control">
-						</div>
-						<div class="form-row">
-							<label for="save__role_form__role_desc">Description</label>
-							<input type="text" name="_role_desc" id="save__role_form__role_desc" value="" class="form-control">
-						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer d-flex justify-content-between">
 				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__role_form' }).resetForm();" class="btn btn-default">Cancel</a>
+				<a href="javascript:void(0)" onClick="new _form({ form_id: 'save__role_form', autoform: true }).autoform();" class="btn btn-default">Reload Form</a>
 				<a href="javascript:void(0)"
 					onClick="new _form({ form_id: 'save__role_form' })
 							.send()
@@ -38,3 +28,12 @@
 		</div>
 	</div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded",
+	function()
+	{
+		new _form({ form_id: 'save__role_form' }).autoform();
+	}
+);
+</script>

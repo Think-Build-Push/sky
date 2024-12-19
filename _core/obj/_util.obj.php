@@ -7,7 +7,7 @@ class _util extends _obj
 		parent::__construct( '_util' );
 	}
 
-	public function populate_ulids()
+	public function populate_ulids() : bool|null
 	{
 		if( defined( 'AUTOPOPULATE_ULIDS' ) && !AUTOPOPULATE_ULIDS )
 		{
@@ -33,8 +33,16 @@ class _util extends _obj
 				$this->query( $q, [ $ulid, $ulid_row['table_id'] ]);
 			}
 		}
+
+		return NULL;
 	}
 
+	/**
+	 * PHPStan in general will complain about *_sth being an object|bool
+	 * and that you can't call a method on that. Pffft
+	 *
+	 * @return boolean
+	 */
 	public function check_for_ulids() : bool
 	{
 		if( defined( 'AUTOPOPULATE_ULIDS' ) && !AUTOPOPULATE_ULIDS )

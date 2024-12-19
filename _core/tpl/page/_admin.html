@@ -1,33 +1,238 @@
 ~~include:_master_head~~
 
-<div class="row">
-	<div class="col-6 h3">Objects</div>
-	<div class="col-6">
-		<a href="#reload" onClick="new _loader({}).load( 'obj_list' );" class="btn btn-sm btn-primary"><i class="bi bi-arrow-repeat"></i></a>
-		<a href="#awareness" onClick="new _api({ url: '/_admin/awareness' }).poll().then( ( _ret ) => { new _loader({}).load( 'obj_list' ); } );" class="btn btn-sm btn-primary"><i class="bi bi-x-diamond-fill"></i></a>
-		<a href="#add_new_object" data-bs-target="#save__admin_obj_box" data-bs-toggle="modal" class="btn btn-sm btn-primary"><i class="bi bi-plus"></i></a>
-	</div>
-</div>
-<div class="row autoload"
-		id="obj_list"
-		data-fl-src="/_admin/get_objs"
-		data-fl-populate="obj_list"
-		data-fl-tpl="obj_list_tpl"
-		data-fl-when-empty="<li class='list-group-item'>No objects to display</li>"
-	>
-</div>
-<template id="obj_list_tpl">
-	<div class="card col-4">
-		<div class="card-body d-flex">
-			<div class="col-md-10 col-6">~~_admin_obj_name~~</div>
-			<div class="col-md-2 col-6 d-flex justify-content-between">
-				<a href="#rebuild"><i class="bi bi-gear-fill"></i  ></a>
-				<a href="/page/~~_admin_obj_name~~" target="_blank"><i class="bi bi-sliders"></i></a>
+<div class="row tabs mt-3">
+	<div id="companies-tab" class="tab d-none">
+		<div class="row">
+			<div class="col-8 sky-heading-font display-6">
+				Companies
+			</div>
+			<div class="col-4 d-flex justify-content-end">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary" onClick="new _loader({}).load('company_list');"><i class="fa fa-redo-alt"></i></button>
+				</div>
 			</div>
 		</div>
-	</div>
-</template>
+		<div class="row">
+			<table id="company_list_table" class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Owner</th>
+						<th>Active</th>
+						<th>Plan</th>
+						<th>Domain</th>
+						<th>Setup</th>
+						<th>Configured</th>
+					</tr>
+				</thead>
+				<tbody id="company_list" class=""
+					flare-src="/_co/get_all"
+					flare-tpl="company_list_tpl"
+					flare-when-empty="<tr><td colspan='7'>No companies to list</td></tr>"
+				>
 
-<div id="beehive_modal_tpl" class="autotpl" data-fl-tpl="modal/_admin_obj_save"></div>
+				</tbody>
+			</table>
+			<template id="company_list_tpl">
+				<tr>
+					<td>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								~~_co_name~~
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item d-flex justify-content-between"><span>Created</span> <span>~~_co_new~~</span></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Change Subscription</a></li>
+								<li><a href="#" class="dropdown-item">Change Owner</a></li>
+								<li><a href="#" class="dropdown-item">View Profile</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Edit</a></li>
+								<li><a href="#" class="dropdown-item">Archive</a></li>
+								<li><a href="#" class="dropdown-item">Delete</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Activate</a></li>
+								<li><a href="#" class="dropdown-item">Deactivate</a></li>
+							</ul>
+						</div>
+					</td>
+					<td>~~_mem_fname~~ ~~_mem_lname~~</td>
+					<td>~~_co_active~~</td>
+					<td>~~_sub_plan_name~~</td>
+					<td>~~_co_domain~~</td>
+					<td>~~_co_setup~~</td>
+					<td>~~_co_configured~~</td>
+				</tr>
+			</template>
+		</div>
+	</div>
+	<div id="roles-perms-tab" class="tab d-none">
+		Roles & Perms
+	</div>
+	<div id="forms-tab" class="tab d-none">
+		Forms
+	</div>
+	<div id="members-tab" class="tab d-none">
+		<div class="row">
+			<div class="col-8 sky-heading-font display-6">
+				Members
+			</div>
+			<div class="col-4 d-flex justify-content-end">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary" onClick="new _loader({}).load('member_list');"><i class="fa fa-redo-alt"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<table id="member_list_table" class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Active</th>
+						<th>Role</th>
+						<th>Email Verified</th>
+						<th>Configured</th>
+						<th>Locale</th>
+						<th>Timezone</th>
+						<th>Language</th>
+					</tr>
+				</thead>
+				<tbody id="member_list" class=""
+					flare-src="/_mem/get_all"
+					flare-tpl="member_list_tpl"
+					flare-when-empty="<tr><td colspan='7'>No members to list</td></tr>"
+				>
+
+				</tbody>
+			</table>
+			<template id="member_list_tpl">
+				<tr>
+					<td>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								~~_mem_fname~~ ~~_mem_lname~~
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item d-flex justify-content-between"><span>Created</span> <span>~~_mem_new~~</span></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Change Role</a></li>
+								<li><a href="#" class="dropdown-item">View Profile</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Reset Password</a></li>
+								<li><a href="#" class="dropdown-item">Send Verification Email</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Edit</a></li>
+								<li><a href="#" class="dropdown-item">Archive</a></li>
+								<li><a href="#" class="dropdown-item">Delete</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Activate</a></li>
+								<li><a href="#" class="dropdown-item">Deactivate</a></li>
+							</ul>
+						</div>
+					</td>
+					<td>~~_mem_email~~</td>
+					<td>~~_mem_active~~</td>
+					<td>~~_role_name~~</td>
+					<td>~~_mem_email_verified~~</td>
+					<td>~~_mem_configured~~</td>
+					<td>~~_locale_name~~</td>
+					<td>~~_tz_name~~</td>
+					<td>~~_lang_name~~</td>
+				</tr>
+			</template>
+		</div>
+	</div>
+	<div id="settings-tab" class="tab d-none">
+		<div class="row">
+			<div class="col-8 sky-heading-font display-6">
+				Settings
+			</div>
+			<div class="col-4 d-flex justify-content-end">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary" onClick="new _loader({}).load('setting_list');"><i class="fa fa-redo-alt"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<table id="setting_list_table" class="table">
+				<thead>
+					<tr>
+						<th>Key</th>
+						<th>Value</th>
+						<th>Sensitive</th>
+						<th>Active</th>
+					</tr>
+				</thead>
+				<tbody id="setting_list" class=""
+					flare-src="/_setting/get_all"
+					flare-tpl="setting_list_tpl"
+					flare-when-empty="<tr><td colspan='7'>No settings to list</td></tr>"
+				>
+
+				</tbody>
+			</table>
+			<template id="setting_list_tpl">
+				<tr>
+					<td>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								~~_setting_key~~
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item">Make Sensitive</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Edit</a></li>
+								<li><a href="#" class="dropdown-item">Archive</a></li>
+								<li><a href="#" class="dropdown-item">Delete</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item">Activate</a></li>
+								<li><a href="#" class="dropdown-item">Deactivate</a></li>
+							</ul>
+						</div>
+					</td>
+					<td>~~_setting_value~~</td>
+					<td>~~_setting_is_sensitive~~</td>
+					<td>~~_setting_active~~</td>
+				</tr>
+			</template>
+		</div>
+	</div>
+	<div id="entities-tab" class="tab d-none">
+		<div class="row">
+			<div class="col-8 sky-heading-font display-6">
+				Entities
+			</div>
+			<div class="col-4 d-flex justify-content-end">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary" onClick="new _loader({}).load('obj_list');"><i class="fa fa-redo-alt"></i></button>
+					<button type="button" onClick="new _api({ url: '/_admin/auto_create' }).poll().then( ( _ret ) => { new _loader({}).load( 'obj_list' ); } );" class="btn btn-sm btn-primary"><i class="fa fa-wand-magic-sparkles"></i></a>
+					<button type="button" data-bs-target="#save__admin_obj_box" data-bs-toggle="modal" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="row"
+				id="obj_list"
+				flare-src="/_admin/get_objs"
+				flare-tpl="obj_list_tpl"
+				flare-when-empty="<li class='list-group-item'>No objects to display</li>"
+			>
+		</div>
+		<template id="obj_list_tpl">
+			<div class="card col-4">
+				<div class="card-body d-flex">
+					<div class="col-md-10 col-6">~~_admin_obj_name~~</div>
+					<div class="col-md-2 col-6 d-flex justify-content-between">
+						<a href="#rebuild"><i class="fa fa-gears"></i></a>
+						<a href="/_page/show/~~_admin_obj_name~~" target="_blank"><i class="fa fa-toolbox"></i></a>
+					</div>
+				</div>
+			</div>
+		</template>
+		
+		<div id="obj_save_modal_tpl" class="autotpl" flare-tpl="modal/_admin_obj_save"></div>
+	</div>
+</div>
+
 
 ~~include:_master_foot~~

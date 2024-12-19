@@ -19,7 +19,7 @@ class _role extends _obj
 	 */
 	public function get_default_role() : array
 	{
-		$module = $this->get_by_col([ '_role_default' => 1 ]);
+		$module = $this->get_by_col([ '_role_is_default' => 1 ]);
 
 		return $module ? $module : [];
 	}

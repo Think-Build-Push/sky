@@ -9,12 +9,12 @@ class _auth_ctlr extends _ctlr
 	public function __construct()
 	{
 		parent::__construct( '_auth' );
-        $this->log_chan( '_auth' )->log_lvl( 'error' );
+		$this->log_chan( '_auth' )->log_lvl( 'error' );
 	}
 
-    public function magic_link()
-    {
-        $email = _POST['_mem_login'];
+	public function magic_link() : string|bool
+	{
+		$email = _POST['_mem_login'];
 		$magic_link_sent = $this->obj->send_magic_link( $email );
 		if( !$magic_link_sent )
 		{
@@ -24,7 +24,7 @@ class _auth_ctlr extends _ctlr
 
 		$this->success( 'A magic link has been sent to your email inbox.' );
 		return $email;
-    }
+	}
 
 	/**
 	 * Determines whether that current user is authenticated
@@ -52,6 +52,7 @@ class _auth_ctlr extends _ctlr
 	 */
 	public function password() : array|bool
 	{
+		$this->log_data(_POST)->log_msg('_Auth_ctlr->password()');
 		$token = $this->obj->password();
 		if( $token )
 		{

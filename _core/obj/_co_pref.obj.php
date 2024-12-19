@@ -24,7 +24,7 @@ class _co_pref extends _obj
 			return FALSE;
 		}
 
-		if( $pref && !$pref_val )
+		if( !$pref_val )
 		{
 			$this->success( 'sub_pref_returned' );
 			return $pref['_co_pref_val'];

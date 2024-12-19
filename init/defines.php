@@ -5,70 +5,35 @@
  * they are directories and file locations. Since they are constants,
  * the order of creation is not important except where one constant
  * may need another constant to be defined prior to creation.
+ * 
+ * $path is defined in the calling index.php
  */
 
-$defines =
-[
-	'BASE' => $path . "/",
-	'CORE' => [ "BASE", "_core" ],
-	'CONF' => [ "BASE", "conf" ],
-	'INIT' => [ "BASE", "init" ],
-	'WEB' => [ "BASE", "web" ],
-	'CRON' => [ "BASE", "cron" ],
-	'KEYS' => [ "CONF", "keys" ],
-	'LOG' => [ "BASE", "log" ],
-	'VENDOR' => [ "BASE", "vendor" ],
+ /** @var string $path */
+define("BASE",		$path . DIRECTORY_SEPARATOR);
+define("CORE",		BASE . "_core" . DIRECTORY_SEPARATOR);
+define("APP",		BASE . "app" . DIRECTORY_SEPARATOR);
+define("CONF",		BASE . "conf" . DIRECTORY_SEPARATOR);
+define("INIT",		BASE . "init" . DIRECTORY_SEPARATOR);
+define("CRON",		BASE . "cron" . DIRECTORY_SEPARATOR);
+define("KEYS",		CONF . "keys" . DIRECTORY_SEPARATOR);
+define("LOG",		BASE . "log" . DIRECTORY_SEPARATOR);
+define("VENDOR",	BASE . "vendor" . DIRECTORY_SEPARATOR);
+define("WEB",		BASE . "web" . DIRECTORY_SEPARATOR);
+define("ADMIN",		CORE . "_admin" . DIRECTORY_SEPARATOR);
 
-	'ADMIN' => [ "CORE", "_admin" ],
-	'CTLR_CORE' => [ "CORE", "ctlr" ],
-	'OBJ_CORE' => [ "CORE", "obj" ],
-	'OBJ_DATA_CORE' => [ "CORE", "obj/data" ],
-	'PAGE_CORE' => [ "CORE", "page" ],
-	'TPL_CORE' => [ "CORE", "tpl" ],
+define("CTLR_CORE",			CORE . "ctlr" . DIRECTORY_SEPARATOR);
+define("OBJ_CORE",			CORE . "obj" . DIRECTORY_SEPARATOR);
+define("MODEL_CORE",		CORE . "model" . DIRECTORY_SEPARATOR);
+define("PAGE_CORE",			CORE . "page" . DIRECTORY_SEPARATOR);
+define("TPL_CORE",			CORE . "tpl" . DIRECTORY_SEPARATOR);
+define("EXCEPTION_CORE",	CORE . "exception" . DIRECTORY_SEPARATOR);
 
-	'APP' => [ "BASE", "app" ],
-	'CTLR_APP' => [ "APP", "ctlr" ],
-	'OBJ_APP' => [ "APP", "obj" ],
-	'OBJ_DATA_APP' => [ "APP", "obj/data" ],
-	'PAGE_APP' => [ "APP", "page" ],
-	'TPL_APP' => [ "APP", "tpl" ],
-];
+define("CTLR_APP",		APP . "ctlr" . DIRECTORY_SEPARATOR);
+define("OBJ_APP",		APP . "obj" . DIRECTORY_SEPARATOR);
+define("MODEL_APP",		APP . "model" . DIRECTORY_SEPARATOR);
+define("PAGE_APP",		APP . "page" . DIRECTORY_SEPARATOR);
+define("TPL_APP",		APP . "tpl" . DIRECTORY_SEPARATOR);
+define("EXCEPTION_APP",	APP . "exception" . DIRECTORY_SEPARATOR);
 
-if( $config['defines'] )
-{
-	foreach( $config['defines'] as $define => $value )
-	{
-		$defines[$define] = $value;
-	}
-}
-
-foreach( $defines as $define => $value )
-{
-	if( is_array( $value ) )
-	{
-		// if the value is an array, then it uses a previously defined
-		// constant and must be constructed.
-		$defined = array_shift( $value );
-		$path = array_shift( $value );
-		$interpolated = $defines[$defined];
-		if( is_array( $interpolated ) )
-		{
-			$defined_path = $defines[array_shift($interpolated)] . array_shift( $interpolated );
-		}
-		else
-		{
-			$defined_path = $defines[$defined];
-		}
-		define( $define, $defined_path . "/" . $path . "/" );
-	}
-	else
-	{
-		// Otherwise if not an array, just override the whole constant's
-		// value with the supplied value.
-		define( $define, $value . "/" );
-	}
-}
-
-// Not yet implemented. This will allow for using UUIDs for SLED operations
-// to hide auto_increment IDs.
 define( 'ULID_AS_ID', TRUE );

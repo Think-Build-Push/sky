@@ -9,118 +9,127 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_sub_plan_metric_list' }).initTable().then( () => { new _table({ table: '_sub_plan_metric_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_sub_plan_metric_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_sub_plan_metric_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__sub_plan_metric_box" onClick="new _form({ form_id: 'save__sub_plan_metric_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_sub_plan_metric_list' }).initTable().then( () => { new _table({ table: '_sub_plan_metric_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_sub_plan_metric_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_sub_plan_metric_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__sub_plan_metric_box" onClick="new _form({ form_id: 'save__sub_plan_metric_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_sub_plan_metric_list"
-							class="list-group col-12 autoload _sub_plan_metric_list"
-							data-fl-src="/_sub_plan_metric/list"
-							data-fl-populate="_sub_plan_metric_list"
-							data-fl-tpl="_sub_plan_metric_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _sub_plan_metric to display</div>"
+						<table id="_sub_plan_metric_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_sub_plan_metric_id" flare-col-type="int">_sub_plan_metric_id</th>
+<th flare-col="_sub_plan_metric_new" flare-col-type="timestamp">_sub_plan_metric_new</th>
+<th flare-col="_sub_plan_metric_edit" flare-col-type="timestamp">_sub_plan_metric_edit</th>
+<th flare-col="_sub_plan_metric_del" flare-col-type="timestamp">_sub_plan_metric_del</th>
+<th flare-col="_sub_plan_metric_arch" flare-col-type="timestamp">_sub_plan_metric_arch</th>
+<th flare-col="_sub_plan_metric_active" flare-col-type="tinyint">_sub_plan_metric_active</th>
+<th flare-col="fk__co_id" flare-col-type="int">fk__co_id</th>
+<th flare-col="fk__sub_plan_id" flare-col-type="int">fk__sub_plan_id</th>
+<th flare-col="_sub_plan_metric_is_addon" flare-col-type="tinyint">_sub_plan_metric_is_addon</th>
+<th flare-col="_sub_plan_metric_is_single_purchase" flare-col-type="tinyint">_sub_plan_metric_is_single_purchase</th>
+<th flare-col="_sub_plan_metric_is_unlimited" flare-col-type="tinyint">_sub_plan_metric_is_unlimited</th>
+<th flare-col="_sub_plan_metric_units_included" flare-col-type="smallint">_sub_plan_metric_units_included</th>
+<th flare-col="_sub_plan_metric_units_increment" flare-col-type="smallint">_sub_plan_metric_units_increment</th>
+<th flare-col="_sub_plan_metric_units_price" flare-col-type="decimal">_sub_plan_metric_units_price</th>
+<th flare-col="_sub_plan_metric_unit_name" flare-col-type="varchar">_sub_plan_metric_unit_name</th>
+<th flare-col="_sub_plan_metric_unit_key" flare-col-type="varchar">_sub_plan_metric_unit_key</th>
+<th flare-col="_sub_plan_metric_ulid" flare-col-type="varchar">_sub_plan_metric_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_sub_plan_metric_list" class="autoload _sub_plan_metric_list"
+								flare-src="/_sub_plan_metric/list"
+								flare-tpl="_sub_plan_metric_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _sub_plan_metric to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_sub_plan_metric_id" data-col-type="int">_sub_plan_metric_id</div>
-<div class="col" data-col="_sub_plan_metric_new" data-col-type="timestamp">_sub_plan_metric_new</div>
-<div class="col" data-col="_sub_plan_metric_edit" data-col-type="timestamp">_sub_plan_metric_edit</div>
-<div class="col" data-col="_sub_plan_metric_del" data-col-type="timestamp">_sub_plan_metric_del</div>
-<div class="col" data-col="_sub_plan_metric_arch" data-col-type="timestamp">_sub_plan_metric_arch</div>
-<div class="col" data-col="_sub_plan_metric_active" data-col-type="tinyint">_sub_plan_metric_active</div>
-<div class="col" data-col="fk__co_id" data-col-type="int">fk__co_id</div>
-<div class="col" data-col="fk__sub_plan_id" data-col-type="int">fk__sub_plan_id</div>
-<div class="col" data-col="_sub_plan_metric_is_one_time" data-col-type="tinyint">_sub_plan_metric_is_one_time</div>
-<div class="col" data-col="_sub_plan_metric_extra_price" data-col-type="decimal">_sub_plan_metric_extra_price</div>
-<div class="col" data-col="_sub_plan_metric_extra_qty" data-col-type="smallint">_sub_plan_metric_extra_qty</div>
-<div class="col" data-col="_sub_plan_metric_units_incl" data-col-type="smallint">_sub_plan_metric_units_incl</div>
-<div class="col" data-col="_sub_plan_metric_unit" data-col-type="varchar">_sub_plan_metric_unit</div>
-<div class="col" data-col="_sub_plan_metric_ulid" data-col-type="char">_sub_plan_metric_ulid</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_sub_plan_metric_list_tpl" class="d-none">
-							<div id="_sub_plan_metric_~~_sub_plan_metric_id~~" class="list-group-item"
-								data-filter-_sub_plan_metric_id=~~_sub_plan_metric_id~~
-data-filter-_sub_plan_metric_new=~~_sub_plan_metric_new~~
-data-filter-_sub_plan_metric_edit=~~_sub_plan_metric_edit~~
-data-filter-_sub_plan_metric_del=~~_sub_plan_metric_del~~
-data-filter-_sub_plan_metric_arch=~~_sub_plan_metric_arch~~
-data-filter-_sub_plan_metric_active=~~_sub_plan_metric_active~~
-data-filter-fk__co_id=~~fk__co_id~~
-data-filter-fk__sub_plan_id=~~fk__sub_plan_id~~
-data-filter-_sub_plan_metric_is_one_time=~~_sub_plan_metric_is_one_time~~
-data-filter-_sub_plan_metric_extra_price=~~_sub_plan_metric_extra_price~~
-data-filter-_sub_plan_metric_extra_qty=~~_sub_plan_metric_extra_qty~~
-data-filter-_sub_plan_metric_units_incl=~~_sub_plan_metric_units_incl~~
-data-filter-_sub_plan_metric_unit=~~_sub_plan_metric_unit~~
-data-filter-_sub_plan_metric_ulid=~~_sub_plan_metric_ulid~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_sub_plan_metric_id" data-col-type="int">~~_sub_plan_metric_id~~</div>
-<div class="col" data-col="_sub_plan_metric_new" data-col-type="timestamp">~~_sub_plan_metric_new~~</div>
-<div class="col" data-col="_sub_plan_metric_edit" data-col-type="timestamp">~~_sub_plan_metric_edit~~</div>
-<div class="col" data-col="_sub_plan_metric_del" data-col-type="timestamp">~~_sub_plan_metric_del~~</div>
-<div class="col" data-col="_sub_plan_metric_arch" data-col-type="timestamp">~~_sub_plan_metric_arch~~</div>
-<div class="col" data-col="_sub_plan_metric_active" data-col-type="tinyint">~~_sub_plan_metric_active~~</div>
-<div class="col" data-col="fk__co_id" data-col-type="int">~~fk__co_id~~</div>
-<div class="col" data-col="fk__sub_plan_id" data-col-type="int">~~fk__sub_plan_id~~</div>
-<div class="col" data-col="_sub_plan_metric_is_one_time" data-col-type="tinyint">~~_sub_plan_metric_is_one_time~~</div>
-<div class="col" data-col="_sub_plan_metric_extra_price" data-col-type="decimal">~~_sub_plan_metric_extra_price~~</div>
-<div class="col" data-col="_sub_plan_metric_extra_qty" data-col-type="smallint">~~_sub_plan_metric_extra_qty~~</div>
-<div class="col" data-col="_sub_plan_metric_units_incl" data-col-type="smallint">~~_sub_plan_metric_units_incl~~</div>
-<div class="col" data-col="_sub_plan_metric_unit" data-col-type="varchar">~~_sub_plan_metric_unit~~</div>
-<div class="col" data-col="_sub_plan_metric_ulid" data-col-type="char">~~_sub_plan_metric_ulid~~</div>
+							<tr id="_sub_plan_metric_~~_sub_plan_metric_id~~" class=""
+								flare-filter-_sub_plan_metric_id=~~_sub_plan_metric_id~~
+flare-filter-_sub_plan_metric_new=~~_sub_plan_metric_new~~
+flare-filter-_sub_plan_metric_edit=~~_sub_plan_metric_edit~~
+flare-filter-_sub_plan_metric_del=~~_sub_plan_metric_del~~
+flare-filter-_sub_plan_metric_arch=~~_sub_plan_metric_arch~~
+flare-filter-_sub_plan_metric_active=~~_sub_plan_metric_active~~
+flare-filter-fk__co_id=~~fk__co_id~~
+flare-filter-fk__sub_plan_id=~~fk__sub_plan_id~~
+flare-filter-_sub_plan_metric_is_addon=~~_sub_plan_metric_is_addon~~
+flare-filter-_sub_plan_metric_is_single_purchase=~~_sub_plan_metric_is_single_purchase~~
+flare-filter-_sub_plan_metric_is_unlimited=~~_sub_plan_metric_is_unlimited~~
+flare-filter-_sub_plan_metric_units_included=~~_sub_plan_metric_units_included~~
+flare-filter-_sub_plan_metric_units_increment=~~_sub_plan_metric_units_increment~~
+flare-filter-_sub_plan_metric_units_price=~~_sub_plan_metric_units_price~~
+flare-filter-_sub_plan_metric_unit_name=~~_sub_plan_metric_unit_name~~
+flare-filter-_sub_plan_metric_unit_key=~~_sub_plan_metric_unit_key~~
+flare-filter-_sub_plan_metric_ulid=~~_sub_plan_metric_ulid~~
+							>
+								<td flare-col="_sub_plan_metric_id" flare-col-type="int">~~_sub_plan_metric_id~~</td>
+<td flare-col="_sub_plan_metric_new" flare-col-type="timestamp">~~_sub_plan_metric_new~~</td>
+<td flare-col="_sub_plan_metric_edit" flare-col-type="timestamp">~~_sub_plan_metric_edit~~</td>
+<td flare-col="_sub_plan_metric_del" flare-col-type="timestamp">~~_sub_plan_metric_del~~</td>
+<td flare-col="_sub_plan_metric_arch" flare-col-type="timestamp">~~_sub_plan_metric_arch~~</td>
+<td flare-col="_sub_plan_metric_active" flare-col-type="tinyint">~~_sub_plan_metric_active~~</td>
+<td flare-col="fk__co_id" flare-col-type="int">~~fk__co_id~~</td>
+<td flare-col="fk__sub_plan_id" flare-col-type="int">~~fk__sub_plan_id~~</td>
+<td flare-col="_sub_plan_metric_is_addon" flare-col-type="tinyint">~~_sub_plan_metric_is_addon~~</td>
+<td flare-col="_sub_plan_metric_is_single_purchase" flare-col-type="tinyint">~~_sub_plan_metric_is_single_purchase~~</td>
+<td flare-col="_sub_plan_metric_is_unlimited" flare-col-type="tinyint">~~_sub_plan_metric_is_unlimited~~</td>
+<td flare-col="_sub_plan_metric_units_included" flare-col-type="smallint">~~_sub_plan_metric_units_included~~</td>
+<td flare-col="_sub_plan_metric_units_increment" flare-col-type="smallint">~~_sub_plan_metric_units_increment~~</td>
+<td flare-col="_sub_plan_metric_units_price" flare-col-type="decimal">~~_sub_plan_metric_units_price~~</td>
+<td flare-col="_sub_plan_metric_unit_name" flare-col-type="varchar">~~_sub_plan_metric_unit_name~~</td>
+<td flare-col="_sub_plan_metric_unit_key" flare-col-type="varchar">~~_sub_plan_metric_unit_key~~</td>
+<td flare-col="_sub_plan_metric_ulid" flare-col-type="varchar">~~_sub_plan_metric_ulid~~</td>
 
-									<div class="col">
-										<div class="btn-group">
-											<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__sub_plan_metric_box"
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__sub_plan_metric_box"
+											onClick="
+												_dom.val('#save__sub_plan_metric_box__sub_plan_metric_id', '_sub_plan_metric_id');
+												new _form({ form_id: 'save__sub_plan_metric_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_sub_plan_metric/fetch/~~_sub_plan_metric_id~~' })
+														.poll()
+														.then(
+															function( _ret )
+															{
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__sub_plan_metric_form', data: _ret.data }).popForm();
+																}
+															}
+														);
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
 												onClick="
-													new _form({ form_id: 'save__sub_plan_metric_form', autoform: true }).autoform()
-													.then(
-														() =>
-														{
-															new _api({ url: '/_sub_plan_metric/fetch/~~_sub_plan_metric_id~~' })
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_sub_plan_metric/delete/~~_sub_plan_metric_id~~' })
 															.poll()
 															.then(
-																function( _ret )
+																() =>
 																{
-																	if( 1 == _ret.return )
-																	{
-																		new _form({ form_id: 'save__sub_plan_metric_form', data: _ret.data }).popForm();
-																	}
+																	new _loader({}).load( '._sub_plan_metric_list' );
 																}
 															);
-														}
-													);
-												">Edit
-											</button>
-											<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-												<span class="visually-hidden">Toggle Dropdown</span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="javascript:void(0);" class="dropdown-item"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_sub_plan_metric/delete/~~_sub_plan_metric_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '._sub_plan_metric_list' );
-																	}
-																);
-														}">Delete
-												</a></li>
-											</ul>
-										</div>
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -129,6 +138,6 @@ data-filter-_sub_plan_metric_ulid=~~_sub_plan_metric_ulid~~
 	</div>
 </body>
 
-<div id="save__sub_plan_metric_modal_tpl" class="autotpl" data-fl-tpl="modal/_sub_plan_metric_save"></div>
+<div id="save__sub_plan_metric_modal_tpl" class="autotpl" data-tpl="modal/_sub_plan_metric_save"></div>
 
 ~~include:_master_foot~~

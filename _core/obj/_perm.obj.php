@@ -12,7 +12,6 @@ class _perm extends _obj
 	 *	supplied role has access.
 	 *
 	 * @param string $path The request path
-	 * @param integer $role_id The auto_increment value of role
 	 * @return array|boolean
 	 */
 	public function verify_path_access( string $path ) : array|bool

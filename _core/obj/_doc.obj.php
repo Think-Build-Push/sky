@@ -155,9 +155,9 @@ class _doc extends _obj
 	 */
 	public function store( array $vars ) : string|bool
 	{
+		$_mem = new _mem();
 		if( !$vars['fk__mem_id'] )
 		{
-			$_mem = new _mem();
 			$vars['fk__mem_id'] = $_mem->me( '_mem_id' );
 		}
 

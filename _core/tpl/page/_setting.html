@@ -9,97 +9,106 @@
 			<div class="row">
 				<div class="col-12 mt-3" id="canvas">
 					<div class="col-12">
-						<div class="col-12 text-right">
-							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_setting_list' }).initTable().then( () => { new _table({ table: '_setting_list' }).openPrefs(); } );" class="btn btn-default"><i class="bi bi-gear-fill text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_setting_list' }).openFilters();" class="btn btn-default"><i class="bi bi-filter text-primary"></i></a>
-							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_setting_list' );" class="btn btn-default"><i class="bi bi-arrow-clockwise text-primary"></i></a>
-							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__setting_box" onClick="new _form({ form_id: 'save__setting_form', autoform: true }).autoform();" class="btn btn-primary"><i class="bi bi-plus"></i>&nbsp;&nbsp;&nbsp;Add New</a>
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_setting_list' }).initTable().then( () => { new _table({ table: '_setting_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_setting_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_setting_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__setting_box" onClick="new _form({ form_id: 'save__setting_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
 						</div>
-						<div id="_setting_list"
-							class="list-group col-12 autoload _setting_list"
-							data-fl-src="/_setting/list"
-							data-fl-populate="_setting_list"
-							data-fl-tpl="_setting_list_tpl"
-							data-fl-when-empty="<div class='list-group-item'>No _setting to display</div>"
+						<table id="_setting_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="_setting_id" flare-col-type="int">_setting_id</th>
+<th flare-col="_setting_new" flare-col-type="timestamp">_setting_new</th>
+<th flare-col="_setting_edit" flare-col-type="timestamp">_setting_edit</th>
+<th flare-col="_setting_del" flare-col-type="timestamp">_setting_del</th>
+<th flare-col="_setting_arch" flare-col-type="timestamp">_setting_arch</th>
+<th flare-col="_setting_active" flare-col-type="tinyint">_setting_active</th>
+<th flare-col="_setting_is_sensitive" flare-col-type="tinyint">_setting_is_sensitive</th>
+<th flare-col="_setting_key" flare-col-type="varchar">_setting_key</th>
+<th flare-col="_setting_value" flare-col-type="varchar">_setting_value</th>
+<th flare-col="_setting_ulid" flare-col-type="varchar">_setting_ulid</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_setting_list" class="autoload _setting_list"
+								flare-src="/_setting/list"
+								flare-tpl="_setting_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _setting to display</div>"
 							>
-							<div class="list-group-item list-group-header keep">
-								<div class="row">
-									<div class="col" data-col="_setting_id" data-col-type="int">_setting_id</div>
-<div class="col" data-col="_setting_new" data-col-type="timestamp">_setting_new</div>
-<div class="col" data-col="_setting_edit" data-col-type="timestamp">_setting_edit</div>
-<div class="col" data-col="_setting_del" data-col-type="timestamp">_setting_del</div>
-<div class="col" data-col="_setting_arch" data-col-type="timestamp">_setting_arch</div>
-<div class="col" data-col="_setting_active" data-col-type="tinyint">_setting_active</div>
-<div class="col" data-col="_setting_key" data-col-type="varchar">_setting_key</div>
-<div class="col" data-col="_setting_value" data-col-type="varchar">_setting_value</div>
-<div class="col text-center"><i class="fa fa-tools"></i></div>
-								</div>
-							</div>
-						</div>
+							</tbody>
+						<table>
 						<template id="_setting_list_tpl" class="d-none">
-							<div id="_setting_~~_setting_id~~" class="list-group-item"
-								data-filter-_setting_id=~~_setting_id~~
-data-filter-_setting_new=~~_setting_new~~
-data-filter-_setting_edit=~~_setting_edit~~
-data-filter-_setting_del=~~_setting_del~~
-data-filter-_setting_arch=~~_setting_arch~~
-data-filter-_setting_active=~~_setting_active~~
-data-filter-_setting_key=~~_setting_key~~
-data-filter-_setting_value=~~_setting_value~~
-								>
-								<div class="row justify-content-between">
-									<div class="col" data-col="_setting_id" data-col-type="int">~~_setting_id~~</div>
-<div class="col" data-col="_setting_new" data-col-type="timestamp">~~_setting_new~~</div>
-<div class="col" data-col="_setting_edit" data-col-type="timestamp">~~_setting_edit~~</div>
-<div class="col" data-col="_setting_del" data-col-type="timestamp">~~_setting_del~~</div>
-<div class="col" data-col="_setting_arch" data-col-type="timestamp">~~_setting_arch~~</div>
-<div class="col" data-col="_setting_active" data-col-type="tinyint">~~_setting_active~~</div>
-<div class="col" data-col="_setting_key" data-col-type="varchar">~~_setting_key~~</div>
-<div class="col" data-col="_setting_value" data-col-type="varchar">~~_setting_value~~</div>
+							<tr id="_setting_~~_setting_id~~" class=""
+								flare-filter-_setting_id=~~_setting_id~~
+flare-filter-_setting_new=~~_setting_new~~
+flare-filter-_setting_edit=~~_setting_edit~~
+flare-filter-_setting_del=~~_setting_del~~
+flare-filter-_setting_arch=~~_setting_arch~~
+flare-filter-_setting_active=~~_setting_active~~
+flare-filter-_setting_is_sensitive=~~_setting_is_sensitive~~
+flare-filter-_setting_key=~~_setting_key~~
+flare-filter-_setting_value=~~_setting_value~~
+flare-filter-_setting_ulid=~~_setting_ulid~~
+							>
+								<td flare-col="_setting_id" flare-col-type="int">~~_setting_id~~</td>
+<td flare-col="_setting_new" flare-col-type="timestamp">~~_setting_new~~</td>
+<td flare-col="_setting_edit" flare-col-type="timestamp">~~_setting_edit~~</td>
+<td flare-col="_setting_del" flare-col-type="timestamp">~~_setting_del~~</td>
+<td flare-col="_setting_arch" flare-col-type="timestamp">~~_setting_arch~~</td>
+<td flare-col="_setting_active" flare-col-type="tinyint">~~_setting_active~~</td>
+<td flare-col="_setting_is_sensitive" flare-col-type="tinyint">~~_setting_is_sensitive~~</td>
+<td flare-col="_setting_key" flare-col-type="varchar">~~_setting_key~~</td>
+<td flare-col="_setting_value" flare-col-type="varchar">~~_setting_value~~</td>
+<td flare-col="_setting_ulid" flare-col-type="varchar">~~_setting_ulid~~</td>
 
-									<div class="col">
-										<div class="row">
-											<div class="col d-flex justify-content-between">
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#save__setting_box"
-													onClick="
-														new _form({ form_id: 'save__setting_form', autoform: true }).autoform()
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__setting_box"
+											onClick="
+												_dom.val('#save__setting_box__setting_id', '_setting_id');
+												new _form({ form_id: 'save__setting_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_setting/fetch/~~_setting_id~~' })
+														.poll()
 														.then(
-															() =>
+															function( _ret )
 															{
-																new _api({ url: '/_setting/fetch/~~_setting_id~~' })
-																.poll()
-																.then(
-																	function( _ret )
-																	{
-																		if( 1 == _ret.return )
-																		{
-																			new _form({ form_id: 'save__setting_form', data: _ret.data }).popForm();
-																		}
-																	}
-																);
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__setting_form', data: _ret.data }).popForm();
+																}
 															}
 														);
-													">
-													<i class="bi bi-pencil-fill"></i>
-												</a>
-												<a href="javascript:void(0);"
-													onClick="
-														if( confirm( 'Are you sure you want to delete?' ) )
-														{
-															new _api({ url: '/_setting/delete/~~_setting_id~~' })
-																.poll()
-																.then(
-																	() =>
-																	{
-																		new _loader({}).load( '#_setting_list' );
-																	}
-																);
-														}"><i class="bi bi-x-circle-fill text-danger"></i></a>
-											</div>
-										</div>
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_setting/delete/~~_setting_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._setting_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
 									</div>
-								</div>
-							</div>
+								</td>
+							</tr>
 						</template>
 					</div>
 				</div>
@@ -108,6 +117,6 @@ data-filter-_setting_value=~~_setting_value~~
 	</div>
 </body>
 
-<div id="save__setting_modal_tpl" class="autotpl" data-fl-tpl="modal/_setting_save"></div>
+<div id="save__setting_modal_tpl" class="autotpl" data-tpl="modal/_setting_save"></div>
 
 ~~include:_master_foot~~

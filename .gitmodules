@@ -1,0 +1,6 @@
+[submodule "_core/_admin/web/flare"]
+	path = _core/_admin/web/flare
+	url = https://github.com/Think-Build-Push/flare.git
+[submodule "web/flare"]
+	path = web/flare
+	url = https://github.com/Think-Build-Push/flare.git

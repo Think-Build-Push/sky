@@ -22,7 +22,7 @@ class _valid_field extends _obj
 
 	public function form_fields( string $form_input_id ) : bool|array
 	{
-		$q = "SELECT * FROM _valid_field JOIN _valid_form ON _valid_form._valid_form_id = _valid_field.fk__valid_form_id WHERE _valid_form_input_id = ?";
+		$q = "SELECT * FROM _valid_field JOIN _field ON fk__field_id = _field_id JOIN _valid_form ON _valid_form._valid_form_id = _valid_field.fk__valid_form_id WHERE _valid_form_form_id = ?";
 		$sth = $this->query( $q, [ $form_input_id ] );
 		$sth->execute();
 
@@ -34,23 +34,23 @@ class _valid_field extends _obj
 		$fields = array();
 		while( $row = $sth->fetch() )
 		{
-			$fields[$row['_valid_field_id']] = array(
-				'_valid_field_id' => $row['_valid_field_id'],
-				'id'		=> $row['_valid_field_input_id'],
-				'name'		=> $row['_valid_field_name'],
-				'type'		=> $row['_valid_field_type'],
-				'required'	=> $row['_valid_field_required'],
-				'mask'		=> $row['_valid_field_mask'],
-				'min'		=> $row['_valid_field_min'],
-				'max'		=> $row['_valid_field_max'],
-				'format'	=> $row['_valid_field_format'],
-				'src'		=> $row['_valid_field_src'],
-				'default'	=> $row['_valid_field_default_value'] ? $row['_valid_field_default_value'] : NULL,
-			);
+			$fields[$row['_valid_field_id']] = $row;
 		}
 
 		$this->success( 'fields_fetched' );
 		return $fields;
 	}
 
+	public function is_field( string $field_fqn ) : bool|array
+	{
+		$field = $this->get_by_col([ '_field_fqn' => $field_fqn ], FALSE, TRUE, 'none', "_field_id");
+		if( FALSE === $field )
+		{
+			// To avoid duplicates we return true here as though the field exists
+			$this->fail( 'Field existence could not be tested' );
+			return TRUE;
+		}
+
+		return $field;
+	}
 }

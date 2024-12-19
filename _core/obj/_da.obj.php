@@ -10,7 +10,8 @@
 class _da extends _fail
 {
 	private bool $allow_co_override		= FALSE;
-	private bool $paginate				= FALSE;
+	private bool|int $paginate				= FALSE;
+	protected string $table				= '';
 	private string $dsn					= '';
 	protected string $dbuser			= '';
 	protected string $dbpass			= '';
@@ -264,10 +265,10 @@ class _da extends _fail
 	/**
 	 * Toggles the paginate member var
 	 *
-	 * @param boolean $action value of paginate
-	 * @return boolean new paginate value
+	 * @param bool|int $action value of paginate
+	 * @return bool new paginate value
 	 */
-	public function paginate( bool $action = TRUE ) : bool
+	public function paginate( bool|int $action = TRUE ) : bool
 	{
 		$action ? $this->paginate = TRUE : $this->paginate = FALSE;
 		$this->set_pagination();
@@ -341,6 +342,7 @@ class _da extends _fail
 			}
 		}
 
+		$sth = FALSE;
 		try
 		{
 			$sth = $this->db->prepare( $query );

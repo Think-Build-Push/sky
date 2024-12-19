@@ -1,8 +1,11 @@
 <?php
 
+/* $_co & $me are defined in _page->show().  This page runs within that scope. */
+
 $_verify = new _verify();
 $_mem_auth = new _mem_auth();
 $_mem_reset = new _mem_reset();
+$_mem = new _mem();
 
 $token = $args;
 if( is_array( $args ) )
@@ -37,13 +40,16 @@ if( $verified )
 			$admin_role = array_shift( $admin_roles );
 		}
 
+		/* @TODO Needs to be implemented */
+		/*
 		if( !$admin_role );
 		{
 			$admin_role = $_role->create_admin_role();
 		}
+		*/
 
-		$_co_mem = new _co_mem();
-		$sub_mem = $_co_mem->save([ 'fk__mem_id' => $owner_id, 'fk__role_id' => $admin_role['_role_id'] ]);
+		$_co__mem = new _co__mem();
+		$sub_mem = $_co__mem->save([ 'fk__mem_id' => $owner_id, 'fk__role_id' => $admin_role['_role_id'] ]);
 
 		$_co->save([ '_co_id' => $sub['_co_id'], '_co_setup' => 1 ]);
 	}
@@ -58,7 +64,7 @@ if( $verified )
 else
 {
 	// Display not verified token page and exit early
-	print $o_tpl->parse( TPL_CORE . '/error/_expired_link.html' );
+	print $_tpl->parse( TPL_CORE . '/error/_expired_link.html' );
 	exit;
 }
 

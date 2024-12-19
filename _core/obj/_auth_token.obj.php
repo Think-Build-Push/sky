@@ -54,12 +54,12 @@ class _auth_token extends _obj
 	 * @param string $type type of token to generate
 	 * @return array|boolean array of token details or FALSE on error
 	 */
-	public function generate_token( int $mem_id, string $type = 'password' ) : array|bool
+	public function generate_token( int $mem_id, string $type = 'password', int $hours_alive = 8 ) : array|bool
 	{
 
-		$new_token = $this->hash( $this->generate_ulid() );
+		$new_token = $this->generate_ulid();
 		$expires = new DateTime();
-		$expires->modify( "+8 HOUR" );
+		$expires->modify( "+{$hours_alive} HOUR" );
 		$expires = $expires->format( 'Y-m-d H:i:s' );
 
 		$saved = $this->save([ 'fk__mem_id' => $mem_id, '_auth_token' => $new_token, '_auth_token_expires' => $expires, '_auth_token_type' => $type ]);
@@ -125,7 +125,7 @@ class _auth_token extends _obj
 
 				$now = new DateTimeImmutable();
 				$expires = new DateTimeImmutable( $token['_auth_token_expires'] );
-				if( $expires >= $now && !$token['_auth_token_expired'] )
+				if( $expires >= $now )
 				{
 					$this->log_msg( 'valid_auth_token' );
 					$this->success( 'valid_auth_token' );

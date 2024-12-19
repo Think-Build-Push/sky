@@ -1,0 +1,107 @@
+~~include:_master_head~~
+
+	<div class="d-flex">
+		<!-- Page Content -->
+		<div class="col-12">
+			<div class="row">
+				<h3>_migration List</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-3" id="canvas">
+					<div class="col-12">
+						<div class="col-12 text-end">
+							<a href="javascript:void(0)" data-bs-backdrop="false" data-bs-toggle="modal" data-bs-target="#table_prefs_box" onClick="new _table({ table: '_migration_list' }).initTable().then( () => { new _table({ table: '_migration_list' }).openPrefs(); } );" class="btn btn-default"><i class="fa fa-gear text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#table_filters_box" onClick="new _table({ table: '_migration_list' }).openFilters();" class="btn btn-default"><i class="fa fa-filter text-primary"></i></a>
+							<a href="javascript:void(0)" onClick="new _loader({}).load( '#_migration_list' );" class="btn btn-default"><i class="fa fa-redo-alt text-primary"></i></a>
+							<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#save__migration_box" onClick="new _form({ form_id: 'save__migration_form', autoform: true }).autoform();" class="btn btn-primary"><i class="fa fa-plus me-3"></i>Add New</a>
+						</div>
+						<table id="_migration_table" class="form">
+							<thead>
+								<tr>
+									<th flare-col="version" flare-col-type="bigint">version</th>
+<th flare-col="migration_name" flare-col-type="varchar">migration_name</th>
+<th flare-col="start_time" flare-col-type="timestamp">start_time</th>
+<th flare-col="end_time" flare-col-type="timestamp">end_time</th>
+<th flare-col="breakpoint" flare-col-type="tinyint">breakpoint</th>
+<th class="text-center"><i class="fa fa-tools"></i></th>
+								</tr>
+							</thead>
+							<tbody
+								id="_migration_list" class="autoload _migration_list"
+								flare-src="/_migration/list"
+								flare-tpl="_migration_list_tpl"
+								flare-when-empty="<div class='list-group-item'>No _migration to display</div>"
+							>
+							</tbody>
+						<table>
+						<template id="_migration_list_tpl" class="d-none">
+							<tr id="_migration_~~_migration_id~~" class=""
+								flare-filter-version=~~version~~
+flare-filter-migration_name=~~migration_name~~
+flare-filter-start_time=~~start_time~~
+flare-filter-end_time=~~end_time~~
+flare-filter-breakpoint=~~breakpoint~~
+							>
+								<td flare-col="version" flare-col-type="bigint">~~version~~</td>
+<td flare-col="migration_name" flare-col-type="varchar">~~migration_name~~</td>
+<td flare-col="start_time" flare-col-type="timestamp">~~start_time~~</td>
+<td flare-col="end_time" flare-col-type="timestamp">~~end_time~~</td>
+<td flare-col="breakpoint" flare-col-type="tinyint">~~breakpoint~~</td>
+
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#save__migration_box"
+											onClick="
+												_dom.val('#save__migration_box__migration_id', '_migration_id');
+												new _form({ form_id: 'save__migration_form', autoform: true }).autoform()
+												.then(
+													() =>
+													{
+														new _api({ url: '/_migration/fetch/~~_migration_id~~' })
+														.poll()
+														.then(
+															function( _ret )
+															{
+																if( 1 == _ret.return )
+																{
+																	new _form({ form_id: 'save__migration_form', data: _ret.data }).popForm();
+																}
+															}
+														);
+													}
+												);
+											">Edit
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+											<span class="visually-hidden">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="javascript:void(0);" class="dropdown-item"
+												onClick="
+													if( confirm( 'Are you sure you want to delete?' ) )
+													{
+														new _api({ url: '/_migration/delete/~~_migration_id~~' })
+															.poll()
+															.then(
+																() =>
+																{
+																	new _loader({}).load( '._migration_list' );
+																}
+															);
+													}">Delete
+											</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<div id="save__migration_modal_tpl" class="autotpl" data-tpl="modal/_migration_save"></div>
+
+~~include:_master_foot~~
