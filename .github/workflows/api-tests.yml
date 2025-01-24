@@ -1,0 +1,10 @@
+name: API Tests
+on:
+  push:
+    branches: [ release ]
+  pull_request:
+    branches: [ release ]
+
+jobs:
+  test:
+    uses: ThinkBuildPush/github-workflows/newman-tests.yml@main

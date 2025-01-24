@@ -138,15 +138,14 @@ class _auth extends _obj
 			return $curr_token['_auth_token'];
 		}
 
-		if( _POST['_mem_auth_login'] && _POST['_mem_auth_password'] )
-		{
+		if (_POST['_mem_login'] && _POST['_mem_password']) {
 			$this->log_msg( 'has_login_creds' );
-			$_mem = $this->get_by_col([ '_mem_auth_login' => _POST['_mem_auth_login'] ], FALSE, TRUE, [], "*" );
+			$_mem = $this->get_by_col(['_mem_auth_login' => _POST['_mem_login']], FALSE, TRUE, [], "*");
 			$this->log_data([ '_mem' => $_mem ]);
 			if( $_mem['fk__mem_id'] )
 			{
 				$this->log_msg( '_mem_found' );
-				if( !password_verify( _POST['_mem_auth_password'], $_mem['_mem_auth_password'] ) )
+                if (!password_verify(_POST['_mem_password'], $_mem['_mem_auth_password'])) 
 				{
 					$this->log_msg( 'invalid_password' );
 					$this->fail( 'invalid_password' );
