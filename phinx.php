@@ -21,13 +21,13 @@ return
 		],
 		'development' => [
 			'adapter' => 'mysql',
-			'host' => 'localhost',
-			'name' => 'andbam',
+			'host' => 'mysql',
+			'name' => 'db_sky',
 			'user' => 'root',
-			'pass' => 'root',
+			'pass' => 'secret',
 			'port' => '3306',
 			'charset' => 'utf8',
-			'collation' => 'utf8mb4_unicode_520_nopad_ci'
+			'collation' => 'utf8mb4_unicode_ci'
 		],
 		'testing' => [
 			'adapter' => 'mysql',
