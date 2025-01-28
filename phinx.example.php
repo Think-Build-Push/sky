@@ -11,7 +11,7 @@ return
 		'default_environment' => 'development',
 		'development' => [
 			'adapter' => 'mysql',
-			'host' => 'mysql',
+			'host' => 'localhost',
 			'name' => 'sky_database_name',
 			'user' => 'sky_database_user',
 			'pass' => 'sky_database_password',
