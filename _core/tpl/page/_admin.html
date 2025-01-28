@@ -25,7 +25,7 @@
 						<th>Configured</th>
 					</tr>
 				</thead>
-				<tbody id="company_list" class=""
+				<tbody id="company_list" class="_co_list"
 					flare-src="/_co/get_all"
 					flare-tpl="company_list_tpl"
 					flare-populate="company_list"
@@ -42,18 +42,39 @@
 								~~_co_name~~
 							</button>
 							<ul class="dropdown-menu">
-								<li class="dropdown-item d-flex justify-content-between"><span>Created</span> <span>~~_co_new~~</span></li>
+								<li class="dropdown-item">Created ~~_co_new~~</li>
+								<li class="dropdown-item">Archived ~~_co_arch~~</li>
+								<li class="dropdown-item">Deleted ~~_co_del~~</li>
 								<li class="dropdown-divider"></li>
-								<li><a href="#" class="dropdown-item">Change Subscription</a></li>
-								<li><a href="#" class="dropdown-item">Change Owner</a></li>
-								<li><a href="#" class="dropdown-item">View Profile</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _growl({ 'type': 'error', 'msg': 'Pending Payments & Subscriptions' });">Change Subscription</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _growl({ 'type': 'error', 'msg': 'Need to add owner change' });">Change Owner</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _growl({ 'type': 'error', 'msg': 'Pending Payments & Subscriptions' });">View Profile</a></li>
 								<li class="dropdown-divider"></li>
-								<li><a href="#" class="dropdown-item">Edit</a></li>
-								<li><a href="#" class="dropdown-item">Archive</a></li>
-								<li><a href="#" class="dropdown-item">Delete</a></li>
+								<li>
+									<a href="#" class="dropdown-item" data-bs-target="#save__co_box" data-bs-toggle="modal"
+										onClick="
+											new _api({ url: '/_co/fetch/~~_co_id~~' })
+												.poll()
+												.then(
+													( _ret ) =>
+													{
+														if( 1 == _ret.return )
+														{
+															new _form({ form_id: 'save__co_form', data: _ret.data }).popForm();
+														}
+													}
+												);
+										"
+									>Edit</a>
+								</li>
 								<li class="dropdown-divider"></li>
-								<li><a href="#" class="dropdown-item">Activate</a></li>
-								<li><a href="#" class="dropdown-item">Deactivate</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _api({ url: '/_co/archive/~~_co_id~~' }).poll().then( ( _ret ) => { new _loader({}).load( 'company_list' ); } );">Archive</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _api({ url: '/_co/unarchive/~~_co_id~~' }).poll().then( ( _ret ) => { new _loader({}).load( 'company_list' ); } );">Unarchive</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item" onClick="new _api({ url: '/_co/delete/~~_co_id~~' }).poll().then( ( _ret ) => { new _loader({}).load( 'company_list' ); } );">Delete</a></li>
+								<li><a href="#" class="dropdown-item" onClick="new _api({ url: '/_co/undelete/~~_co_id~~' }).poll().then( ( _ret ) => { new _loader({}).load( 'company_list' ); } );">Undelete</a></li>
+								<li class="dropdown-divider"></li>
+								<li><a href="#" class="dropdown-item" onClick="new _api({ url: '/_co/toggle_active/~~_co_id~~' }).poll().then( ( _ret ) => { new _loader({}).load( 'company_list' ); } );">Toggle Active</a></li>
 							</ul>
 						</div>
 					</td>
@@ -238,5 +259,5 @@
 	</div>
 </div>
 
-
+<div id="save__co_modal_tpl" class="autotpl" data-tpl="modal/_co_save"></div>
 ~~include:_master_foot~~

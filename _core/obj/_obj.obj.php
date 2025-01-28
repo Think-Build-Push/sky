@@ -81,9 +81,10 @@ class _obj extends _da
 	 */
 	public function toggle_active( int|string $id ) : bool
 	{
+		$this->log_data( $id )->log_msg( 'toggle_active' );
 		$params = [ "{$this->table_ulid}" => $id ];
 		$q = "UPDATE {$this->table} SET {$this->table}_active = !{$this->table}_active WHERE {$this->table}_del IS NULL AND {$this->table_ulid} = :{$this->table_ulid}";
-		if( is_int( $id ) )
+		if( is_numeric( $id ) )
 		{
 			$q = "UPDATE {$this->table} SET {$this->table}_active = !{$this->table}_active WHERE {$this->table}_del IS NULL AND {$this->table_id} = :{$this->table_id}";
 			$params = [ "{$this->table_id}" => $id ];
@@ -95,6 +96,8 @@ class _obj extends _da
   			$params['fk__co_id'] = $this->_co_id;
   		}
 
+		$this->log_data([ $q, $params ])->log_msg( 'toggle_active q' );
+
 		$sth = $this->query( $q, $params );
 
   		if( '00000' != $sth->errorCode() )
@@ -103,7 +106,7 @@ class _obj extends _da
   			return FALSE;
   		}
 
-  		$this->success( 'deleted' );
+  		$this->success( 'active_toggled' );
   		return TRUE;
 	}
 
@@ -114,11 +117,11 @@ class _obj extends _da
 	  * @param int|string $id Either auto_increment or ulid depending on ULID_AS_ID value
 	  * @return boolean FALSE if the query fails (but the QueryException should be thrown way before this), TRUE otherwise
 	  */
-	public function delete( int|string $id ) : bool
+	  public function delete( int|string $id ) : bool
   	{
   		$params = array( $this->table_id => $id );
   		$q = "UPDATE {$this->table} SET {$this->table}_del = NOW(), {$this->table}_active = 0 WHERE {$this->table}_del IS NULL AND {$this->table_ulid} = :{$this->table_ulid}";
-		if( is_int( $id ) )
+		if( is_numeric( $id ) )
 		{
 			$q = "UPDATE {$this->table} SET {$this->table}_del = NOW(), {$this->table}_active = 0 WHERE {$this->table}_del IS NULL AND {$this->table_id} = :{$this->table_id}";
 		}
@@ -138,6 +141,73 @@ class _obj extends _da
   		}
 
   		$this->success( 'deleted' );
+  		return TRUE;
+  	}
+
+	/**
+	  * archive() marks a row for archiving with a NOW() timestamp. A cron will collect all the garbage
+	  *	and delete them every day right after the nightly backup.
+	  *
+	  * @param int|string $id Either auto_increment or ulid depending on ULID_AS_ID value
+	  * @return boolean FALSE if the query fails (but the QueryException should be thrown way before this), TRUE otherwise
+	  */
+	  public function archive( int|string $id ) : bool
+  	{
+  		$params = array( $this->table_id => $id );
+  		$q = "UPDATE {$this->table} SET {$this->table}_arch = NOW(), {$this->table}_active = 0 WHERE {$this->table}_arch IS NULL AND {$this->table_ulid} = :{$this->table_ulid}";
+		if( is_numeric( $id ) )
+		{
+			$q = "UPDATE {$this->table} SET {$this->table}_arch = NOW(), {$this->table}_active = 0 WHERE {$this->table}_arch IS NULL AND {$this->table_id} = :{$this->table_id}";
+		}
+
+  		if( $this->has_fk__co_id() )
+  		{
+  			$q .= " AND fk__co_id = :fk__co_id";
+  			$params['fk__co_id'] = $this->_co_id;
+  		}
+
+  		$sth = $this->query( $q, $params );
+
+  		if( '00000' != $sth->errorCode() )
+  		{
+  			$this->fail( $sth->errorInfo() );
+  			return FALSE;
+  		}
+
+  		$this->success( 'archived' );
+  		return TRUE;
+  	}
+
+	/**
+	  * unarchive() marks a row unarchived with a NULL timestamp.
+	  *
+	  * @param int|string $id Either auto_increment or ulid depending on ULID_AS_ID value
+	  * @return boolean FALSE if the query fails (but the QueryException should be thrown way before this), TRUE otherwise
+	  */
+	public function unarchive( int|string $id ) : bool
+  	{
+  		$params = array( $this->table_id => $id );
+  		$q = "UPDATE {$this->table} SET {$this->table}_arch = NULL, {$this->table}_active = 1 WHERE {$this->table_ulid} = :{$this->table_ulid}";
+		if( is_numeric( $id ) )
+		{
+			$q = "UPDATE {$this->table} SET {$this->table}_arch = NULL, {$this->table}_active = 1 WHERE {$this->table_id} = :{$this->table_id}";
+		}
+
+  		if( $this->has_fk__co_id() )
+  		{
+  			$q .= " AND fk__co_id = :fk__co_id";
+  			$params['fk__co_id'] = $this->_co_id;
+  		}
+
+  		$sth = $this->query( $q, $params );
+
+  		if( '00000' != $sth->errorCode() )
+  		{
+  			$this->fail( $sth->errorInfo() );
+  			return FALSE;
+  		}
+
+  		$this->success( 'unarchived' );
   		return TRUE;
   	}
 

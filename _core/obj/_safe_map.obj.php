@@ -99,7 +99,7 @@ class _safe_map extends _da
 		}
 	}
 
-	public function convert_get_ulids( string $table, array|string $get_vals = [] ) : array
+	public function convert_get_ulids( string $table, array|string $get_vals = [] ) : array|string
 	{
 		if( !$table )
 		{
@@ -113,6 +113,8 @@ class _safe_map extends _da
 			{
 				$get_vals = array( $get_vals );
 			}
+
+			$this->log_data( $get_vals, FALSE )->log_msg( 'get_vals' );
 
 			// For gets, since they don't have keys, we need to check all get values for ulid values
 			$new_get = [];

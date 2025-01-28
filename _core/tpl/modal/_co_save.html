@@ -6,34 +6,69 @@
 			</div>
 			<div class="modal-body">
 				<form id="save__co_form" method="POST" action="/_co/save" class="form validate">
-					<div id="save__co_form_fields">
+					<input type="hidden" name="_co_id" id="save__co_form__co_id" value="" class="form-control required" required>
+					<div class="form-row">
+						<label for="save__co_form__co_name">Name</label>
+						<input type="text" name="_co_name" id="save__co_form__co_name" value="" class="form-control required" required>
+					</div>
+					<div class="form-row">
+						<label for="save__co_form__co_domain">Subdomain</label>
+						<input type="text" name="_co_domain" id="save__co_form__co_domain" value="" class="form-control required" required>
+					</div>
+					<div class="form-row">
+						<label for="save__co_form_fk__mem_id">
+							<a href="javascript:void(0);" onclick="new _loader({}).load( 'save__co_form_fk__mem_id' );">Owner</a>
+						</label>
+						<select name="fk__mem_id" id="save__co_form_fk__mem_id" class="form-control autoload" flare-src="/_mem/list" flare-tpl="save__co_form_fk__mem_id_tpl" required>
+							<option value="" class="keep">Select</option>
+						</select>
+						<template id="save__co_form_fk__mem_id_tpl">
+							<option value="~~_mem_id~~">~~_mem_name~~</option>
+						</template>
+					</div>
+					<div class="form-row">
+						<label for="save__co_form__co_active">Active</label>
+						<input type="number" name="_co_active" id="save__co_form__co_active" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__co_form__co_setup">Setup</label>
+						<input type="number" name="_co_setup" id="save__co_form__co_setup" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__co_form__co_configured">Configured</label>
+						<input type="number" name="_co_configured" id="save__co_form__co_configured" value="" class="form-control">
+					</div>
+					<div class="form-row">
+						<label for="save__co_form_fk__sub_plan_id">
+							<a href="javascript:void(0);" onclick="new _loader({}).load( 'save__co_form_fk__sub_plan_id' );">Subscription</a>
+						</label>
+						<select name="fk__sub_plan_id" id="save__co_form_fk__sub_plan_id" class="form-control" flare-src="/_sub_plan/list" flare-tpl="save__co_form_fk__sub_plan_id_tpl">
+							<option value="" class="keep">Select</option>
+						</select>
+						<template id="save__co_form_fk__sub_plan_id_tpl">
+							<option value="~~_sub_plan_id~~">~~_sub_plan_name~~</option>
+						</template>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer d-flex justify-content-between">
 				<a href="javascript:void(0)" data-bs-dismiss="modal" onClick="new _form({ form_id: '#save__co_form' }).resetForm();" class="btn btn-default">Cancel</a>
-				<a href="javascript:void(0)" onClick="new _form({ form_id: 'save__co_form', autoform: true }).autoform();" class="btn btn-default">Reload Form</a>
 				<a href="javascript:void(0)"
 					onClick="new _form({ form_id: 'save__co_form' })
 							.send()
 							.then(
 								function( _ret )
 								{
-									new _form({ form_id: '#save__co_form' }).resetForm();
-									new _loader({}).load( '._co_list' );
-									$( '#save__co_box' ).modal( 'toggle' );
+									new _growl({ type: _ret.return ? 'success' : 'error', msg: _ret.msg });
+									if( 1 == _ret.return )
+									{
+										new _form({ form_id: '#save__co_form' }).resetForm();
+										new _loader({}).load( '._co_list' );
+										$( '#save__co_box' ).modal( 'toggle' );
+									}
 								}
 							);" class="btn btn-primary">Save</a>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded",
-	function()
-	{
-		new _form({ form_id: 'save__co_form' }).autoform();
-	}
-);
-</script>

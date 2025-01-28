@@ -7,6 +7,11 @@ class _co_ctlr extends _ctlr
 		parent::__construct( '_co' );
 	}
 
+	/**
+	 * Gets all companies
+	 *
+	 * @return array|boolean
+	 */
 	public function get_all() : array|bool
 	{
 		// Rather than a simple list,
@@ -20,27 +25,6 @@ class _co_ctlr extends _ctlr
 
 		$this->success( '_cos fetched' );
 		return $_cos;
-	}
-
-	/**
-	 * Should be moved to _co_pref ctlr
-	 *
-	 * @deprecated
-	 * @return bool
-	 */
-	public function save_email_footer() : bool
-	{
-		$_co_pref = new _co_pref();
-		$footer = $_co_pref->pref( 'email_footer' );
-
-		if( FALSE === $_co_pref->pref( 'email_footer', _POST['new_email_footer'] ) )
-		{
-			$this->fail( 'could_not_update_email_footer' );
-			return FALSE;
-		}
-
-		$this->success( 'footer_updated' );
-		return TRUE;
 	}
 
 	/**
@@ -86,30 +70,6 @@ class _co_ctlr extends _ctlr
 
 		$this->success( 'subdomain_changed' );
 		return _POST['new_subdomain'] . '.' . $app_domain;
-	}
-
-	/**
-	 * Should be moved to _co__mem ctlr
-	 *
-	 * @deprecated
-	 * @return void
-	 */
-	public function save_user() : void
-	{
-		if( !_POST['fk__mem_id'] )
-		{
-			$_mem = new _mem();
-			$mem_exists = $_mem->get_by_col([ '_mem_email' => _POST['_mem_email'] ]);
-			p( 'mem_exists' );
-			p( $mem_exists );
-
-			$_mem_auth = new _mem_auth();
-			$mem_auth_exists = $_mem_auth->get_by_col([ '_mem_login' => _POST['_mem_email'] ]);
-			p( 'mem_auth_exists' );
-			p( $mem_auth_exists );
-		}
-
-		exit;
 	}
 
 	/**

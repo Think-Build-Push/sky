@@ -110,6 +110,72 @@ class _ctlr extends _fail
 	}
 
 	/**
+	 *	undelete marks one row in the table as undeleted
+	 *
+	 * @param string|integer $id ulid or id o the row to mark undeleted
+	 * @return boolean FALSE on failure, TRUE on success
+	 */
+	public function undelete( string|int $id ) : bool
+	{
+		$undeleted = $this->obj->undelete( $id );
+
+		if( !$undeleted )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+		else
+		{
+			$this->success( $this->obj->get_error_msg() );
+			return TRUE;
+		}
+	}
+
+	/**
+	 *	archive marks one row in the table as archived
+	 *
+	 * @param string|integer $id ulid or id o the row to mark archived
+	 * @return boolean FALSE on failure, TRUE on success
+	 */
+	public function archive( string|int $id ) : bool
+	{
+		$archived = $this->obj->archive( $id );
+
+		if( !$archived )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+		else
+		{
+			$this->success( $this->obj->get_error_msg() );
+			return TRUE;
+		}
+	}
+
+	/**
+	 *	unarchive marks one row in the table as unarchived
+	 *
+	 * @param string|integer $id ulid or id o the row to mark unarchived
+	 * @return boolean FALSE on failure, TRUE on success
+	 */
+	public function unarchive( string|int $id ) : bool
+	{
+		$unarchived = $this->obj->unarchive( $id );
+
+		if( !$unarchived )
+		{
+			$this->fail( $this->obj->get_error_msg() );
+			return FALSE;
+		}
+		else
+		{
+			$this->success( $this->obj->get_error_msg() );
+			return TRUE;
+		}
+	}
+
+	/**
 	 *	save saves a single row to the table from the $_POST.
 	 *	This function ignores any other request values to comply with the subset of RESTful API common practices
 	 *	@return  bool	FALSE on failure, TRUE on success
