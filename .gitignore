@@ -1,3 +1,4 @@
 log
 phpstan_errors.log
 phinx.php
+vendor/
