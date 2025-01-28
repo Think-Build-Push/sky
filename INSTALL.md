@@ -36,7 +36,7 @@
 		* You can access the application at http://sky.[your_domain_or_localhost]/
 	* Default superadmin login
 		* Username: default@admin
-		* Password: test
+		* Password: sky_admin
 	* Logging
 		* Set LOG_LEVEL in web/index.php and _core/_admin/web/index.php to any level allowable by Monolog, default is `error`. Change to `debug` to get more inforrmation in the logs directory.
 		* Logs are stored in the log/ directory.
