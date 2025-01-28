@@ -2,6 +2,7 @@
 
 // Set default error level for logging and reporting
 const LOG_LEVEL = 'error';
+const ADMIN_PORTAL = FALSE;
 
 require_once( '../init/init.php' );
 
