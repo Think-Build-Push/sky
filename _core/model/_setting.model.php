@@ -22,9 +22,10 @@ class _setting_model extends _model
 			"_setting_del" => "timestamp",
 			"_setting_arch" => "timestamp",
 			"_setting_active" => "tinyint",
+			"_setting_is_sensitive" => "tinyint",
 			"_setting_key" => "varchar",
 			"_setting_value" => "varchar",
-
+			"_setting_ulid" => "varchar",
 		];
 
 		$this->select_cols = [
@@ -32,9 +33,10 @@ class _setting_model extends _model
 			"_setting_new" => "timestamp",
 			"_setting_edit" => "timestamp",
 			"_setting_active" => "tinyint",
+			"_setting_is_sensitive" => "tinyint",
 			"_setting_key" => "varchar",
 			"_setting_value" => "varchar",
-
+			"_setting_ulid" => "varchar",
 		];
 
 		$this->full_join = [
