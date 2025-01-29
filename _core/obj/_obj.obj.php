@@ -358,6 +358,14 @@ class _obj extends _da
 		try
 		{
 			$this->query( $q, $sane_vars );
+			
+			if( !$vars[$this->table_id] )
+			{
+				$vars[$this->table_id] = $this->last_insert_id();
+			}
+	
+			$this->success( 'saved' );
+			return $vars[$this->table_id];
 		}
 		catch( QueryException $qe )
 		{
@@ -372,14 +380,6 @@ class _obj extends _da
 			$this->fail( $msg );
 			return FALSE;
 		}
-
-		if( !$vars[$this->table_id] )
-		{
-			$vars[$this->table_id] = $this->last_insert_id();
-		}
-
-		$this->success( 'saved' );
-		return $vars[$this->table_id];
 	}
 
 	/**

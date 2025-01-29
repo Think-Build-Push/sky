@@ -89,7 +89,7 @@ class _da extends _fail
 			}
 		}
 
-		$this->log_data( $vars )->log_msg( '_obj auto_query vars ' . __LINE__ );
+		$this->log_data( $vars )->log_msg( '_obj auto_query vars fk__co_id check' );
 
 		$params = array();
 		$now = new DateTime();
@@ -122,11 +122,11 @@ class _da extends _fail
 			{
 				switch( $val )
 				{
-					case '(--)' == $vars[$key]:
+					case '(--)':
 						$params[] = "{$key} = {$key} - 1";
 						unset( $vars[$key] );
 						break;
-					case '(++)' == $vars[$key]:
+					case '(++)':
 						$params[] = "{$key} = {$key} + 1";
 						unset( $vars[$key] );
 						break;
