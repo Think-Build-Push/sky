@@ -23,6 +23,7 @@ class _register extends _obj
 		 */
 
 		$_mem_id = $o__mem->is_duplicate_email( $username );
+		
 		if( !$_mem_id )
 		{
 			$_mem_auth = new _mem_auth();
@@ -33,7 +34,7 @@ class _register extends _obj
 				return FALSE;
 			}
 		}
-
+		
 		if( $_mem_id )
 		{
 			$_co = $o__co->get_by_owner__mem_id( $_mem_id );
@@ -42,7 +43,7 @@ class _register extends _obj
 				$this->fail( $o__co->get_error_msg() );
 				return FALSE;
 			}
-
+			
 			if( $_co )
 			{
 				$this->fail( '_mem_already_owns__co' );
@@ -73,7 +74,8 @@ p( $_mem );
 		if( !$vars['_co_domain'] )
 		{
 			$now = new DateTime();
-			$vars['_co_domain'] = strtolower( $this->alphaID( $username . $now->format( 'Uu' ) ) );
+            $domain_string = $this->alphaID($username . $now->format('Uu'));
+            $vars['_co_domain'] = strtolower($domain_string);       
 		}
 
 		if( !$vars['_co_name'] )

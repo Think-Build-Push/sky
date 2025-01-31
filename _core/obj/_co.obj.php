@@ -22,6 +22,7 @@ class _co extends _obj
 	{
 		$sth = $this->query('
 			SELECT
+			    _co_id,
 				_co_name,
 				_co_domain,
 				DATE_FORMAT( _co_new, "%Y-%m-%d %H:%i" ) AS _co_new,
